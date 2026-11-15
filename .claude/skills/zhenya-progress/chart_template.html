@@ -98,11 +98,13 @@ __KPIS__
 
   <section>
     <h2>Сколько времени в день</h2>
-    <p class="note">Минуты, которые Женя провёл над карточками. Anki считает время от показа карточки до ответа; если карточка была на экране дольше минуты (отвлёкся), засчитывается только минута. Перерывы между карточками не входят, поэтому за телефоном он сидит немного дольше.</p>
+    <p class="note">Левый столбик — минуты, которые Женя провёл над карточками. Anki считает время от показа карточки до ответа; если карточка была на экране дольше минуты (отвлёкся), засчитывается только минута. Перерывы между карточками не входят, поэтому за телефоном он сидит немного дольше.</p>
+    <p class="note">Правый столбик — сколько он читал: пока читает, он записывает незнакомые слова (как считается — в разделе «Новые слова от Жени»).</p>
     <div class="fig" id="tfig">
-      <svg id="time" viewBox="0 0 640 240" role="img" aria-label="Минут занятий по дням"></svg>
+      <svg id="time" viewBox="0 0 640 240" role="img" aria-label="Минут над карточками и минут чтения по дням"></svg>
       <div class="tip" id="ttip" hidden></div>
     </div>
+    <div class="legend"><span><i style="background:var(--pct)"></i>карточки</span><span><i style="background:var(--nw)"></i>читал (записывал новые слова)</span></div>
   </section>
 
   <section>
@@ -133,13 +135,8 @@ __KPIS__
 
   <section>
     <h2>Новые слова от Жени</h2>
-    <p class="note">Незнакомые слова, которые Женя сам записал в AnkiDroid в колоду «Новые слова», — и сколько он читал.</p>
+    <p class="note">Незнакомые слова, которые Женя сам записал в AnkiDroid в колоду «Новые слова». Сколько минут он читал — на графике «Сколько времени в день».</p>
     <p class="note" id="nhow"></p>
-    <h3>Сколько минут читал за день</h3>
-    <div class="fig" id="rfig">
-      <svg id="nrd" viewBox="0 0 640 240" role="img" aria-label="Сколько минут Женя читал по дням"></svg>
-      <div class="tip" id="rtip" hidden></div>
-    </div>
     <h3>Во сколько записывал слова</h3>
     <div class="fig" id="nfig">
       <svg id="nwc" viewBox="0 0 640 300" role="img" aria-label="Во сколько Женя записывал новые слова, по дням"></svg>
@@ -320,24 +317,32 @@ mem.addEventListener("pointerleave", mhide);
 // Раздел «Поровну ли по предметам» (данные — и для подсказки панели времени)
 const SD = __SUBJ_JSON__;
 
-// Панель «Сколько времени в день»: минуты по дням, одна серия
+// Панель «Сколько времени в день»: два столбика на день — карточки (min) и чтение (rd)
 const tsvg = document.getElementById("time");
-const tTop = Math.max(...days.map(o => o.min), 1);
+const tTop = Math.max(...days.map(o => Math.max(o.min, o.rd || 0)), 1);
 const tStep = tTop > 60 ? 20 : 10;
 const tMax = Math.max(tStep * 2, Math.ceil(tTop / tStep) * tStep);
 const T = { T: 22, B: 190 }, ty = v => T.B - v / tMax * (T.B - T.T);
+const tw = Math.min(26, (step - 12) / 2), tg = 2;  // ширина столбика и зазор внутри пары
 const tcols = days.map((o, i) => el("rect", { x: L + step * i + 1, y: 2, width: step - 2, height: 224, rx: 6, class: "col" }, null, tsvg));
 for (let t = 0; t <= tMax; t += tStep) {
   el("line", { x1: L, x2: R, y1: ty(t), y2: ty(t), class: "grid" }, null, tsvg);
   el("text", { x: L - 8, y: ty(t) + 4, "text-anchor": "end" }, t, tsvg);
 }
 el("text", { x: L - 8, y: 10, "text-anchor": "end", style: "font-size:11px" }, "мин", tsvg);
+const tval = dense ? "font-size:11px" : "";
 days.forEach((o, i) => {
-  if (!o.ans) el("text", { x: cx(i), y: T.B - 6, "text-anchor": "middle", style: "font-size:11px" }, "—", tsvg);
+  const xa = cx(i) - tg / 2 - tw, xb = cx(i) + tg / 2;
+  if (!o.ans) el("text", { x: xa + tw / 2, y: T.B - 6, "text-anchor": "middle", style: "font-size:11px" }, "—", tsvg);
   else {
     const h = Math.max(T.B - ty(o.min), 2);
-    el("rect", { x: cx(i) - w / 2, y: T.B - h, width: w, height: h, rx: 4, fill: "var(--pct)" }, null, tsvg);
-    el("text", { x: cx(i), y: T.B - h - 8, "text-anchor": "middle", class: "val", style: dense ? "font-size:11px" : "" }, o.min, tsvg);
+    el("rect", { x: xa, y: T.B - h, width: tw, height: h, rx: 4, fill: "var(--pct)" }, null, tsvg);
+    el("text", { x: xa + tw / 2, y: T.B - h - 8, "text-anchor": "middle", class: "val", style: tval }, o.min, tsvg);
+  }
+  if (o.rd) {
+    const h = Math.max(T.B - ty(o.rd), 2);
+    el("rect", { x: xb, y: T.B - h, width: tw, height: h, rx: 4, fill: "var(--nw)" }, null, tsvg);
+    el("text", { x: xb + tw / 2, y: T.B - h - 8, "text-anchor": "middle", class: "val", style: tval }, o.rd, tsvg);
   }
   el("text", { x: cx(i), y: 214, "text-anchor": "middle", style: dense ? "font-size:11px" : "" }, o.d, tsvg);
 });
@@ -346,8 +351,9 @@ function tshow(i) {
   const o = days[i];
   tcols.forEach((c, j) => c.classList.toggle("on", j === i));
   ttip.innerHTML = `<b>${o.full}</b>` + (o.ans ?
-    `<span>Время:</span> ${o.min} мин<br><span>Ответов:</span> ${o.ans}, в среднем ${Math.round(o.min * 60 / o.ans)} с на ответ<br>` +
-    SD.subj.map((s, j) => `<span>— ${s.name}:</span> ${o.sm[j]} мин`).join("<br>") : `<span>Занятий не было</span>`);
+    `<span>Карточки:</span> ${o.min} мин<br><span>Ответов:</span> ${o.ans}, в среднем ${Math.round(o.min * 60 / o.ans)} с на ответ<br>` +
+    SD.subj.map((s, j) => `<span>— ${s.name}:</span> ${o.sm[j]} мин`).join("<br>") : `<span>Карточки не учил</span>`) +
+    "<br>" + readBody(o);
   ttip.hidden = false;
   const box = tsvg.getBoundingClientRect(), k = box.width / 640;
   let left = (cx(i) + step / 2) * k + 8;
@@ -431,7 +437,7 @@ scols.forEach((c, i) => {
 });
 ssvg.addEventListener("pointerleave", shide);
 
-// Раздел «Новые слова от Жени»: вверху — время записи слов и сеансы чтения, внизу — минуты чтения
+// Раздел «Новые слова от Жени»: время записи слов и сеансы чтения (минуты чтения — на панели времени)
 const IN = __INBOX_JSON__;
 document.getElementById("nhow").textContent = `Как считается время чтения: пока Женя читает, он записывает незнакомые слова. ` +
   `Если больше ${IN.gap} минут не записывал — считаем, что перестал читать. Сеанс — от первого до последнего слова, ` +
@@ -439,15 +445,16 @@ document.getElementById("nhow").textContent = `Как считается вре�
 const hm = m => `${Math.floor(m / 60) % 24}:${String(m % 60).padStart(2, "0")}`;
 const esc = t => String(t).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[ch]);
 const nWord = n => n % 10 === 1 && n % 100 !== 11 ? "слово" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "слова" : "слов";
-function readTip(o) {
+function readBody(o) {
   const MAXW = 12;
-  return `<b>${o.full}</b>` + (o.nw ?
+  return (o.nw ?
     `<span>Читал примерно:</span> ${o.rd} мин<br>` +
     o.ss.map(([a, b, n]) => `<span>— ${a === b ? "в " + hm(a) : hm(a) + "–" + hm(b)}:</span> ${n} ${nWord(n)}`).join("<br>") +
     "<br>" + o.ws.slice(0, MAXW).map(([wd, m]) => `<span>${hm(m)}</span> ${esc(wd)}`).join("<br>") +
     (o.ws.length > MAXW ? `<br><span>…и ещё ${o.ws.length - MAXW}</span>` : "")
-    : `<span>Новых слов не записывал</span>`);
+    : `<span>Не читал (новых слов не записывал)</span>`);
 }
+const readTip = o => `<b>${o.full}</b>` + readBody(o);
 // подсветка и подсказка: place(i, box, k, tip) возвращает [left, top] в пикселях
 function hover(sv, cs, tp, html, place) {
   const show = i => {
@@ -467,32 +474,6 @@ function hover(sv, cs, tp, html, place) {
   });
   sv.addEventListener("pointerleave", hideT);
 }
-
-// Минуты чтения по дням — столбики, как «Сколько времени в день»
-const rsvg = document.getElementById("nrd"), rtip = document.getElementById("rtip");
-const rTop = Math.max(...days.map(o => o.rd), 1);
-const rStep = rTop > 60 ? 30 : rTop > 20 ? 10 : 5;
-const rMax = Math.max(rStep * 2, Math.ceil(rTop / rStep) * rStep);
-const Q = { T: 22, B: 190 }, qy = v => Q.B - v / rMax * (Q.B - Q.T);
-const rcols = days.map((o, i) => el("rect", { x: L + step * i + 1, y: 2, width: step - 2, height: 224, rx: 6, class: "col" }, null, rsvg));
-for (let t = 0; t <= rMax; t += rStep) {
-  el("line", { x1: L, x2: R, y1: qy(t), y2: qy(t), class: "grid" }, null, rsvg);
-  el("text", { x: L - 8, y: qy(t) + 4, "text-anchor": "end" }, t, rsvg);
-}
-el("text", { x: L - 8, y: 10, "text-anchor": "end", style: "font-size:11px" }, "мин", rsvg);
-days.forEach((o, i) => {
-  if (o.rd) {
-    const h = Q.B - qy(o.rd);
-    el("rect", { x: cx(i) - w / 2, y: Q.B - h, width: w, height: h, rx: 4, fill: "var(--nw)" }, null, rsvg);
-    el("text", { x: cx(i), y: Q.B - h - 8, "text-anchor": "middle", class: "val", style: dense ? "font-size:11px" : "" }, o.rd, rsvg);
-  } else el("text", { x: cx(i), y: Q.B - 6, "text-anchor": "middle", style: "font-size:11px" }, "0", rsvg);
-  el("text", { x: cx(i), y: 214, "text-anchor": "middle", style: dense ? "font-size:11px" : "" }, o.d, rsvg);
-});
-hover(rsvg, rcols, rtip, readTip, (i, k, box) => {
-  let left = (cx(i) + step / 2) * k + 8;
-  if (left + rtip.offsetWidth > box.width) left = (cx(i) - step / 2) * k - rtip.offsetWidth - 8;
-  return [left, 4 * k];
-});
 
 // Во сколько записывал слова: строка — день (новые сверху), по горизонтали — время дня
 const nsvg = document.getElementById("nwc"), ntip = document.getElementById("ntip");
