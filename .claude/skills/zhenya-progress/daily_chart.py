@@ -15,7 +15,13 @@ synced (по умолчанию) — копия, скачанная ankiweb_sync
 выучено (обе карточки на повторении с интервалом ≥ 7 дней, как в words_page.py) и ответов за
 последние RECENT_DAYS дней. Нужно, чтобы видеть, что все три предмета идут равномерно.
 Новые слова от Жени (__INBOX_JSON__): из истории ящика data/zhenya_inbox.tsv (inbox.py) — в днях
-«nw» — сколько слов он записал в этот день, «nws» — какие; list — последние INBOX_LIST слов.
+«nw» — сколько слов он записал в этот день; list — последние INBOX_LIST слов.
+Сколько он читал («rd», минуты): время записи слова — id записи (момент создания, мс). Пока Женя
+читает, он записывает незнакомые слова; перестал записывать — перестал читать. Слова дня по
+времени делятся на сеансы: перерыв больше READ_GAP минут — новый сеанс. Сеанс длится от первого
+до последнего слова, но не меньше READ_MIN минут (одно слово — тоже чтение). «ss» — сеансы
+[начало, конец, слов], «ws» — слова [слово, минута]; минуты от полуночи дня Anki, после полуночи
+— больше 1440 (день Anki идёт до 4:00).
 Время («min», «sm» — по предметам, минуты): сумма revlog.time — сколько карточка была на экране до
 ответа; Anki обрезает одну карточку до 60 с (настройка колоды), перерывы между карточками не входят.
 """
@@ -39,6 +45,8 @@ SUBJECTS = [("Maths", "Математика"), ("Physics", "Физика"), ("Co
 SUBJ_IDX = {en: i for i, (en, _ru) in enumerate(SUBJECTS)}
 RECENT_DAYS = 7
 INBOX_LIST = 20
+READ_GAP = 30  # мин: перерыв между словами больше — новый сеанс чтения
+READ_MIN = 5   # мин: самый короткий сеанс (одно слово)
 MONTHS = "января февраля марта апреля мая июня июля августа сентября октября ноября декабря".split()
 
 
@@ -113,9 +121,20 @@ def main():
             s["learn"] += 1
 
     inbox = sorted(ib.read_log().values(), key=lambda r: int(r["id"]))
-    nw = {}
+    nw = {}  # день -> [(минута от полуночи дня Anki, слово)]
     for r in inbox:
-        nw.setdefault(r["day"], []).append(r["word"])
+        t = dt.datetime.fromtimestamp(int(r["id"]) / 1000)
+        minute = (t.date() - dt.date.fromisoformat(r["day"])).days * 1440 + t.hour * 60 + t.minute
+        nw.setdefault(r["day"], []).append((minute, r["word"]))
+
+    def sessions(ws):
+        ss = []
+        for m, _w in sorted(ws):
+            if ss and m - ss[-1][1] <= READ_GAP:
+                ss[-1][1], ss[-1][2] = m, ss[-1][2] + 1
+            else:
+                ss.append([m, m, 1])
+        return ss
 
     today = p.anki_day(dt.datetime.now().timestamp() * 1000)
     end = today if per.get(today, {}).get("ans") or today.isoformat() in nw else today - dt.timedelta(days=1)
@@ -137,7 +156,11 @@ def main():
                      "sn": d["sn"] if d else [0] * ns, "sa": d["sa"] if d else [0] * ns,
                      "min": round(sum(d["ms"]) / 60000) if d else 0,
                      "sm": [round(x / 60000) for x in d["ms"]] if d else [0] * ns,
-                     "nw": len(nw.get(day.isoformat(), [])), "nws": nw.get(day.isoformat(), [])})
+                     "nw": len(nw.get(day.isoformat(), []))})
+        ws = sorted(nw.get(day.isoformat(), []))
+        ss = sessions(ws)
+        days[-1].update(ws=[[w, m] for m, w in ws], ss=ss,
+                        rd=sum(max(b - a, READ_MIN) for a, b, _n in ss))
     for d in days[-RECENT_DAYS:]:
         for j, n in enumerate(d["sa"]):
             subj[j]["recent"] += n
@@ -171,7 +194,9 @@ def main():
             .replace("__SUBJ_JSON__", json.dumps({"subj": subj, "recent": RECENT_DAYS}, ensure_ascii=False))
             .replace("__INBOX_JSON__", json.dumps({
                 "total": len(inbox), "waiting": sum(r["status"] == ib.WAITING for r in inbox),
-                "list": [{k: r[k] for k in ("day", "word", "context", "status", "result")}
+                "gap": READ_GAP, "min": READ_MIN,
+                "list": [{**{k: r[k] for k in ("day", "word", "context", "status", "result")},
+                          "t": f"{dt.datetime.fromtimestamp(int(r['id']) / 1000):%H:%M}"}
                          for r in reversed(inbox[-INBOX_LIST:])]}, ensure_ascii=False)))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:

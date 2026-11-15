@@ -133,11 +133,20 @@ __KPIS__
 
   <section>
     <h2>Новые слова от Жени</h2>
-    <p class="note">Незнакомые слова, которые Женя сам записал в AnkiDroid в колоду «Новые слова» — по дню, когда записал. Из каждого делаются карточки колоды, и они идут первыми среди новых. Что стало с каждым словом — в списке под графиком.</p>
+    <p class="note">Незнакомые слова, которые Женя сам записал в AnkiDroid в колоду «Новые слова», — и сколько он читал.</p>
+    <p class="note" id="nhow"></p>
+    <h3>Сколько минут читал за день</h3>
+    <div class="fig" id="rfig">
+      <svg id="nrd" viewBox="0 0 640 240" role="img" aria-label="Сколько минут Женя читал по дням"></svg>
+      <div class="tip" id="rtip" hidden></div>
+    </div>
+    <h3>Во сколько записывал слова</h3>
     <div class="fig" id="nfig">
-      <svg id="nwc" viewBox="0 0 640 240" role="img" aria-label="Сколько новых слов Женя записал по дням"></svg>
+      <svg id="nwc" viewBox="0 0 640 300" role="img" aria-label="Во сколько Женя записывал новые слова, по дням"></svg>
       <div class="tip" id="ntip" hidden></div>
     </div>
+    <div class="legend"><span><i style="background:var(--nw);border-radius:50%"></i>записал слово</span><span><i style="background:var(--nw);opacity:.35"></i>читал (от первого до последнего слова)</span></div>
+    <p class="note" style="margin-top:8px">Из каждого слова делаются карточки колоды, и они идут первыми среди новых. Что стало с каждым словом — в списке ниже.</p>
     <h3 id="nhead">Последние слова</h3>
     <div class="tbl"><table id="ntbl">
       <thead><tr><th>День</th><th>Слово</th><th>Что сделано</th></tr></thead>
@@ -422,51 +431,100 @@ scols.forEach((c, i) => {
 });
 ssvg.addEventListener("pointerleave", shide);
 
-// Раздел «Новые слова от Жени»: столбики по дням + список последних слов
+// Раздел «Новые слова от Жени»: вверху — время записи слов и сеансы чтения, внизу — минуты чтения
 const IN = __INBOX_JSON__;
-const nsvg = document.getElementById("nwc");
-const nTop = Math.max(...days.map(o => o.nw), 1);
-const nStep = nTop > 20 ? 10 : nTop > 10 ? 5 : nTop > 4 ? 2 : 1;
-const nMax = Math.max(nStep * 2, Math.ceil(nTop / nStep) * nStep);
-const N = { T: 22, B: 190 }, ny = v => N.B - v / nMax * (N.B - N.T);
-const ncols = days.map((o, i) => el("rect", { x: L + step * i + 1, y: 2, width: step - 2, height: 224, rx: 6, class: "col" }, null, nsvg));
-for (let t = 0; t <= nMax; t += nStep) {
-  el("line", { x1: L, x2: R, y1: ny(t), y2: ny(t), class: "grid" }, null, nsvg);
-  el("text", { x: L - 8, y: ny(t) + 4, "text-anchor": "end" }, t, nsvg);
-}
-el("text", { x: L - 8, y: 10, "text-anchor": "end", style: "font-size:11px" }, "слов", nsvg);
-days.forEach((o, i) => {
-  if (o.nw) {
-    const h = N.B - ny(o.nw);
-    el("rect", { x: cx(i) - w / 2, y: N.B - h, width: w, height: h, rx: 4, fill: "var(--nw)" }, null, nsvg);
-    el("text", { x: cx(i), y: N.B - h - 8, "text-anchor": "middle", class: "val", style: dense ? "font-size:11px" : "" }, o.nw, nsvg);
-  } else el("text", { x: cx(i), y: N.B - 6, "text-anchor": "middle", style: "font-size:11px" }, "0", nsvg);
-  el("text", { x: cx(i), y: 214, "text-anchor": "middle", style: dense ? "font-size:11px" : "" }, o.d, nsvg);
-});
+document.getElementById("nhow").textContent = `Как считается время чтения: пока Женя читает, он записывает незнакомые слова. ` +
+  `Если больше ${IN.gap} минут не записывал — считаем, что перестал читать. Сеанс — от первого до последнего слова, ` +
+  `сеанс из одного слова — ${IN.min} минут. Это оценка: читать без новых слов он тоже может.`;
+const hm = m => `${Math.floor(m / 60) % 24}:${String(m % 60).padStart(2, "0")}`;
 const esc = t => String(t).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[ch]);
-const ntip = document.getElementById("ntip");
-function nshow(i) {
-  const o = days[i];
-  ncols.forEach((c, j) => c.classList.toggle("on", j === i));
-  ntip.innerHTML = `<b>${o.full}</b>` + (o.nw ? `<span>Записал слов:</span> ${o.nw}<br>` + o.nws.map(esc).join(", ")
-                                               : `<span>Новых слов не записывал</span>`);
-  ntip.hidden = false;
-  const box = nsvg.getBoundingClientRect(), k = box.width / 640;
-  let left = (cx(i) + step / 2) * k + 8;
-  if (left + ntip.offsetWidth > box.width) left = (cx(i) - step / 2) * k - ntip.offsetWidth - 8;
-  ntip.style.left = Math.max(0, left) + "px";
-  ntip.style.top = 4 * k + "px";
+const nWord = n => n % 10 === 1 && n % 100 !== 11 ? "слово" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "слова" : "слов";
+function readTip(o) {
+  const MAXW = 12;
+  return `<b>${o.full}</b>` + (o.nw ?
+    `<span>Читал примерно:</span> ${o.rd} мин<br>` +
+    o.ss.map(([a, b, n]) => `<span>— ${a === b ? "в " + hm(a) : hm(a) + "–" + hm(b)}:</span> ${n} ${nWord(n)}`).join("<br>") +
+    "<br>" + o.ws.slice(0, MAXW).map(([wd, m]) => `<span>${hm(m)}</span> ${esc(wd)}`).join("<br>") +
+    (o.ws.length > MAXW ? `<br><span>…и ещё ${o.ws.length - MAXW}</span>` : "")
+    : `<span>Новых слов не записывал</span>`);
 }
-function nhide() { ntip.hidden = true; ncols.forEach(c => c.classList.remove("on")); }
-ncols.forEach((c, i) => {
-  c.setAttribute("tabindex", "0");
-  c.addEventListener("pointerenter", () => nshow(i));
-  c.addEventListener("click", () => nshow(i));
-  c.addEventListener("focus", () => nshow(i));
-  c.addEventListener("blur", nhide);
-  nsvg.appendChild(c);
+// подсветка и подсказка: place(i, box, k, tip) возвращает [left, top] в пикселях
+function hover(sv, cs, tp, html, place) {
+  const show = i => {
+    cs.forEach((c, j) => c.classList.toggle("on", j === i));
+    tp.innerHTML = html(days[i]); tp.hidden = false;
+    const box = sv.getBoundingClientRect(), [left, top] = place(i, box.width / 640, box);
+    tp.style.left = Math.max(0, left) + "px"; tp.style.top = top + "px";
+  };
+  const hideT = () => { tp.hidden = true; cs.forEach(c => c.classList.remove("on")); };
+  cs.forEach((c, i) => {
+    c.setAttribute("tabindex", "0");
+    c.addEventListener("pointerenter", () => show(i));
+    c.addEventListener("click", () => show(i));
+    c.addEventListener("focus", () => show(i));
+    c.addEventListener("blur", hideT);
+    sv.appendChild(c);
+  });
+  sv.addEventListener("pointerleave", hideT);
+}
+
+// Минуты чтения по дням — столбики, как «Сколько времени в день»
+const rsvg = document.getElementById("nrd"), rtip = document.getElementById("rtip");
+const rTop = Math.max(...days.map(o => o.rd), 1);
+const rStep = rTop > 60 ? 30 : rTop > 20 ? 10 : 5;
+const rMax = Math.max(rStep * 2, Math.ceil(rTop / rStep) * rStep);
+const Q = { T: 22, B: 190 }, qy = v => Q.B - v / rMax * (Q.B - Q.T);
+const rcols = days.map((o, i) => el("rect", { x: L + step * i + 1, y: 2, width: step - 2, height: 224, rx: 6, class: "col" }, null, rsvg));
+for (let t = 0; t <= rMax; t += rStep) {
+  el("line", { x1: L, x2: R, y1: qy(t), y2: qy(t), class: "grid" }, null, rsvg);
+  el("text", { x: L - 8, y: qy(t) + 4, "text-anchor": "end" }, t, rsvg);
+}
+el("text", { x: L - 8, y: 10, "text-anchor": "end", style: "font-size:11px" }, "мин", rsvg);
+days.forEach((o, i) => {
+  if (o.rd) {
+    const h = Q.B - qy(o.rd);
+    el("rect", { x: cx(i) - w / 2, y: Q.B - h, width: w, height: h, rx: 4, fill: "var(--nw)" }, null, rsvg);
+    el("text", { x: cx(i), y: Q.B - h - 8, "text-anchor": "middle", class: "val", style: dense ? "font-size:11px" : "" }, o.rd, rsvg);
+  } else el("text", { x: cx(i), y: Q.B - 6, "text-anchor": "middle", style: "font-size:11px" }, "0", rsvg);
+  el("text", { x: cx(i), y: 214, "text-anchor": "middle", style: dense ? "font-size:11px" : "" }, o.d, rsvg);
 });
-nsvg.addEventListener("pointerleave", nhide);
+hover(rsvg, rcols, rtip, readTip, (i, k, box) => {
+  let left = (cx(i) + step / 2) * k + 8;
+  if (left + rtip.offsetWidth > box.width) left = (cx(i) - step / 2) * k - rtip.offsetWidth - 8;
+  return [left, 4 * k];
+});
+
+// Во сколько записывал слова: строка — день (новые сверху), по горизонтали — время дня
+const nsvg = document.getElementById("nwc"), ntip = document.getElementById("ntip");
+const rows = days.slice().reverse(), RH = 28, GT = 34, GL = 70, GR = 612;
+const gH = GT + rows.length * RH + 6;
+nsvg.setAttribute("viewBox", `0 0 640 ${gH}`);
+const allM = days.flatMap(o => o.ws.map(x => x[1]));
+let h0 = allM.length ? Math.floor(Math.min(...allM) / 60) : 16, h1 = allM.length ? Math.ceil((Math.max(...allM) + 1) / 60) : 21;
+while (h1 - h0 < 4) { if (h0 > 4) h0--; if (h1 - h0 < 4) h1++; }
+const hStep = h1 - h0 > 10 ? 3 : h1 - h0 > 5 ? 2 : 1;
+h0 = Math.floor(h0 / hStep) * hStep; h1 = h0 + Math.ceil((h1 - h0) / hStep) * hStep;
+const gx = m => GL + (m / 60 - h0) / (h1 - h0) * (GR - GL), gy = r => GT + r * RH + RH / 2;
+const ncols = days.map((o, i) => { const r = rows.length - 1 - i; return el("rect", { x: 2, y: GT + r * RH, width: 636, height: RH, rx: 4, class: "col" }, null, nsvg); });
+for (let h = h0; h <= h1; h += hStep) {
+  el("line", { x1: gx(h * 60), x2: gx(h * 60), y1: GT - 6, y2: gH - 6, class: "grid" }, null, nsvg);
+  el("text", { x: gx(h * 60), y: GT - 14, "text-anchor": "middle", style: "font-size:15px" }, `${h % 24}:00`, nsvg);
+}
+rows.forEach((o, r) => {
+  el("text", { x: GL - 10, y: gy(r) + 5, "text-anchor": "end", style: "font-size:15px" }, o.d, nsvg);
+  o.ss.forEach(([a, b]) => {
+    const x0 = gx(a), x1 = Math.max(gx(Math.max(b, a + IN.min)), x0 + 4);
+    el("rect", { x: x0 - 7, y: gy(r) - 8, width: x1 - x0 + 14, height: 16, rx: 8, fill: "var(--nw)", "fill-opacity": .35 }, null, nsvg);
+  });
+  o.ws.forEach(([_w, m]) => el("circle", { cx: gx(m), cy: gy(r), r: 5.5, fill: "var(--nw)", stroke: "var(--surface)", "stroke-width": 1.5 }, null, nsvg));
+});
+hover(nsvg, ncols, ntip, o => readTip(o), (i, k, box) => {
+  const r = rows.length - 1 - i;  // days[i] — строка r
+  const o = days[i], xs = o.ws.map(x => gx(x[1]));
+  let left = (xs.length ? Math.max(...xs) : GL) * k + 14;
+  if (left + ntip.offsetWidth > box.width) left = (xs.length ? Math.min(...xs) : GL) * k - ntip.offsetWidth - 14;
+  return [left, Math.min((GT + r * RH) * k, Math.max(0, box.height - ntip.offsetHeight))];
+});
 document.getElementById("nhead").textContent = IN.total
   ? `Последние слова (всего ${IN.total}, ждут обработки ${IN.waiting})` : "Последние слова";
 const ntb = document.querySelector("#ntbl tbody");
@@ -476,7 +534,7 @@ IN.list.forEach(r => {
   const tr = document.createElement("tr");
   const st = r.status === "ждёт" ? `<span class="st wait">ждёт обработки</span>`
            : `<span class="st">${esc(r.status)}</span> ${esc(r.result)}`;
-  tr.innerHTML = `<td>${fullDay(r.day)}</td><td><b>${esc(r.word)}</b>` +
+  tr.innerHTML = `<td>${fullDay(r.day)}<div class="ctx">${r.t}</div></td><td><b>${esc(r.word)}</b>` +
     (r.context ? `<div class="ctx">${esc(r.context)}</div>` : "") + `</td><td>${st}</td>`;
   ntb.appendChild(tr);
 });
