@@ -56,6 +56,15 @@ summary::-webkit-details-marker { display: none; }
 .more p.iv { padding-left: 12px; font-variant-numeric: tabular-nums; }
 .more .k { color: var(--muted); }
 .empty { padding: 20px 14px; color: var(--muted); margin: 0; }
+.chip.zh { color: var(--ok); }
+.tp { color: var(--muted); font-size: .85rem; grid-column: 1; overflow-wrap: anywhere; }
+.days { display: grid; gap: 18px; min-width: 0; }
+.days h2 { font-family: var(--display); font-size: 1.2rem; margin: 0 0 6px; }
+.days h2 span { display: block; font-family: var(--body); font-size: .9rem; font-weight: 400; color: var(--muted); }
+.zhl { margin-top: 8px; }
+.zhx { padding: 8px 14px; border-bottom: 1px solid var(--grid); overflow-wrap: anywhere; }
+.zhx:last-child { border-bottom: 0; }
+.zhx span { display: block; color: var(--muted); font-size: .9rem; }
 footer { color: var(--muted); font-size: .85rem; max-width: 65ch; }
 @media (max-width: 480px) { .meta { grid-row: auto; grid-column: 1; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; } summary { grid-template-columns: 1fr; } }
 </style>
@@ -72,6 +81,7 @@ footer { color: var(--muted); font-size: .85rem; max-width: 65ch; }
     <button class="tab" id="t-done" data-f="done"><b></b><span>выучено</span></button>
     <button class="tab" id="t-new" data-f="new"><b></b><span>ещё впереди</span></button>
     <button class="tab" id="t-all" data-f="all"><b></b><span>все слова</span></button>
+    <button class="tab" id="t-days" data-f="days"><b></b><span>по дням</span></button>
   </div>
 
   <div class="tools">
@@ -82,7 +92,7 @@ footer { color: var(--muted); font-size: .85rem; max-width: 65ch; }
 
   <div class="list" id="list"></div>
 
-  <footer>Каждое слово Женя учит в обе стороны: видит английское — печатает русское, видит русское с английским определением — печатает английское. Засчитывается только точный ответ. «Выучено» — обе стороны Anki спрашивает не чаще раза в неделю (и будет спрашивать дальше, всё реже). «Трудные» — __HARD_RULE__. Нажмите на слово — определение, пример из задания и через сколько дней Anki спрашивал его снова: если эти числа растут (1 → 3 → 8), слово запоминается.</footer>
+  <footer>Каждое слово Женя учит в обе стороны: видит английское — печатает русское, видит русское с английским определением — печатает английское. Засчитывается только точный ответ. «Выучено» — обе стороны Anki спрашивает не чаще раза в неделю (и будет спрашивать дальше, всё реже). «Трудные» — __HARD_RULE__. «По дням» — когда слово появилось в колоде и из какого предмета; «записал Женя» — слово, которое он сам записал при чтении. Нажмите на слово — определение, пример из задания и через сколько дней Anki спрашивал его снова: если эти числа растут (1 → 3 → 8), слово запоминается.</footer>
 </main>
 
 <script>
@@ -109,9 +119,15 @@ const HINT = {
   learn: "Начатые, но Anki ещё спрашивает их чаще раза в неделю. Сверху — где больше всего ошибок.",
   done: "Обе стороны Anki спрашивает не чаще раза в неделю. Сверху — те, что давались труднее.",
   new: "Ещё не показывались. Порядок — как Anki их покажет: по очереди из Maths, Physics и Computer Science, всего до 20 в день.",
-  all: "Вся колода: сначала начатые, потом ещё не показанные в порядке очереди."
+  all: "Вся колода: сначала начатые, потом ещё не показанные в порядке очереди.",
+  days: "Какие слова в какой день появились в колоде и из какого предмета, сверху — последние дни. Под днём — слова, которые Женя записал в тот день, но новых карточек из них нет: уже были в колоде или ждут ночной обработки. Число на кнопке — сколько слов добавлено в последний день."
 };
-const match = { hard: w => w.hard, learn: w => w.s === "learn", done: w => w.s === "done", new: w => w.s === "new", all: () => true };
+const match = { hard: w => w.hard, learn: w => w.s === "learn", done: w => w.s === "done", new: w => w.s === "new", all: () => true, days: () => true };
+// Слова, которые Женя записал сам, но новых карточек из них нет (уже было / ждёт / непонятно)
+const zhExtra = __ZHENYA_JSON__;
+const ZH_ST = { "уже было": "уже было в колоде", "ждёт": "ждёт ночной обработки", "непонятно": "не понято" };
+const wn = n => n % 10 === 1 && n % 100 !== 11 ? "слово" : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? "слова" : "слов";
+const byTerm = {}; words.forEach(w => { byTerm[w.en.toLowerCase()] = w; });
 words.forEach((w, i) => { w.q = (w.en + " " + w.ru).toLowerCase().replace(/ё/g, "е"); });
 let qi = 0; words.forEach(w => { if (w.s === "new") w.qn = ++qi; });
 
@@ -126,23 +142,65 @@ function render() {
   const t = topicSel.value;
   const inScope = w => (!t || w.topic === t) && (!q || w.q.includes(q));
   for (const f in match) document.querySelector(`#t-${f} b`).textContent = words.filter(w => match[f](w) && inScope(w)).length;
+  const lastDay = words.reduce((m, w) => w.added > m ? w.added : m, "");
+  document.querySelector("#t-days b").textContent = words.filter(w => w.added === lastDay && inScope(w)).length;
+  document.querySelector("#t-days span").textContent = lastDay ? `добавлено ${day(lastDay)} · все по дням` : "по дням";
   document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === filter));
   document.getElementById("hint").textContent = HINT[filter];
   const shown = words.filter(w => match[filter](w) && inScope(w));
   if (filter === "hard") shown.sort((a, b) => b.err - a.err);
   const list = document.getElementById("list");
+  if (filter === "days") { list.className = "days"; list.innerHTML = daysHtml(shown, q, t); return; }
+  list.className = "list";
   if (!shown.length) { list.innerHTML = `<p class="empty">${q || t ? "Таких слов нет — измените поиск или тему." : "Пока таких слов нет."}</p>`; return; }
-  list.innerHTML = shown.map(w => `<details><summary>
-      <span class="en">${w.qn && filter !== "all" ? `<span class="n">${w.qn}.</span>` : ""}${esc(w.en)}</span>
+  list.innerHTML = shown.map(item).join("");
+}
+function item(w) {
+  return `<details><summary>
+      <span class="en">${w.qn && filter !== "all" && filter !== "days" ? `<span class="n">${w.qn}.</span>` : ""}${esc(w.en)}</span>
       <span class="ru">${esc(w.ru)}</span>
-      <span class="meta">${w.hard ? `<span class="chip hard">трудное</span>` : ""}<span class="chip ${w.s}">${STATUS[w.s]}</span>
+      ${filter === "days" ? `<span class="tp">${esc(w.subj)} · ${esc(w.sub)}</span>` : ""}
+      <span class="meta">${w.zh ? `<span class="chip zh">записал Женя</span>` : ""}${w.hard ? `<span class="chip hard">трудное</span>` : ""}<span class="chip ${w.s}">${STATUS[w.s]}</span>
         ${w.ans ? `<span class="err">ошибок ${w.err} из ${w.ans}</span>` : ""}</span>
     </summary><div class="more">
       ${w.def ? `<p><span class="k">Определение:</span> ${esc(w.def)}</p>` : ""}
       ${w.ex ? `<p><span class="k">Пример:</span> ${esc(w.ex)}</p>` : ""}
       ${ivHtml(w)}
       <p><span class="k">Тема:</span> ${esc(w.topic)}${w.last ? ` · <span class="k">последний раз:</span> ${day(w.last)}` : ""}</p>
-    </div></details>`).join("");
+      <p><span class="k">В колоде с</span> ${day(w.added)}${w.zh ? ` · <span class="k">Женя записал</span> ${day(w.zh)}` : ""}</p>
+    </div></details>`;
+}
+// «По дням»: день добавления (новые сверху), в заголовке — сколько слов из каких предметов
+function daysHtml(shown, q, t) {
+  const groups = {};
+  shown.forEach(w => (groups[w.added] = groups[w.added] || []).push(w));
+  const extra = {};
+  zhExtra.forEach(x => {
+    const w = byTerm[x.term.toLowerCase()];
+    if (t && (!w || w.topic !== t)) return;
+    if (q && !(x.word + " " + x.term + " " + (w ? w.ru : "")).toLowerCase().replace(/ё/g, "е").includes(q)) return;
+    (extra[x.day] = extra[x.day] || []).push(x);
+    groups[x.day] = groups[x.day] || [];
+  });
+  const days = Object.keys(groups).sort().reverse();
+  if (!days.length) return `<p class="empty">Таких слов нет — измените поиск или тему.</p>`;
+  return days.map(d => {
+    const ws = groups[d].sort((a, b) => !!b.zh - !!a.zh || a.subj.localeCompare(b.subj) || a.sub.localeCompare(b.sub) || a.en.localeCompare(b.en));
+    const by = {}; ws.forEach(w => { by[w.subj] = (by[w.subj] || 0) + 1; });
+    const parts = Object.entries(by).sort((a, b) => b[1] - a[1]).map(([s, n]) => `${s} ${n}`);
+    const zn = ws.filter(w => w.zh === d).length;
+    const xn = (extra[d] || []).length;
+    const head = (ws.length ? `добавлено ${ws.length} ${wn(ws.length)}: ${parts.join(" · ")}${zn ? ` (из них записал Женя — ${zn})` : ""}` : "новых слов в колоде нет")
+      + (xn ? `; Женя записал${ws.length ? " ещё" : ""} ${xn} ${wn(xn)} — новых карточек из них нет` : "");
+    const xs = (extra[d] || []).map(x => {
+      const w = byTerm[x.term.toLowerCase()];
+      const why = x.st === "уже было" && w ? `уже было в колоде с ${day(w.added)} (${w.subj})` : x.st === "непонятно" && x.res ? `не понято: ${x.res}` : ZH_ST[x.st] || x.st;
+      return `<div class="zhx"><b>${esc(x.word)}</b> <span>${esc(why)}</span></div>`;
+    });
+    return `<section><h2>${day(d)}<span>${head}</span></h2>
+      ${ws.length ? `<div class="list">${ws.map(item).join("")}</div>` : ""}
+      ${xs.length ? `<div class="list zhl">${xs.join("")}</div>` : ""}</section>`;
+  }).join("");
 }
 function setFilter(f, push) { filter = match[f] ? f : "hard"; if (push) history.replaceState(null, "", "#" + filter); render(); }
 document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => setFilter(b.dataset.f, true)));

@@ -10,6 +10,11 @@
 иначе «учит».
 «iv» — по каждому направлению интервалы после ответов (revlog.ivl > 0, дни): растут (1 → 3 → 8) —
 слово запоминается; стоят на 1–2 днях или падают после ошибки — нет.
+«По дням» — день, когда слово появилось в колоде: id записи (момент создания при первом импорте,
+повторный импорт его не меняет; день Anki — с 4:00, поэтому ночная обработка слов Жени в 3–4 часа
+попадает в день, когда он их записал), и предмет (SUBJECT, по номеру подколоды). Слова, которые
+Женя записал сам, — из data/zhenya_inbox.tsv (inbox.py): «добавлено»/«уже было» — пометка у слова;
+«уже было»/«ждёт»/«непонятно» — ещё и список под днём записи (новых карточек из них в тот день нет).
 """
 import argparse
 import html as htmllib
@@ -23,11 +28,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import progress as p  # noqa: E402
 from ankiweb_sync import DATA_DIR  # noqa: E402
 from daily_chart import MONTHS, ROOT_DIR, HERE  # noqa: E402
+import inbox as ib  # noqa: E402
 
 OUT = os.path.join(ROOT_DIR, "out", "zhenya-words.html")
 HARD_DAYS, HARD_ERRORS = 14, 8
 LEARNED_DAYS = 7  # то же в daily_chart.py (IV_BUCKETS[1] + 1)
 F_RU, F_DEF, F_EX = 1, 2, 3  # поля «русский», определение, пример (FIELDS в build_deck.py)
+# предмет по номеру подколоды верхнего уровня (как STREAM_OF_TOP в progress.py, но команды заданий — отдельно)
+SUBJECT = {"0": "Математика", "1": "Команды заданий", "2": "Математика", "3": "Физика", "4": "Физика",
+           "5": "Информатика"}
 
 
 def txt(s):
@@ -38,6 +47,23 @@ def topic(name):
     """'IGCSE English\\x1f1 Command words\\x1fExam instructions' → 'Command words · Exam instructions'."""
     parts = name.split("\x1f")[1:]
     return " · ".join(s.split(" ", 1)[1] if s[:1].isdigit() and " " in s else s for s in parts)
+
+
+def subject(name):
+    """'IGCSE English\\x1f5 Computer Science 0478\\x1f02 Data transmission' → ('Информатика', 'Data transmission')."""
+    return SUBJECT.get(name.split("\x1f")[1][:1], ""), topic(name).split(" · ")[-1]
+
+
+def zhenya_words():
+    """Из data/zhenya_inbox.tsv: {термин в нижнем регистре: день записи} и записи без новой карточки."""
+    marked, extra = {}, []
+    for r in ib.read_log().values():
+        st, term = r["status"], r["term"].strip()
+        if st in ib.DONE and term:
+            marked[term.lower()] = min(marked.get(term.lower(), r["day"]), r["day"])
+        if st in ("уже было", ib.WAITING, ib.UNCLEAR):
+            extra.append({"day": r["day"], "word": r["word"], "st": st, "res": r["result"], "term": term})
+    return marked, extra
 
 
 def main():
@@ -88,10 +114,12 @@ def main():
         con.close()
         shutil.rmtree(tmp, ignore_errors=True)
 
+    zh, zh_extra = zhenya_words()
     rows = []
     for nid, w in words.items():
         f = notes[nid]
         types = w["types"]
+        subj, sub = subject(w["deck"])
         status = "done" if all(t == 2 for t in types) else "new" if all(t == 0 for t in types) else "learn"
         rows.append({
             "en": txt(f[p.F_TERM]), "ru": txt(f[F_RU]), "def": txt(f[F_DEF]),
@@ -99,6 +127,8 @@ def main():
             "hard": w["recent"] >= HARD_ERRORS, "ans": w["ans"], "err": w["err"],
             "last": p.anki_day(w["last"]).isoformat() if w["last"] else None,
             "pos": w["pos"] if status == "new" else None,
+            "added": p.anki_day(nid).isoformat(), "subj": subj, "sub": sub,
+            "zh": zh.get(txt(f[p.F_TERM]).lower()),
             "iv": {d: [i for _day, i in tr] for d, tr in w.get("iv", {}).items()},
         })
     # впереди — в том порядке, в каком Anki их покажет; остальные — по трудности
@@ -113,7 +143,8 @@ def main():
         html = fh.read()
     html = (html.replace("__SUB__", sub)
             .replace("__HARD_RULE__", f"{HARD_ERRORS} и больше ошибок за последние {HARD_DAYS} дней")
-            .replace("__WORDS_JSON__", json.dumps(rows, ensure_ascii=False, separators=(",", ":"))))
+            .replace("__WORDS_JSON__", json.dumps(rows, ensure_ascii=False, separators=(",", ":")))
+            .replace("__ZHENYA_JSON__", json.dumps(zh_extra, ensure_ascii=False, separators=(",", ":"))))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
         fh.write(html)
