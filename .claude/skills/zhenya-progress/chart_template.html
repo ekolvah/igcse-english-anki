@@ -12,15 +12,15 @@
   --bg: #f6f7f9; --surface: #ffffff; --fg: #1d2330; --muted: #5d6676; --grid: #e2e5ea;
   --ok: #2f7d5b; --ok-soft: #a9d3bf; --pct: #3a5fb0; --on-ok: #ffffff; --hover: rgba(58, 95, 176, .08);
   --iv0: #cfe9e5; --iv1: #84c7be; --iv2: #2f978c; --iv3: #0f5c55;
-  --s0: #2a78d6; --s1: #eb6834; --s2: #1baf7a;  /* предметы: математика, физика, информатика */  /* «спросит снова через…»: от «скоро» к «нескоро»; в тёмной теме яркость обратная — в тексте цвет не называть */
+  --s0: #2a78d6; --s1: #eb6834; --s2: #1baf7a; --nw: #7b4fc4;  /* предметы: математика, физика, информатика */  /* «спросит снова через…»: от «скоро» к «нескоро»; в тёмной теме яркость обратная — в тексте цвет не называть */
   --display: "PT Serif", Georgia, serif; --body: "PT Sans", "Segoe UI", Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #14171d; --surface: #1c2028; --fg: #e8ebf0; --muted: #9aa3b2; --grid: #2c323d;
-  --ok: #5cc092; --ok-soft: #2f5a47; --pct: #8fa9ec; --on-ok: #0f241a; --hover: rgba(143, 169, 236, .10); --iv0: #2d5550; --iv1: #2f7068; --iv2: #4fb3a6; --iv3: #a3e6dc; --s0: #3987e5; --s1: #d95926; --s2: #199e70; color-scheme: dark } }
+  --ok: #5cc092; --ok-soft: #2f5a47; --pct: #8fa9ec; --on-ok: #0f241a; --hover: rgba(143, 169, 236, .10); --iv0: #2d5550; --iv1: #2f7068; --iv2: #4fb3a6; --iv3: #a3e6dc; --s0: #3987e5; --s1: #d95926; --s2: #199e70; --nw: #b393ee; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #14171d; --surface: #1c2028; --fg: #e8ebf0; --muted: #9aa3b2; --grid: #2c323d;
-  --ok: #5cc092; --ok-soft: #2f5a47; --pct: #8fa9ec; --on-ok: #0f241a; --hover: rgba(143, 169, 236, .10); --iv0: #2d5550; --iv1: #2f7068; --iv2: #4fb3a6; --iv3: #a3e6dc; --s0: #3987e5; --s1: #d95926; --s2: #199e70; color-scheme: dark }
+  --ok: #5cc092; --ok-soft: #2f5a47; --pct: #8fa9ec; --on-ok: #0f241a; --hover: rgba(143, 169, 236, .10); --iv0: #2d5550; --iv1: #2f7068; --iv2: #4fb3a6; --iv3: #a3e6dc; --s0: #3987e5; --s1: #d95926; --s2: #199e70; --nw: #b393ee; color-scheme: dark }
 body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.5;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 40px; }
 main { max-width: 720px; margin: 0 auto; display: grid; gap: 28px; }
@@ -65,6 +65,11 @@ h3 { font-size: .95rem; margin: 18px 0 2px; }
 .share-l { display: flex; flex-wrap: wrap; gap: 2px 16px; font-size: .9rem; margin-top: 4px; font-variant-numeric: tabular-nums; }
 .share-l i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: 0; }
 .share-l span { color: var(--muted); }
+.st { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: .8rem; background: var(--grid); color: var(--fg); }
+.st.wait { background: var(--nw); color: var(--surface); }
+#ntbl td, #ntbl th { white-space: normal; text-align: left; vertical-align: top; }
+#ntbl td:first-child { white-space: nowrap; }
+#ntbl .ctx { color: var(--muted); font-size: .85rem; }
 </style>
 
 <main>
@@ -122,6 +127,20 @@ __KPIS__
     <div class="legend" id="slegend"></div>
     <div class="tbl"><table id="stbl">
       <thead><tr><th>Предмет</th><th>Всего слов</th><th>Учит</th><th>Выучено</th><th>Ещё впереди</th><th>Ответов за неделю</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Новые слова от Жени</h2>
+    <p class="note">Незнакомые слова, которые Женя сам записал в AnkiDroid в колоду «Новые слова» — по дню, когда записал. Из каждого делаются карточки колоды, и они идут первыми среди новых. Что стало с каждым словом — в списке под графиком.</p>
+    <div class="fig" id="nfig">
+      <svg id="nwc" viewBox="0 0 640 240" role="img" aria-label="Сколько новых слов Женя записал по дням"></svg>
+      <div class="tip" id="ntip" hidden></div>
+    </div>
+    <h3 id="nhead">Последние слова</h3>
+    <div class="tbl"><table id="ntbl">
+      <thead><tr><th>День</th><th>Слово</th><th>Что сделано</th></tr></thead>
       <tbody></tbody>
     </table></div>
   </section>
@@ -402,6 +421,65 @@ scols.forEach((c, i) => {
   ssvg.appendChild(c);
 });
 ssvg.addEventListener("pointerleave", shide);
+
+// Раздел «Новые слова от Жени»: столбики по дням + список последних слов
+const IN = __INBOX_JSON__;
+const nsvg = document.getElementById("nwc");
+const nTop = Math.max(...days.map(o => o.nw), 1);
+const nStep = nTop > 20 ? 10 : nTop > 10 ? 5 : nTop > 4 ? 2 : 1;
+const nMax = Math.max(nStep * 2, Math.ceil(nTop / nStep) * nStep);
+const N = { T: 22, B: 190 }, ny = v => N.B - v / nMax * (N.B - N.T);
+const ncols = days.map((o, i) => el("rect", { x: L + step * i + 1, y: 2, width: step - 2, height: 224, rx: 6, class: "col" }, null, nsvg));
+for (let t = 0; t <= nMax; t += nStep) {
+  el("line", { x1: L, x2: R, y1: ny(t), y2: ny(t), class: "grid" }, null, nsvg);
+  el("text", { x: L - 8, y: ny(t) + 4, "text-anchor": "end" }, t, nsvg);
+}
+el("text", { x: L - 8, y: 10, "text-anchor": "end", style: "font-size:11px" }, "слов", nsvg);
+days.forEach((o, i) => {
+  if (o.nw) {
+    const h = N.B - ny(o.nw);
+    el("rect", { x: cx(i) - w / 2, y: N.B - h, width: w, height: h, rx: 4, fill: "var(--nw)" }, null, nsvg);
+    el("text", { x: cx(i), y: N.B - h - 8, "text-anchor": "middle", class: "val", style: dense ? "font-size:11px" : "" }, o.nw, nsvg);
+  } else el("text", { x: cx(i), y: N.B - 6, "text-anchor": "middle", style: "font-size:11px" }, "0", nsvg);
+  el("text", { x: cx(i), y: 214, "text-anchor": "middle", style: dense ? "font-size:11px" : "" }, o.d, nsvg);
+});
+const esc = t => String(t).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[ch]);
+const ntip = document.getElementById("ntip");
+function nshow(i) {
+  const o = days[i];
+  ncols.forEach((c, j) => c.classList.toggle("on", j === i));
+  ntip.innerHTML = `<b>${o.full}</b>` + (o.nw ? `<span>Записал слов:</span> ${o.nw}<br>` + o.nws.map(esc).join(", ")
+                                               : `<span>Новых слов не записывал</span>`);
+  ntip.hidden = false;
+  const box = nsvg.getBoundingClientRect(), k = box.width / 640;
+  let left = (cx(i) + step / 2) * k + 8;
+  if (left + ntip.offsetWidth > box.width) left = (cx(i) - step / 2) * k - ntip.offsetWidth - 8;
+  ntip.style.left = Math.max(0, left) + "px";
+  ntip.style.top = 4 * k + "px";
+}
+function nhide() { ntip.hidden = true; ncols.forEach(c => c.classList.remove("on")); }
+ncols.forEach((c, i) => {
+  c.setAttribute("tabindex", "0");
+  c.addEventListener("pointerenter", () => nshow(i));
+  c.addEventListener("click", () => nshow(i));
+  c.addEventListener("focus", () => nshow(i));
+  c.addEventListener("blur", nhide);
+  nsvg.appendChild(c);
+});
+nsvg.addEventListener("pointerleave", nhide);
+document.getElementById("nhead").textContent = IN.total
+  ? `Последние слова (всего ${IN.total}, ждут обработки ${IN.waiting})` : "Последние слова";
+const ntb = document.querySelector("#ntbl tbody");
+const fullDay = iso => { const [y, m, d] = iso.split("-").map(Number); return `${d} ${MONF[m - 1]}`; };
+if (!IN.list.length) ntb.innerHTML = `<tr><td colspan="3">Пока ни одного слова. Как записать слово — в README проекта.</td></tr>`;
+IN.list.forEach(r => {
+  const tr = document.createElement("tr");
+  const st = r.status === "ждёт" ? `<span class="st wait">ждёт обработки</span>`
+           : `<span class="st">${esc(r.status)}</span> ${esc(r.result)}`;
+  tr.innerHTML = `<td>${fullDay(r.day)}</td><td><b>${esc(r.word)}</b>` +
+    (r.context ? `<div class="ctx">${esc(r.context)}</div>` : "") + `</td><td>${st}</td>`;
+  ntb.appendChild(tr);
+});
 const stb = document.querySelector("#stbl tbody");
 SUBJ.forEach(s => {
   const tr = document.createElement("tr");

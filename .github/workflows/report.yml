@@ -1,6 +1,8 @@
 # Каждую ночь: скачать копию коллекции из AnkiWeb (только скачивание), построить две страницы
 # отчёта и выложить их на GitHub Pages:
 #   index.html — график «Как занимается Женя», words.html — «Слова Жени» для репетитора.
+# Заодно обновляет историю новых слов, которые Женя записал в AnkiDroid в колоду «Новые слова»
+# (data/zhenya_inbox.tsv, inbox.py), и коммитит её в main — по ней строится график на index.html.
 # Время — 01:30 UTC: на Кипре 03:30 зимой и 04:30 летом; GitHub иногда опаздывает до часа,
 # поэтому к 6:00 страницы уже новые. Запустить вручную: вкладка Actions → «Отчёт» → Run workflow.
 # Секреты репозитория: ANKIWEB_HKEY (ключ входа из auth.json, не пароль), ANKIWEB_ENDPOINT.
@@ -12,7 +14,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # коммит data/zhenya_inbox.tsv
   pages: write
   id-token: write
   actions: write   # шаг «не дать GitHub отключить расписание»
@@ -49,6 +51,11 @@ jobs:
           ANKIWEB_ENDPOINT: ${{ secrets.ANKIWEB_ENDPOINT }}
         run: python .claude/skills/zhenya-progress/ankiweb_sync.py
 
+      - name: Новые слова Жени (ящик «Новые слова» → data/zhenya_inbox.tsv)
+        id: inbox
+        continue-on-error: true   # отчёт строится и без этого шага; ошибка — в последнем шаге
+        run: python .claude/skills/zhenya-progress/inbox.py
+
       - name: Построить страницы
         run: |
           python .claude/skills/zhenya-progress/daily_chart.py
@@ -64,6 +71,17 @@ jobs:
       - id: deploy
         uses: actions/deploy-pages@v4
 
+      - name: Сохранить историю новых слов в git
+        id: commit
+        if: steps.inbox.outcome == 'success'
+        run: |
+          git add data/zhenya_inbox.tsv
+          if git diff --cached --quiet; then echo "Без изменений"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "Новые слова Жени: история на $(date +%F)"
+          git pull -q --rebase origin main && git push -q origin HEAD:main
+
       # Расписание в открытом репозитории GitHub отключает после 60 дней без коммитов —
       # повторное включение каждую ночь сбрасывает этот счётчик.
       - name: Не дать GitHub отключить расписание
@@ -71,3 +89,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/report.yml/enable"
+
+      - name: Ошибка в шаге «Новые слова Жени» — письмо владельцу
+        if: steps.inbox.outcome == 'failure'
+        run: exit 1

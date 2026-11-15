@@ -5,6 +5,8 @@
     по 10 новых в день,
     300 повторений, максимальный интервал 60 дней, пиявка после 5 ошибок (только метка);
   * главная «IGCSE English» («По умолчанию»): 20 новых, 300 повторений — общий потолок;
+  * колода-ящик «Новые слова» (отдельно, не внутри IGCSE English) с пресетом «Новые слова»: 0 новых
+    и 0 повторений — Женя пишет туда незнакомые слова, учить их там нельзя (см. inbox.py);
   * новые карточки берутся «по позиции»; позиции новых карточек выравниваются по build_deck.py
     (Maths / Physics / Computer Science по очереди, порядок — STREAMS в build_deck.py).
     Позиции новым словам ставит уже сама сборка (импорт Anki 26.9 их сохраняет, проверено
@@ -34,6 +36,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 _found = glob.glob(os.path.join(os.environ.get("APPDATA", ""), "Anki2", "*", "collection.anki2"))
 PROFILE = os.environ.get("ANKI_PROFILE") or (os.path.dirname(_found[0]) if len(_found) == 1 else "")
 ROOT = "IGCSE English"
+INBOX = "Новые слова"  # то же имя, что INBOX в .claude/skills/zhenya-progress/progress.py
 STREAMS = build_deck.STREAMS  # какие подколоды в Maths, Physics, Computer Science
 PER_STREAM_NEW, ROOT_NEW, REVIEWS, MAX_IVL, LEECH = 10, 20, 300, 60, 5
 LOWEST_POSITION = DeckConfig.Config.NEW_CARD_GATHER_PRIORITY_LOWEST_POSITION
@@ -80,6 +83,17 @@ def main(path):
         preset_ids[name] = conf["id"]
     set_values(default, ROOT_NEW)
     dm.update_config(default)
+
+    # ящик «Новые слова»: карточки там не показываются для учёбы
+    found = [c for c in dm.all_config() if c["name"] == INBOX]
+    inbox_conf = found[0] if found else dm.get_config(dm.add_config_returning_id(INBOX, clone_from=default))
+    inbox_conf["new"]["perDay"] = 0
+    inbox_conf["rev"]["perDay"] = 0
+    dm.update_config(inbox_conf)
+    inbox = dm.get(dm.id(INBOX))  # создаёт колоду, если её нет
+    inbox["conf"] = inbox_conf["id"]
+    dm.save(inbox)
+    preset_ids[INBOX] = inbox_conf["id"]
 
     # подколоды → наборы
     for name, tops in STREAMS.items():

@@ -24,6 +24,8 @@ PROFILE = os.environ.get("ANKI_PROFILE") or (os.path.dirname(_found[0]) if len(_
 ROOT = "IGCSE English"
 STREAM_OF_TOP = {"0": "Maths", "1": "Maths", "2": "Maths", "3": "Physics", "4": "Physics",
                  "5": "Computer Science"}
+INBOX = "Новые слова"  # колода-ящик: сюда Женя пишет незнакомые слова (inbox.py; создаёт anki_settings.py)
+IGCSE_MODELS = (1730716800, 1730803200)  # типы записей колоды (старый и MODEL_ID из build_deck.py)
 ROLLOVER_H = 4  # новый день в Anki начинается в 4:00
 F_TERM, F_RUMAIN = 0, 7  # индексы полей Term и RuMain (FIELDS в build_deck.py)
 DIRECTION = {0: "EN→RU", 1: "RU→EN"}

@@ -14,6 +14,8 @@ synced (по умолчанию) — копия, скачанная ankiweb_sync
 слов за день (первый ответ по слову), «sa» — ответов за день; в subj — всего слов, сейчас учит,
 выучено (обе карточки на повторении с интервалом ≥ 7 дней, как в words_page.py) и ответов за
 последние RECENT_DAYS дней. Нужно, чтобы видеть, что все три предмета идут равномерно.
+Новые слова от Жени (__INBOX_JSON__): из истории ящика data/zhenya_inbox.tsv (inbox.py) — в днях
+«nw» — сколько слов он записал в этот день, «nws» — какие; list — последние INBOX_LIST слов.
 Время («min», «sm» — по предметам, минуты): сумма revlog.time — сколько карточка была на экране до
 ответа; Anki обрезает одну карточку до 60 с (настройка колоды), перерывы между карточками не входят.
 """
@@ -25,6 +27,7 @@ import shutil
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import inbox as ib  # noqa: E402
 import progress as p  # noqa: E402
 from ankiweb_sync import DATA_DIR  # noqa: E402
 
@@ -35,6 +38,7 @@ IV_BUCKETS = (1, 6, 20)  # ≤1 день | 2–6 | 7–20 | 21+ (верхние 
 SUBJECTS = [("Maths", "Математика"), ("Physics", "Физика"), ("Computer Science", "Информатика")]
 SUBJ_IDX = {en: i for i, (en, _ru) in enumerate(SUBJECTS)}
 RECENT_DAYS = 7
+INBOX_LIST = 20
 MONTHS = "января февраля марта апреля мая июня июля августа сентября октября ноября декабря".split()
 
 
@@ -108,8 +112,13 @@ def main():
         elif any(t > 0 for t, _i in cs):
             s["learn"] += 1
 
+    inbox = sorted(ib.read_log().values(), key=lambda r: int(r["id"]))
+    nw = {}
+    for r in inbox:
+        nw.setdefault(r["day"], []).append(r["word"])
+
     today = p.anki_day(dt.datetime.now().timestamp() * 1000)
-    end = today if per.get(today, {}).get("ans") else today - dt.timedelta(days=1)
+    end = today if per.get(today, {}).get("ans") or today.isoformat() in nw else today - dt.timedelta(days=1)
     first_day = min(per) if per else end
     start = max(first_day, end - dt.timedelta(days=a.days - 1))
     days, state, k = [], {}, 0
@@ -127,7 +136,8 @@ def main():
                      "first": sum(d["first"].values()) if d else 0, "iv": iv,
                      "sn": d["sn"] if d else [0] * ns, "sa": d["sa"] if d else [0] * ns,
                      "min": round(sum(d["ms"]) / 60000) if d else 0,
-                     "sm": [round(x / 60000) for x in d["ms"]] if d else [0] * ns})
+                     "sm": [round(x / 60000) for x in d["ms"]] if d else [0] * ns,
+                     "nw": len(nw.get(day.isoformat(), [])), "nws": nw.get(day.isoformat(), [])})
     for d in days[-RECENT_DAYS:]:
         for j, n in enumerate(d["sa"]):
             subj[j]["recent"] += n
@@ -158,7 +168,11 @@ def main():
         html = f.read()
     html = (html.replace("__SUB__", sub).replace("__KPIS__", kpi_html)
             .replace("__DAYS_JSON__", json.dumps(days, ensure_ascii=False))
-            .replace("__SUBJ_JSON__", json.dumps({"subj": subj, "recent": RECENT_DAYS}, ensure_ascii=False)))
+            .replace("__SUBJ_JSON__", json.dumps({"subj": subj, "recent": RECENT_DAYS}, ensure_ascii=False))
+            .replace("__INBOX_JSON__", json.dumps({
+                "total": len(inbox), "waiting": sum(r["status"] == ib.WAITING for r in inbox),
+                "list": [{k: r[k] for k in ("day", "word", "context", "status", "result")}
+                         for r in reversed(inbox[-INBOX_LIST:])]}, ensure_ascii=False)))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(html)
