@@ -14,8 +14,8 @@ synced (по умолчанию) — копия, скачанная ankiweb_sync
 слов за день (первый ответ по слову), «sa» — ответов за день; в subj — всего слов, сейчас учит,
 выучено (обе карточки на повторении с интервалом ≥ 7 дней, как в words_page.py) и ответов за
 последние RECENT_DAYS дней. Нужно, чтобы видеть, что все три предмета идут равномерно.
-Новые слова от Жени (__INBOX_JSON__): из истории ящика data/zhenya_inbox.tsv (inbox.py) — в днях
-«nw» — сколько слов он записал в этот день; list — последние INBOX_LIST слов.
+Новые слова от Жени: из истории ящика data/zhenya_inbox.tsv (inbox.py) — в днях «nw» — сколько
+слов он записал в этот день; в __INBOX_JSON__ — только правило подсчёта чтения (gap, min).
 Сколько он читал («rd», минуты): время записи слова — id записи (момент создания, мс). Пока Женя
 читает, он записывает незнакомые слова; перестал записывать — перестал читать. Слова дня по
 времени делятся на сеансы: перерыв больше READ_GAP минут — новый сеанс. Сеанс длится от первого
@@ -44,7 +44,6 @@ IV_BUCKETS = (1, 6, 20)  # ≤1 день | 2–6 | 7–20 | 21+ (верхние 
 SUBJECTS = [("Maths", "Математика"), ("Physics", "Физика"), ("Computer Science", "Информатика")]
 SUBJ_IDX = {en: i for i, (en, _ru) in enumerate(SUBJECTS)}
 RECENT_DAYS = 7
-INBOX_LIST = 20
 READ_GAP = 30  # мин: перерыв между словами больше — новый сеанс чтения
 READ_MIN = 5   # мин: самый короткий сеанс (одно слово)
 MONTHS = "января февраля марта апреля мая июня июля августа сентября октября ноября декабря".split()
@@ -192,12 +191,7 @@ def main():
     html = (html.replace("__SUB__", sub).replace("__KPIS__", kpi_html)
             .replace("__DAYS_JSON__", json.dumps(days, ensure_ascii=False))
             .replace("__SUBJ_JSON__", json.dumps({"subj": subj, "recent": RECENT_DAYS}, ensure_ascii=False))
-            .replace("__INBOX_JSON__", json.dumps({
-                "total": len(inbox), "waiting": sum(r["status"] == ib.WAITING for r in inbox),
-                "gap": READ_GAP, "min": READ_MIN,
-                "list": [{**{k: r[k] for k in ("day", "word", "context", "status", "result")},
-                          "t": f"{dt.datetime.fromtimestamp(int(r['id']) / 1000):%H:%M}"}
-                         for r in reversed(inbox[-INBOX_LIST:])]}, ensure_ascii=False)))
+            .replace("__INBOX_JSON__", json.dumps({"gap": READ_GAP, "min": READ_MIN})))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(html)

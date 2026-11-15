@@ -65,11 +65,6 @@ h3 { font-size: .95rem; margin: 18px 0 2px; }
 .share-l { display: flex; flex-wrap: wrap; gap: 2px 16px; font-size: .9rem; margin-top: 4px; font-variant-numeric: tabular-nums; }
 .share-l i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: 0; }
 .share-l span { color: var(--muted); }
-.st { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: .8rem; background: var(--grid); color: var(--fg); }
-.st.wait { background: var(--nw); color: var(--surface); }
-#ntbl td, #ntbl th { white-space: normal; text-align: left; vertical-align: top; }
-#ntbl td:first-child { white-space: nowrap; }
-#ntbl .ctx { color: var(--muted); font-size: .85rem; }
 </style>
 
 <main>
@@ -99,7 +94,7 @@ __KPIS__
   <section>
     <h2>Сколько времени в день</h2>
     <p class="note">Левый столбик — минуты, которые Женя провёл над карточками. Anki считает время от показа карточки до ответа; если карточка была на экране дольше минуты (отвлёкся), засчитывается только минута. Перерывы между карточками не входят, поэтому за телефоном он сидит немного дольше.</p>
-    <p class="note">Правый столбик — сколько он читал: пока читает, он записывает незнакомые слова (как считается — в разделе «Новые слова от Жени»).</p>
+    <p class="note" id="nhow"></p>
     <div class="fig" id="tfig">
       <svg id="time" viewBox="0 0 640 240" role="img" aria-label="Минут над карточками и минут чтения по дням"></svg>
       <div class="tip" id="ttip" hidden></div>
@@ -129,17 +124,6 @@ __KPIS__
     <div class="legend" id="slegend"></div>
     <div class="tbl"><table id="stbl">
       <thead><tr><th>Предмет</th><th>Всего слов</th><th>Учит</th><th>Выучено</th><th>Ещё впереди</th><th>Ответов за неделю</th></tr></thead>
-      <tbody></tbody>
-    </table></div>
-  </section>
-
-  <section>
-    <h2>Новые слова от Жени</h2>
-    <p class="note">Незнакомые слова, которые Женя сам записал в AnkiDroid в колоду «Новые слова». Из каждого слова делаются карточки колоды, и они идут первыми среди новых. Что стало с каждым словом — в списке ниже.</p>
-    <p class="note" id="nhow"></p>
-    <h3 id="nhead">Последние слова</h3>
-    <div class="tbl"><table id="ntbl">
-      <thead><tr><th>День</th><th>Слово</th><th>Что сделано</th></tr></thead>
       <tbody></tbody>
     </table></div>
   </section>
@@ -430,12 +414,11 @@ scols.forEach((c, i) => {
 });
 ssvg.addEventListener("pointerleave", shide);
 
-// Раздел «Новые слова от Жени»: как считается чтение и список слов (минуты чтения — на панели времени)
+// Чтение (правый столбик панели времени): как считается — по времени записи новых слов
 const IN = __INBOX_JSON__;
-document.getElementById("nhow").textContent = `Как считается время чтения: пока Женя читает, он записывает незнакомые слова. ` +
-  `Если больше ${IN.gap} минут не записывал — считаем, что перестал читать. Сеанс — от первого до последнего слова, ` +
-  `сеанс из одного слова — ${IN.min} минут. Это оценка: читать без новых слов он тоже может. ` +
-  `Минуты чтения — на графике «Сколько времени в день», во сколько записано слово — в списке ниже.`;
+document.getElementById("nhow").textContent = `Правый столбик — сколько он читал. Пока Женя читает, он записывает ` +
+  `незнакомые слова в колоду «Новые слова»; если больше ${IN.gap} минут не записывал — считаем, что перестал читать. ` +
+  `Сеанс — от первого до последнего слова, одно слово — ${IN.min} минут. Это оценка: читать без новых слов он тоже может.`;
 const hm = m => `${Math.floor(m / 60) % 24}:${String(m % 60).padStart(2, "0")}`;
 const esc = t => String(t).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[ch]);
 const nWord = n => n % 10 === 1 && n % 100 !== 11 ? "слово" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "слова" : "слов";
@@ -448,19 +431,6 @@ function readBody(o) {
     (o.ws.length > MAXW ? `<br><span>…и ещё ${o.ws.length - MAXW}</span>` : "")
     : `<span>Не читал (новых слов не записывал)</span>`);
 }
-document.getElementById("nhead").textContent = IN.total
-  ? `Последние слова (всего ${IN.total}, ждут обработки ${IN.waiting})` : "Последние слова";
-const ntb = document.querySelector("#ntbl tbody");
-const fullDay = iso => { const [y, m, d] = iso.split("-").map(Number); return `${d} ${MONF[m - 1]}`; };
-if (!IN.list.length) ntb.innerHTML = `<tr><td colspan="3">Пока ни одного слова. Как записать слово — в README проекта.</td></tr>`;
-IN.list.forEach(r => {
-  const tr = document.createElement("tr");
-  const st = r.status === "ждёт" ? `<span class="st wait">ждёт обработки</span>`
-           : `<span class="st">${esc(r.status)}</span> ${esc(r.result)}`;
-  tr.innerHTML = `<td>${fullDay(r.day)}<div class="ctx">${r.t}</div></td><td><b>${esc(r.word)}</b>` +
-    (r.context ? `<div class="ctx">${esc(r.context)}</div>` : "") + `</td><td>${st}</td>`;
-  ntb.appendChild(tr);
-});
 const stb = document.querySelector("#stbl tbody");
 SUBJ.forEach(s => {
   const tr = document.createElement("tr");
