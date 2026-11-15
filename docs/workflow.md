@@ -114,8 +114,10 @@ HTML сравнения `col.compare_answer(ожидаемое, напечата
   Время — `cron: "30 1 * * *"` (UTC): на Кипре 03:30 зимой, 04:30 летом, GitHub опаздывает до
   часа — к 6:00 готово. В workflow `TZ=Asia/Nicosia`: «день Anki» (с 4:00) и время на странице — кипрские.
 - Шаги: `ankiweb_sync.py` → `inbox.py` (история слов Жени) → `daily_chart.py` → `words_page.py` →
-  `out/*.html` копируются в `site/` (`index.html`, `words.html`) → deploy на Pages → коммит
-  `data/zhenya_inbox.tsv`, если изменился (бот `github-actions[bot]`, `permissions: contents: write`).
+  `out/*.html` копируются в `site/` (`index.html`, `words.html`) → загрузка страниц → коммит
+  `data/zhenya_inbox.tsv`, если изменился (бот `github-actions[bot]`, `permissions: contents: write`);
+  выкладка на Pages — отдельный этап `deploy` (в одном этапе deploy-pages 15.11 трижды «не нашёл»
+  загруженные страницы). Не удалась выкладка — история слов всё равно сохранена.
   Упал `inbox.py` — страницы всё равно выкладываются, но запуск помечается ошибкой (придёт письмо). В конце — повторное включение workflow через API:
   иначе GitHub отключает расписание открытого репозитория после 60 дней без коммитов.
 - Запуски и ошибки — https://github.com/ekolvah/igcse-english-anki/actions (вкладка Actions). Упал — GitHub пишет письмо владельцу.

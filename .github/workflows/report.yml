@@ -13,11 +13,8 @@ on:
     - cron: "30 1 * * *"
   workflow_dispatch:
 
-permissions:
-  contents: write  # коммит data/zhenya_inbox.tsv
-  pages: write
-  id-token: write
-  actions: write   # шаг «не дать GitHub отключить расписание»
+# Два этапа, как в шаблоне GitHub: build строит страницы и сохраняет историю слов, deploy выкладывает.
+# В одном этапе deploy-pages иногда «не находит» только что загруженные страницы (15.11.2026).
 
 concurrency:
   group: pages
@@ -30,9 +27,11 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+    permissions:
+      contents: write  # коммит data/zhenya_inbox.tsv
+      actions: write   # шаг «не дать GitHub отключить расписание»
+    outputs:
+      inbox: ${{ steps.inbox.outcome }}
     steps:
       - uses: actions/checkout@v5
 
@@ -68,8 +67,6 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site
-      - id: deploy
-        uses: actions/deploy-pages@v4
 
       - name: Сохранить историю новых слов в git
         id: commit
@@ -90,6 +87,19 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/report.yml/enable"
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
       - name: Ошибка в шаге «Новые слова Жени» — письмо владельцу
-        if: steps.inbox.outcome == 'failure'
+        if: needs.build.outputs.inbox == 'failure'
         run: exit 1
