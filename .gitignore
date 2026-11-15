@@ -1,0 +1,24 @@
+# Собирается заново: PYTHONIOENCODING=utf-8 python build_deck.py
+IGCSE_Maths_Physics.apkg
+__pycache__/
+
+# Учебники (чужие, 50+ МБ) и личные PDF (статистика, сканы) — только локально
+books/
+*.pdf
+
+# Копии коллекции Anki, виртуальные окружения, локальные настройки агента
+backups/
+*.anki2
+*.colpkg
+ankienv/
+venv/
+.venv/
+.claude/settings.local.json
+
+# Страница-график Жени (строится daily_chart.py)
+out/
+
+# только на этом компьютере: личное (репозиторий открытый)
+docs/student.md
+# сборка страниц отчёта в GitHub Actions
+site/

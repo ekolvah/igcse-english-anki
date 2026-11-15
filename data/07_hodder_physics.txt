@@ -1,0 +1,135 @@
+# Слова из учебника Hodder «Cambridge IGCSE Physics» (Duncan, Kennett, 3-е изд., 2014):
+# предметный указатель (Index, с. 308–314) + частые слова в тексте и задачах.
+# Только то, чего не было в колоде, и только темы текущего syllabus 0625 (2026–2028):
+# логические вентили, транзисторы, конденсаторы, осциллограф (CRO) и т. п. из учебника 2014 года
+# в программе больше нет — пропущены. Подколоды — существующие (новых не создаём).
+# Формат: term | русский | definition (simple English) | example | flag
+
+## 3 Physics 0625::00 Practical skills
+meniscus | мениск (изогнутая поверхность жидкости) | the curved surface of a liquid in a tube; read the scale at the bottom of it, with your eye level with it | Read the measuring cylinder at the bottom of the meniscus. |
+pendulum | маятник | a mass on a string that swings backwards and forwards | Time 20 swings of the pendulum. |
+oscillation | колебание (одно полное качание) | one complete swing backwards and forwards | Time 20 oscillations and divide by 20. |
+period | период (время одного колебания) | the time for one complete oscillation or one complete wave | The period of the pendulum is 1.5 s. |
+trolley | тележка | a small vehicle on wheels used in experiments | A trolley runs down a ramp. |
+SI unit | единица СИ (международная система единиц) | a unit of the International System: m, kg, s, A, K | The SI unit of mass is the kilogram. |
+slope | наклон графика, уклон (= gradient) | the gradient of a graph; a surface that goes up or down | The slope of a distance–time graph is the speed. |
+
+## 3 Physics 0625::01 Motion, forces and energy
+steady speed | равномерная скорость (= constant speed) | speed that does not change | The car moves at a steady speed of 20 m/s. |
+uniform | однородный; равномерный (постоянный) | the same all the way through; not changing | a uniform metre rule; uniform acceleration |
+uniform acceleration | постоянное ускорение, равноускоренное движение | acceleration that stays the same | A falling ball has uniform acceleration. |
+from rest | из состояния покоя (начальная скорость = 0) | starting with zero speed | A car starts from rest. → u = 0 |
+initial velocity | начальная скорость (u) | the velocity at the start | |
+final velocity | конечная скорость (v) | the velocity at the end | |
+area under the graph | площадь под графиком | on a speed–time graph it gives the distance travelled | |
+neglect | не учитывать, пренебречь | do not include it in the calculation | Neglect air resistance. |
+exert | оказывать (силу, давление), действовать (на) | apply a force or pressure on something | The man exerts a force of 200 N on the box. |
+inertia | инерция | the resistance of an object to a change in its motion; more mass means more inertia | |
+Newton's first law | первый закон Ньютона | an object stays at rest or moves at constant velocity unless a resultant force acts on it | |
+Newton's second law | второй закон Ньютона | resultant force = mass × acceleration | F = ma |
+Newton's third law | третий закон Ньютона | if A pushes on B, B pushes on A with an equal and opposite force | |
+centripetal force | центростремительная сила | the force towards the centre that keeps an object moving in a circle | The tension in the string is the centripetal force. |
+Hooke's law | закон Гука | extension is proportional to load, up to the limit of proportionality | F = kx |
+load–extension graph | график удлинения (от нагрузки) | a graph of extension against load for a spring | A straight line through the origin shows Hooke's law. |
+turning effect | вращающее действие (силы) | how much a force makes something rotate; it is measured by the moment | The moment of a force is a measure of its turning effect. |
+reaction time | время реакции | the time a driver takes to react before braking | |
+thinking distance | путь за время реакции (до начала торможения) | the distance travelled during the driver's reaction time | |
+braking distance | тормозной путь | the distance travelled after the brakes are put on | |
+stopping distance | остановочный путь (реакция + торможение) | thinking distance + braking distance | |
+crumple zone | зона деформации (сминаемая часть автомобиля) | a part of a car that squashes in a crash, so the collision takes longer and the force is smaller | |
+seat belt | ремень безопасности | a belt that holds a person in the seat of a car | |
+airbag | подушка безопасности | a bag that fills with gas in a crash to protect the driver | |
+energy resource | энергоресурс, источник энергии | something used to produce electricity or other useful energy | coal, wind, the Sun |
+power station | электростанция | a place where electricity is generated | |
+turbine | турбина | a machine with blades turned by steam, water or wind; it turns a generator | Steam turns the turbine. |
+biofuel | биотопливо | fuel made from plants or animal waste | wood, biogas, ethanol |
+combustion (burning) | горение, сгорание (топлива) | burning a fuel; it releases thermal energy | |
+solar energy | солнечная энергия | energy from the Sun | |
+pollution | загрязнение (окружающей среды) | harmful substances put into the air, water or land | Burning coal causes air pollution. |
+carbon dioxide | углекислый газ (CO₂) | a greenhouse gas produced when fuels burn | |
+
+## 3 Physics 0625::02 Thermal physics
+molecule | молекула | the smallest particle of a substance; atoms joined together | a water molecule |
+substance | вещество | a type of matter | Water is a pure substance. |
+material | материал | what an object is made of | Copper is a good material for wires. |
+property (pl. properties) | свойство (мн. свойства) | what something is like and how it behaves | the properties of solids, liquids and gases |
+change of state | изменение агрегатного состояния | melting, boiling, evaporating, condensing or freezing | |
+steam | пар (водяной пар от кипения) | water as a gas, from boiling water | |
+vapour | пары, испарения (газ из жидкости) | the gas formed when a liquid evaporates | water vapour in the air |
+cooling curve | кривая охлаждения (график температуры от времени) | a graph of temperature against time as a substance cools | The flat part shows the substance is freezing. |
+Celsius scale | шкала Цельсия | a temperature scale: water freezes at 0 °C and boils at 100 °C | |
+Boyle's law | закон Бойля, закон Бойля-Мариотта | for a fixed mass of gas at constant temperature, pressure × volume is constant | pV = constant |
+fixed mass (of gas) | постоянная масса (газа) | the mass does not change: no gas gets in or out | for a fixed mass of gas at constant temperature |
+bimetallic strip | биметаллическая пластина | two metals joined together; it bends when heated because they expand by different amounts | used in a thermostat |
+thermostat | термостат, терморегулятор | a switch that keeps the temperature constant | |
+immersion heater | погружной нагреватель (кипятильник) | an electric heater put into a liquid or a metal block | |
+vacuum flask | термос | a container that keeps drinks hot or cold by reducing conduction, convection and radiation | |
+greenhouse effect | парниковый эффект | gases in the atmosphere trap infrared radiation, so the Earth gets warmer | |
+greenhouse gas | парниковый газ | a gas that traps infrared radiation, e.g. carbon dioxide | |
+copper | медь | a metal that is a very good conductor of electricity and heat | copper wires |
+aluminium | алюминий | a light metal; a good conductor | |
+steel | сталь | a strong metal made mostly of iron; it is magnetic | |
+rubber | резина | a soft material that stretches; an insulator | |
+
+## 3 Physics 0625::03 Waves
+ray diagram | ход лучей (схема) | a diagram that shows the paths of light rays | Draw a ray diagram to find the image. |
+enlarged | увеличенное (об изображении) | bigger than the object | A magnifying glass gives an enlarged image. |
+diminished | уменьшенное (об изображении) | smaller than the object | |
+magnification | увеличение (у линзы) | image size ÷ object size | |
+laterally inverted | зеркально перевёрнутое (лево ↔ право) | left and right are swapped, as in a plane mirror | |
+opaque | непрозрачный | does not let light through | |
+transparent | прозрачный | lets light through, so you can see through it | glass, water |
+shadow | тень | a dark area where light is blocked by an opaque object | |
+endoscope | эндоскоп | a medical instrument with optical fibres for seeing inside the body | |
+seismic waves | сейсмические волны | waves through the Earth caused by earthquakes | P-waves are longitudinal, S-waves are transverse. |
+emit | испускать, излучать | give out | Hot objects emit infrared radiation. |
+absorb | поглощать | take in | Black surfaces absorb radiation well. |
+
+## 3 Physics 0625::04 Electricity and magnetism
+conventional current | условное (техническое) направление тока (от + к −) | the direction from the positive terminal to the negative terminal | Electrons flow the opposite way to conventional current. |
+free electrons | свободные электроны | electrons that can move through a metal; they carry the current | |
+negatively charged | отрицательно заряженный, заряжен отрицательно | has more electrons than protons | The polythene rod becomes negatively charged. |
+positively charged | положительно заряженный, заряжен положительно | has lost electrons | |
+uncharged | незаряженный (нейтральный) | with no overall charge | |
+charging by friction | электризация трением | rubbing two insulators together, so electrons move from one to the other | Rub a polythene rod with a cloth. |
+polythene | полиэтилен | a type of plastic | a polythene rod |
+deflect | отклоняться, отклонять | move to one side; change direction | The needle of the meter deflects. |
+deflection | отклонение (стрелки прибора, луча) | the amount something moves to one side | a large deflection on the meter |
+circuit diagram | схема (электрической) цепи | a drawing of a circuit using symbols | |
+circuit symbol | условное обозначение (на схеме) | a small drawing that stands for a component | |
+component | элемент (цепи), деталь | a part of a circuit, e.g. a resistor or a lamp | |
+filament lamp | лампа накаливания | a lamp with a thin wire that gets white hot | Its resistance increases as it gets hotter. |
+current–voltage graph | вольт-амперная характеристика (ВАХ) | a graph of current against potential difference (an I–V graph) | The graph for a filament lamp is a curve. |
+Ohm's law | закон Ома | current is proportional to p.d. for a resistor at constant temperature | V = IR |
+brightness | яркость | how bright a lamp or light is | The lamps glow with the same brightness. |
+appliance | электроприбор, бытовой прибор, прибор | an electrical machine used at home | kettle, iron, TV |
+power rating | номинальная мощность (указана на приборе) | the power of an appliance, in W or kW | a kettle with a power rating of 2 kW |
+mains (electricity) | электросеть, сеть (230 В в розетке) | the electricity supply from a wall socket | The mains voltage is 230 V. |
+plug | вилка (от прибора) | connects an appliance to a socket | a three-pin plug |
+socket | розетка | the place in a wall where you connect a plug | |
+cable | кабель, шнур | wires inside a plastic cover | |
+earthed | заземлённый | connected to the earth wire, so charge can flow safely away | The metal case is earthed. |
+electric shock | удар током (поражение электрическим током) | a dangerous current through the body | |
+National Grid | единая энергосистема (сеть ЛЭП страны) | the network of cables that carries electricity across the country | |
+magnetic material | магнитный материал (притягивается магнитом) | a material attracted by a magnet: iron, steel, nickel, cobalt | |
+non-magnetic material | немагнитный материал | a material not attracted by a magnet | copper, aluminium, plastic |
+south pole | южный полюс | the end of a magnet that points south | Like poles repel: two south poles push apart. |
+magnetise | намагнитить | make something into a magnet | Stroke a steel bar with a magnet. |
+demagnetise | размагнитить | make a magnet lose its magnetism | Heat it or hit it with a hammer. |
+induced current | индукционный ток | a current caused by electromagnetic induction | |
+loudspeaker | громкоговоритель, динамик | turns electrical signals into sound | |
+microphone | микрофон | turns sound into electrical signals | |
+
+## 3 Physics 0625::05 Nuclear physics
+alpha decay | альфа-распад | a nucleus emits an alpha particle; proton number goes down by 2, nucleon number by 4 | |
+beta decay | бета-распад | a neutron turns into a proton and an electron is emitted; proton number goes up by 1 | |
+decay curve | кривая распада | a graph of count rate against time for a radioactive sample | Use the decay curve to find the half-life. |
+nuclear reactor | ядерный реактор | where controlled fission produces energy | |
+radiotherapy | лучевая терапия, радиотерапия | treating cancer with radiation | |
+sterilisation | стерилизация | killing bacteria, e.g. on medical equipment, using gamma rays | |
+tracer | (радиоактивный) индикатор, метка | a radioactive substance put into the body or a pipe to follow where it goes | |
+smoke alarm | дымовой датчик (пожарная сигнализация) | uses alpha particles; smoke stops them and the alarm sounds | |
+
+## 3 Physics 0625::06 Space physics
+artificial satellite | искусственный спутник | a man-made object that orbits the Earth | used for TV, phones and weather |
+geostationary orbit | геостационарная орбита | a satellite stays above the same point on the Earth; one orbit takes 24 hours | |

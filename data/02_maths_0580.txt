@@ -1,0 +1,327 @@
+# Термины Cambridge IGCSE Mathematics 0580 (syllabus 2025–2027), Core + Extended.
+# Формат: term | русский | definition (simple English) | example | spell
+
+## 2 Maths 0580::01 Number
+integer | целое число | a whole number; it can be positive, negative or zero; in programming — a data type for whole numbers | −3, 0 and 7 are integers. | +
+natural number | натуральное число | a positive whole number: 1, 2, 3, … | 5 is a natural number. |
+prime number | простое число | a number with exactly two factors: 1 and itself | 2, 3, 5, 7 and 11 are prime numbers. | +
+factor | делитель, множитель | a number that divides exactly into another number | The factors of 12 are 1, 2, 3, 4, 6 and 12. | +
+multiple | кратное | a number in the times table of another number | 15 is a multiple of 5. | +
+highest common factor (HCF) | наибольший общий делитель (НОД) | the biggest number that divides exactly into two or more numbers | The HCF of 12 and 18 is 6. | +
+lowest common multiple (LCM) | наименьшее общее кратное (НОК) | the smallest number that two or more numbers divide into | The LCM of 4 and 6 is 12. | +
+prime factor | простой множитель | a factor that is also a prime number | 60 = 2² × 3 × 5 |
+square number | квадрат числа (точный квадрат) | the result of multiplying a whole number by itself | 1, 4, 9, 16 and 25 are square numbers. | +
+cube number | куб числа (точный куб) | the result of multiplying a whole number by itself three times | 8 = 2 × 2 × 2 |
+square root | квадратный корень | a number that gives the original number when multiplied by itself | The square root of 49 is 7. | +
+cube root | кубический корень | a number that gives the original number when multiplied by itself three times | ∛27 = 3 |
+reciprocal | обратное число (1/x) | 1 divided by the number | The reciprocal of 4 is 1/4. The reciprocal of 3⅓ = 10/3 is 3/10. | +
+rational number | рациональное число | a number that can be written as a fraction a/b of two integers | 0.75 = 3/4 is rational. | +
+irrational number | иррациональное число | a number that cannot be written as a fraction | π and √2 are irrational. | +
+real number | действительное (вещественное) число | any rational or irrational number; in programming — a data type for numbers with a decimal point | √5 is a real number. |
+fraction | дробь | a part of a whole, written as a/b | 3/8 is a fraction. | +
+numerator | числитель | the top number of a fraction | In 3/8 the numerator is 3. | +
+denominator | знаменатель | the bottom number of a fraction | In 3/8 the denominator is 8. | +
+proper fraction | правильная дробь | the top number is smaller than the bottom number | 2/5 |
+improper fraction | неправильная дробь | the top number is bigger than the bottom number | 7/4 |
+mixed number | смешанное число | a whole number and a fraction together | 1¾ |
+equivalent fractions | равные (эквивалентные) дроби | fractions that have the same value | 1/2 = 2/4 = 4/8 |
+decimal | десятичная дробь | a number with a decimal point | 0.25 |
+recurring decimal | периодическая дробь | a decimal in which digits repeat for ever | 1/3 = 0.333… |
+terminating decimal | конечная десятичная дробь | a decimal that ends | 3/8 = 0.375 |
+percentage | процент | a number out of 100 | 25% = 25/100 | +
+percentage increase | увеличение в процентах (на сколько процентов выросло) | how much bigger, as a percentage of the original | Increase 80 by 15%: 80 × 1.15 = 92 |
+percentage decrease | уменьшение в процентах (на сколько процентов уменьшилось) | how much smaller, as a percentage of the original | Decrease 80 by 15%: 80 × 0.85 = 68 |
+reverse percentage | обратная задача на проценты (найти исходное значение) | find the original amount before a percentage change | After a 20% rise the price is $96. Original = 96 ÷ 1.2 = $80. |
+ratio | отношение | compares two or more quantities, written a : b | The ratio of boys to girls is 2 : 3. | +
+proportion | пропорция | two ratios that are equal; a part compared with the whole | 3 out of 10 is the same proportion as 30%. | +
+rate | скорость, темп (величина на единицу другой) | one quantity per unit of another | 60 km/h is a rate. |
+power (index) | степень (показатель степени) | the small number that tells how many times to multiply a number by itself | In 2⁵ the power is 5. |
+indices (pl. of index) | показатели степени | small raised numbers that show powers | Laws of indices: aᵐ × aⁿ = aᵐ⁺ⁿ |
+standard form | стандартный вид числа | a number written as A × 10ⁿ where 1 ≤ A < 10 | 34 000 = 3.4 × 10⁴ | +
+significant figures | значащие цифры | digits that count, starting from the first non-zero digit | 0.04567 to 2 s.f. is 0.046 | +
+decimal places | знаки после запятой | digits after the decimal point | 3.14159 to 2 d.p. is 3.14 |
+round | округлить | write a number approximately, e.g. to the nearest 10 | 347 rounded to the nearest 10 is 350. | +
+upper bound | верхняя граница | the largest value that would round to the given number | 5 cm to the nearest cm: upper bound 5.5 cm | +
+lower bound | нижняя граница | the smallest value that would round to the given number | 4.2 cm to the nearest mm: lower bound 4.15 cm. Lower bound of the area of 4.2 cm × 6.8 cm = 4.15 × 6.75 | +
+surd | иррациональный корень (выражение с корнем) | a square root that is not a whole number, left in root form | √12 = 2√3 | +
+rationalise the denominator | избавиться от иррациональности в знаменателе | rewrite a fraction so the bottom has no root | 1/√2 = √2/2 |
+simple interest | простые проценты | interest paid only on the original amount | $200 at 5% for 3 years: interest = 200 × 0.05 × 3 = $30, total value = $230 |
+compound interest | сложные проценты | interest added to the amount each year, so it earns interest too | 200 × 1.05³ |
+depreciation | амортизация (уменьшение стоимости) | a fall in value over time | A car loses 10% of its value each year. |
+exchange rate | валютный курс | how much of one currency you get for another | £1 = $1.25 |
+profit | прибыль | money gained = selling price − cost price | Bought for $40, sold for $50: profit $10 | +
+loss | убыток | money lost when selling for less than the cost | |
+direct proportion | прямая пропорциональность | y = kx; when x doubles, y doubles | y is directly proportional to x². |
+inverse proportion | обратная пропорциональность | y = k/x; when x doubles, y halves | y is inversely proportional to x. |
+set | множество | a collection of objects or numbers | A = {2, 4, 6} | +
+element | элемент (множества) | a member of a set; also one item in an array | 4 ∈ A |
+universal set | универсальное множество | the set of everything being considered, symbol ℰ | ℰ = {1, 2, …, 10} |
+intersection | пересечение (A ∩ B) | elements in both sets | A ∩ B | +
+union | объединение (A ∪ B) | elements in either set or both | A ∪ B | +
+complement | дополнение (A′) | elements not in the set | A′ |
+subset | подмножество | a set whose elements are all in another set | {2} ⊆ {2, 4} |
+empty set | пустое множество | a set with no elements, symbol ∅ | |
+Venn diagram | диаграмма Венна | a diagram of overlapping circles that shows sets | |
+sequence | последовательность | a list of numbers that follows a rule; in programming — steps carried out one after another, in order | 3, 7, 11, 15, … | +
+term | член (последовательности); слагаемое (в выражении) | one number in a sequence; one part of an expression | The 5th term is 19. |
+nth term | n-й член (формула общего члена) | a formula for any term of a sequence | nth term = 4n − 1 |
+term-to-term rule | правило перехода к следующему члену | how to get the next term from the one before | add 4 |
+arithmetic sequence | арифметическая прогрессия | a sequence with a common difference | 2, 5, 8, 11 |
+common difference | разность (арифметической прогрессии) | the amount added each time | In 2, 5, 8 the common difference is 3. |
+geometric sequence | геометрическая прогрессия | each term is multiplied by the same number | 3, 6, 12, 24 |
+time (24-hour clock) | время в 24-часовом формате | the day is numbered from 00:00 to 23:59 | 3 pm = 15:00 |
+
+## 2 Maths 0580::02 Algebra
+expression | выражение | a group of numbers, letters and operations with no equals sign | 3x + 2 | +
+equation | уравнение | a statement that two expressions are equal | 3x + 2 = 11 | +
+formula | формула | a rule that connects quantities | A = πr² | +
+identity | тождество | true for every value of the variable, symbol ≡ | 2(x + 1) ≡ 2x + 2 |
+inequality | неравенство | a statement using <, >, ≤ or ≥ | x + 3 > 5 | +
+variable | переменная (величина) | a letter or a quantity that can change (in algebra; in an experiment); in programming — a named place in memory whose value can change | In y = 2x, x and y are variables. Keep all other variables the same. | +
+coefficient | коэффициент | the number in front of a letter | In 5x² the coefficient is 5. | +
+constant | постоянная, свободный член, константа | a number that does not change; in programming — a named value that stays the same while the program runs | In x² + 3x + 7 the constant is 7. |
+substitute | подставить | replace a letter with a number | Substitute x = 2 into 3x + 1. | +
+simplify | упростить | write in a shorter, easier form | 2x + 3x simplifies to 5x. | +
+collect like terms | привести подобные слагаемые | add or subtract terms with the same letters | 3a + 2b + a = 4a + 2b |
+expand (brackets) | раскрыть скобки | multiply out the brackets | 3(x + 4) = 3x + 12 | +
+factorise | разложить на множители | put into brackets; the opposite of expanding | 6x + 9 = 3(2x + 3) | +
+solve | решить | find the value of the unknown | Solve 2x = 10, x = 5. | +
+rearrange | выразить (переменную из формулы) | change the subject of a formula | Make r the subject of A = πr². |
+subject (of a formula) | выражаемая величина (в левой части формулы) | the letter on its own on one side of a formula | In v = u + at, v is the subject. |
+linear equation | линейное уравнение | an equation with no powers higher than 1 | 4x − 1 = 7 | +
+simultaneous equations | система уравнений | two equations solved together | x + y = 5 and x − y = 1 | +
+quadratic equation | квадратное уравнение | an equation with x² as the highest power | x² − 5x + 6 = 0 | +
+quadratic formula | формула корней квадратного уравнения | x = (−b ± √(b² − 4ac)) / 2a | |
+completing the square | выделение полного квадрата | writing as (x + p)² + q | x² + 6x + 1 = (x + 3)² − 8 |
+difference of two squares | разность квадратов | a² − b² = (a + b)(a − b) | x² − 9 = (x + 3)(x − 3) |
+algebraic fraction | алгебраическая дробь | a fraction with letters in it | (x + 1)/(x − 2) |
+root (of an equation) | корень (уравнения); на графике — x там, где y = 0 | a solution of an equation; where a graph crosses the x-axis | The roots of x² − 4 = 0 are 2 and −2. |
+solution | решение | the value that makes an equation true | x = 3 is the solution. | +
+function | функция | a rule that gives one output for each input; in programming — a named block of code that returns a value | f(x) = 2x + 3 | +
+input | входное значение (аргумент), ввод (данных) | the value you put into a function; in computing — data put into a computer | |
+output | значение функции, вывод (данных) | the value that comes out of a function; in computing — results sent out by a computer | |
+domain | область определения | the set of possible inputs of a function | |
+range (of a function) | область значений | the set of possible outputs of a function | |
+inverse function | обратная функция | a function that reverses another, f⁻¹(x) | If f(x) = x + 3, then f⁻¹(x) = x − 3. |
+composite function | сложная функция (композиция) | one function applied after another, fg(x) | fg(x) = f(g(x)) |
+exponential | показательная (экспоненциальная) функция | a function where x is a power | y = 2ˣ |
+derivative | производная | a formula for the gradient of a curve | If y = x², dy/dx = 2x. | +
+differentiate | дифференцировать, найти производную | find the gradient function | Differentiate y = x³. | +
+turning point (stationary point) | точка экстремума (стационарная точка) | a point where the gradient is zero | maximum or minimum point |
+maximum | максимум | the highest point | | +
+minimum | минимум | the lowest point | | +
+asymptote | асимптота | a line that a curve gets closer and closer to but never touches | y = 1/x has asymptotes x = 0 and y = 0. y = 3 × 2ˣ − 5 has the asymptote y = −5. | +
+gradient | угловой коэффициент, наклон (k в y = kx + b) | the steepness of a line: rise ÷ run | In y = 3x + 1 the gradient is 3. The answer is one number, not a point. | +
+y-intercept | точка пересечения с осью y (b в y = kx + b) | where a line crosses the y-axis | In y = 3x + 1 the y-intercept is 1. |
+coordinates | координаты | a pair of numbers (x, y) that show a position | (3, −2) | +
+axis (pl. axes) | ось (мн. оси) | a reference line on a graph | the x-axis and the y-axis | +
+origin | начало координат | the point (0, 0) | | +
+midpoint | середина отрезка | the point halfway between two points | The midpoint of (0, 0) and (4, 6) is (2, 3). | +
+parallel | параллельный | always the same distance apart; same gradient | Parallel lines have equal gradients. | +
+perpendicular | перпендикулярный | at 90° to each other | Perpendicular gradients multiply to −1. | +
+straight-line graph | график прямой | the graph of y = mx + c | |
+quadratic graph (parabola) | парабола | the U-shaped graph of y = ax² + bx + c | |
+cubic graph | график кубической функции | the graph of y = ax³ + … | |
+reciprocal graph | гипербола, график обратной пропорциональности | the graph of y = k/x; also called a hyperbola | y = 1/x is a reciprocal graph (a hyperbola). |
+line of symmetry | ось симметрии | a line that divides a shape into two mirror images | |
+tangent (to a curve) | касательная (к кривой) | a straight line that touches a curve at one point | Draw a tangent to estimate the gradient. | +
+region | область (на графике) | an area on a graph defined by inequalities | Shade the region satisfying y ≤ 2x. |
+distance–time graph | график зависимости расстояния от времени | shows how far something has travelled; gradient = speed | |
+speed–time graph | график зависимости скорости от времени | gradient = acceleration, area = distance | |
+conversion graph | график перевода единиц | a straight line for changing one unit into another | km to miles |
+
+## 2 Maths 0580::03 Geometry
+point | точка | an exact position | | +
+line segment | отрезок | part of a line between two points | AB |
+ray | луч | a line that starts at a point and goes on for ever | |
+angle | угол | the amount of turn between two lines | | +
+acute angle | острый угол | an angle less than 90° | 40° | +
+right angle | прямой угол | an angle of exactly 90° | |
+obtuse angle | тупой угол | an angle between 90° and 180° | 120° | +
+reflex angle | угол больше 180° (в рус. нет отдельного слова) | an angle between 180° and 360° | 250° | +
+straight line (angles on) | развёрнутый угол (углы на прямой в сумме 180°) | angles on a straight line add up to 180° | |
+angles at a point | углы вокруг точки (в сумме 360°) | angles around a point add up to 360° | |
+vertically opposite angles | вертикальные углы | equal angles opposite each other where two lines cross | |
+alternate angles | накрест лежащие углы | equal angles in a Z shape between parallel lines | Angle DCX = angle ABX because they are alternate angles (alternate, not “alternative”). |
+corresponding angles | соответственные углы | equal angles in an F shape on parallel lines | x = 70° because corresponding angles are equal. |
+co-interior angles | односторонние углы (в сумме 180°) | angles in a C shape between parallel lines; they add up to 180° | |
+supplementary angles | углы, в сумме дающие 180° | two angles that add up to 180° | 110° and 70° |
+complementary angles | углы, в сумме дающие 90° | two angles that add up to 90° | |
+bisector | биссектриса | a line that cuts an angle or a line into two equal parts | angle bisector | +
+perpendicular bisector | серединный перпендикуляр | a line at 90° through the midpoint of a line segment | |
+triangle | треугольник | a shape with three straight sides | | +
+equilateral triangle | равносторонний треугольник | all three sides and angles are equal | | +
+isosceles triangle | равнобедренный треугольник | two sides and two angles are equal | | +
+scalene triangle | разносторонний треугольник | no sides are equal | |
+right-angled triangle | прямоугольный треугольник | a triangle with a 90° angle | |
+hypotenuse | гипотенуза | the longest side of a right-angled triangle, opposite the right angle | | +
+quadrilateral | четырёхугольник | a shape with four straight sides | | +
+square | квадрат | four equal sides and four right angles | |
+rectangle | прямоугольник | four right angles, opposite sides equal | | +
+parallelogram | параллелограмм | a quadrilateral whose opposite sides are equal and point the same way (a pushed-over rectangle) | | +
+rhombus | ромб | four equal sides, opposite sides parallel | | +
+trapezium (UK) | трапеция (в США это trapezoid!) | exactly one pair of parallel sides | | +
+kite | дельтоид | two pairs of equal sides next to each other | | +
+polygon | многоугольник | a flat shape with straight sides | | +
+regular polygon | правильный многоугольник | all sides and all angles are equal | |
+pentagon | пятиугольник | a polygon with 5 sides | | +
+hexagon | шестиугольник | a polygon with 6 sides | | +
+octagon | восьмиугольник | a polygon with 8 sides | | +
+interior angle | внутренний угол | an angle inside a polygon | |
+exterior angle | внешний угол | the angle between one side and the extension of the next side | Exterior angles of a polygon add up to 360°. |
+vertex (pl. vertices) | вершина (мн. вершины) | a corner of a shape | A cube has 8 vertices. | +
+edge | ребро | a line where two faces meet | A cube has 12 edges. | +
+face | грань | a flat surface of a solid | A cube has 6 faces. | +
+diagonal | диагональ | a line joining two corners that are not next to each other | | +
+congruent | равный (о фигурах) | exactly the same shape and size | Congruent triangles | +
+similar | подобный | the same shape but a different size | Similar triangles have equal angles. | +
+scale factor | коэффициент подобия (масштаб) | how many times bigger one shape is than the other | |
+scale drawing | чертёж в масштабе | an accurate drawing with all lengths changed by the same amount | 1 : 50 000 |
+symmetry | симметрия | when a shape looks the same after a reflection or rotation | | +
+line symmetry | осевая симметрия | a shape can be folded so the halves match | |
+rotational symmetry | поворотная симметрия | a shape looks the same when turned | A square has rotational symmetry of order 4. |
+order of rotational symmetry | порядок поворотной симметрии | how many times the shape looks the same in one full turn | |
+plane of symmetry | плоскость симметрии | a flat surface that cuts a solid into two mirror images | |
+circle | окружность; круг; обвести | a round shape: all points are the same distance from the centre; as an instruction — draw a ring around the answer | | +
+centre | центр | the middle point | |
+radius (pl. radii) | радиус (мн. радиусы) | the distance from the centre to the edge of a circle | | +
+diameter | диаметр | a line across a circle through the centre | d = 2r | +
+circumference | длина окружности | the distance around a circle | C = πd | +
+chord | хорда | a line joining two points on a circle | | +
+arc | дуга | part of the circumference | | +
+sector | сектор | a part of a circle between two radii (like a slice of pizza); in computing — a small part of a track on a disk | | +
+segment | сегмент | the part of a circle between a chord and an arc | | +
+tangent (to a circle) | касательная (к окружности) | a line that touches a circle at one point; it is perpendicular to the radius | |
+semicircle | полуокружность; полукруг | half a circle | | +
+cyclic quadrilateral | вписанный четырёхугольник | a quadrilateral with all four corners on a circle; opposite angles add up to 180° | |
+angle in a semicircle | вписанный угол, опирающийся на диаметр (= 90°) | the angle at the edge of a circle made by a diameter is 90° | Give the geometrical reason why angle ABC = 90°. → angle in a semicircle |
+alternate segment theorem | теорема об угле между касательной и хордой | the angle between a tangent and a chord equals the angle in the alternate segment | |
+inscribed | вписанный | drawn inside another shape, touching it | |
+compass (pair of compasses) | циркуль | an instrument for drawing circles and arcs | | +
+protractor | транспортир | an instrument for measuring angles | | +
+ruler | линейка | an instrument for drawing straight lines and measuring lengths | | +
+locus (pl. loci) | геометрическое место точек (ГМТ) | a set of points that follow a rule | The locus of points 3 cm from A is a circle. |
+equidistant | равноудалённый | the same distance from | equidistant from A and B | +
+net | развёртка | a flat shape that folds into a 3D solid | the net of a cube | +
+bearing | азимут (угол от севера по часовой стрелке, 3 цифры) | a direction measured clockwise from north, written with three figures | a bearing of 045° | +
+clockwise | по часовой стрелке | turning to the right, like the hands of a watch | | +
+anticlockwise | против часовой стрелки | turning to the left, against the hands of a watch | | +
+
+## 2 Maths 0580::04 Mensuration
+perimeter | периметр | the total distance around the edge of a shape | | +
+area | площадь | the amount of flat surface a shape covers | | +
+volume | объём | the amount of space inside a 3D shape | | +
+surface area | площадь поверхности | the total area of all the faces of a solid | | +
+capacity | вместимость, ёмкость | how much liquid a container holds | 1 litre = 1000 cm³ | +
+length | длина | how long something is | | +
+width | ширина | how wide something is | | +
+height | высота | how tall something is; the distance at 90° to the base | | +
+perpendicular height | высота (перпендикулярная) | the height measured at 90° to the base | Area of a triangle = ½ × base × perpendicular height |
+base | основание | the bottom side or face of a shape | | +
+cube | куб | a solid with 6 equal square faces | | +
+cuboid | прямоугольный параллелепипед | a box shape with 6 rectangular faces | | +
+prism | призма | a solid with the same cross-section all along its length; in physics — a triangular glass block that splits white light | | +
+cylinder | цилиндр | a prism with a circular cross-section | V = πr²h | +
+cone | конус | a solid with a circular base and a point at the top | V = ⅓πr²h | +
+sphere | шар; сфера | a perfectly round solid like a ball | V = 4/3 πr³ | +
+hemisphere | полушарие | half of a sphere | | +
+pyramid | пирамида | a solid with a polygon base and triangle faces meeting at a point | | +
+frustum | усечённый конус (усечённая пирамида) | a cone or pyramid with the top cut off parallel to the base | | +
+cross-section | (поперечное) сечение | the shape you see when you cut through a solid | | +
+slant height | образующая (конуса); апофема (пирамиды) | the distance from the top of a cone down its side to the edge of the base | |
+compound shape | составная фигура | a shape made from two or more simple shapes | |
+units of measurement | единицы измерения | e.g. mm, cm, m, km; g, kg; ml, l | |
+
+## 2 Maths 0580::05 Trigonometry
+Pythagoras' theorem | теорема Пифагора | a² + b² = c² in a right-angled triangle | |
+trigonometry | тригонометрия | the study of sides and angles in triangles | | +
+sine (sin) | синус | opposite ÷ hypotenuse | sin x = opp/hyp | +
+cosine (cos) | косинус | adjacent ÷ hypotenuse | cos x = adj/hyp | +
+tangent (tan) | тангенс | opposite ÷ adjacent | tan x = opp/adj |
+opposite (side) | противолежащий катет | the side across from (facing) the angle | | +
+adjacent (side) | прилежащий катет | the side next to the angle (not the hypotenuse) | | +
+SOH CAH TOA | мнемоника для sin, cos, tan | Sin = Opp/Hyp, Cos = Adj/Hyp, Tan = Opp/Adj | |
+sine rule | теорема синусов | a/sin A = b/sin B = c/sin C | |
+cosine rule | теорема косинусов | a² = b² + c² − 2bc cos A | |
+angle of elevation | угол подъёма (угол возвышения) | the angle measured up from the horizontal | |
+angle of depression | угол понижения (угол спуска) | the angle measured down from the horizontal | the angle of depression of B from the top of the building A |
+horizontal | горизонтальный | flat and level, like the surface of still water | | +
+vertical | вертикальный | straight up and down | | +
+three dimensions (3D) | три измерения, пространство | having length, width and height | |
+
+## 2 Maths 0580::06 Transformations and vectors
+transformation | преобразование | a change in the position or size of a shape | | +
+object | исходная фигура | the shape before a transformation | |
+image | образ | the shape after a transformation | | +
+reflection | (осевая) симметрия, отражение | a flip in a mirror line; in physics — a wave bouncing off a surface | Reflect the shape in the line y = x. | +
+mirror line | ось симметрии (при отражении) | the line a shape is reflected in | |
+rotation | поворот | a turn about a point | rotation 90° clockwise about (0, 0) | +
+centre of rotation | центр поворота | the fixed point a shape turns around | |
+translation | параллельный перенос | a slide; every point moves the same distance in the same direction | | +
+enlargement | гомотетия (увеличение/уменьшение) | changes the size of a shape using a centre and a scale factor | enlargement, scale factor 2, centre (1, 1) | +
+centre of enlargement | центр гомотетии | the fixed point used for an enlargement | |
+vector | вектор (векторная величина) | a quantity with size and direction | a = (3, 4) as a column; force and velocity are vectors | +
+column vector | вектор-столбец (координаты вектора) | a vector written as two numbers one above the other | |
+magnitude | модуль (длина) вектора | the size (length) of a vector | for a = (3, 4): magnitude = √(3² + 4²) = 5 | +
+position vector | радиус-вектор | a vector from the origin to a point | |
+resultant (vector) | результирующий вектор (сумма) | the single vector equal to two or more vectors added | |
+collinear | лежащие на одной прямой | points that lie on the same straight line | | +
+
+## 2 Maths 0580::07 Probability
+probability | вероятность | how likely something is to happen, from 0 to 1 | | +
+event | событие | a result or set of results | |
+outcome | исход | one possible result | | +
+certain | достоверное (событие) | probability = 1 | | +
+impossible | невозможное (событие) | probability = 0 | | +
+likely | вероятное | probability more than 0.5 | |
+unlikely | маловероятное | probability less than 0.5 | |
+even chance | равные шансы | probability = 0.5 | |
+equally likely | равновероятные | have the same probability | |
+fair | честный, правильный (кубик, монета) | every outcome is equally likely | a fair dice | +
+biased | смещённый, неправильный (кубик) | not fair; some outcomes are more likely | | +
+relative frequency | относительная частота | number of times an event happens ÷ number of trials | |
+expected frequency | ожидаемая частота | probability × number of trials | |
+trial | испытание, опыт | one go of an experiment | |
+sample space diagram | таблица возможных исходов | a table showing all possible outcomes | two dice |
+tree diagram | дерево вероятностей | a branching diagram for combined events | |
+independent events | независимые события | the result of one does not affect the other | |
+mutually exclusive | несовместные (события) | cannot happen at the same time | |
+conditional probability | условная вероятность | the probability of an event given that another has happened | |
+with replacement | с возвращением | the item is put back before the next pick | |
+without replacement | без возвращения | the item is not put back | |
+dice (pl. dice) | игральный кубик (в ед. ч. также die: a fair die) | a cube with numbers 1–6 used in games | | +
+coin | монета | used for heads or tails | heads, tails | +
+spinner | волчок (вращающийся указатель) | a spinning pointer with sections | |
+
+## 2 Maths 0580::08 Statistics
+data | данные | facts or numbers collected | | +
+discrete data | дискретные данные | data that can only take certain values | number of pupils |
+continuous data | непрерывные данные | data that can take any value in a range | height, mass, time |
+frequency | частота | how many times something happens; in physics — the number of waves per second | | +
+frequency table | таблица частот | a table showing how often each value occurs | |
+tally | подсчёт палочками | marks used for counting in groups of five | |
+mean | среднее арифметическое | add all values and divide by how many there are | The mean of 2, 4, 9 is 5. | +
+median | медиана (середина упорядоченного ряда) | the middle value when the data is in order | 8, 10, 10, 12, 15, 17: median = (10 + 12) ÷ 2 = 11 cm | +
+mode | мода (самое частое значение) | the most common value | 8, 10, 10, 12, 15, 17: mode = 10 cm | +
+range | размах (наибольшее − наименьшее) | the largest value minus the smallest value | 8, 10, 10, 12, 15, 17: range = 17 − 8 = 9 cm | +
+average | среднее (общее слово для mean, median, mode) | one value that represents the data | | +
+quartile | квартиль | values that split ordered data into four equal parts | lower quartile, upper quartile | +
+interquartile range | межквартильный размах | upper quartile − lower quartile | |
+percentile | перцентиль | the value below which a given percentage of the data lies | |
+bar chart | столбчатая диаграмма | a chart using bars of equal width | |
+pie chart | круговая диаграмма | a circle split into sectors to show proportions | |
+pictogram | пиктограмма | a chart using pictures | |
+histogram | гистограмма | a bar chart for continuous data; the area of each bar shows frequency | |
+frequency density | плотность частоты | frequency ÷ class width (the height of a histogram bar) | |
+class interval | интервал (группировки) | a group of values in grouped data | 10 < x ≤ 20 |
+class width | ширина интервала | the size of a class interval | |
+cumulative frequency | накопленная частота | a running total of the frequencies | |
+scatter diagram | диаграмма рассеяния | a graph of points showing two variables | |
+correlation | корреляция | a link between two variables | | +
+positive correlation | положительная корреляция | as one goes up, the other goes up | What type of correlation? → positive (more fuel, more CO2) |
+negative correlation | отрицательная корреляция | as one goes up, the other goes down | What type of correlation? → negative (more study time, fewer errors) |
+no correlation | нет корреляции | there is no link between the two variables; the points are scattered everywhere | shoe size and test score: no correlation |
+line of best fit | линия тренда (линия наилучшего приближения) | ONE straight line through the middle of the points; do not join the points | Draw one ruler line with about the same number of points on each side. |
+stem-and-leaf diagram | диаграмма «ствол и листья» | a table that splits each number into a stem and a leaf | |
+survey | опрос | collecting data by asking people questions | | +
+sample | выборка | a part of a population used in a survey | | +

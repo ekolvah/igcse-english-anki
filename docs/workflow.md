@@ -1,0 +1,115 @@
+# Как менять и обновлять колоду
+
+## Файлы проекта
+- `data/*.txt` — слова. Строка: `term | русский | definition (simple English) | example | flag`.
+  `## Подколода::Тема` начинает подколоду (корень — `IGCSE English`). `#` — комментарий.
+  Что в каком файле — в [sources.md](sources.md).
+- `build_deck.py` — собирает `IGCSE_Maths_Physics.apkg` (genanki 0.13.1).
+- `card_check.js` — проверка ответа внутри карточки (встраивается в шаблоны).
+- `anki_settings.py` — настройки колоды и порядок новых карточек прямо в коллекции Anki
+  (наборы Maths/Physics/Computer Science, чередование). Запуск и условия — в его docstring.
+- `README.md` — инструкция для пользователя.
+- `.claude/skills/zhenya-progress/` — отчёт о занятиях (`progress.py`) и ежедневный график
+  (`ankiweb_sync.py`, `daily_chart.py`, `chart_template.html`) и список слов
+  для репетитора (`words_page.py`, `words_template.html`).
+
+## Добавить или изменить слова
+Полный порядок действий — скил `.claude/skills/add-words/SKILL.md`. Кратко:
+1. Правка в `data/*.txt` (правила вариантов ответа — в [requirements.md](requirements.md)).
+2. Проверить принятые ответы, подсказки и дубликаты:
+   `PYTHONIOENCODING=utf-8 python .claude/skills/add-words/check_words.py data/<файл>.txt`
+   (для одной строки: `python -c "import build_deck as b; print(b.ru_accept('...'), b.mask('def','term'))"`).
+3. Собрать: `PYTHONIOENCODING=utf-8 python build_deck.py`.
+4. Обновить счётчики слов/карточек в `README.md` и [status.md](status.md).
+
+## Импорт делает агент (не просить пользователя)
+Решение пользователя 2026-11-13: после сборки агент **сам** импортирует колоду в Anki на компьютере
+и отправляет в AnkiWeb; пользователю остаётся только синхронизировать телефон.
+1. Anki на компьютере закрыт (скрипт проверяет; если открыт — попросить закрыть).
+2. `PYTHONIOENCODING=utf-8 python .claude/skills/add-words/anki_import.py pull` — подтянуть
+   занятия Жени с телефона. **Обязательно первым**: иначе `anki_settings.py` поменяет позиции
+   у карточек, уже начатых на телефоне, и при синхронизации прогресс по ним откатится.
+3. `… anki_import.py import` — «Если новее», без расписания и пресетов. Смотреть: «новых» = число
+   добавленных слов, «схема не изменилась».
+4. `PYTHONIOENCODING=utf-8 python anki_settings.py` — только если появилась новая подколода или
+   поменялись лимиты/STREAMS.
+5. `… anki_import.py push` — обычная синхронизация с AnkiWeb.
+6. Проверка: `python .claude/skills/zhenya-progress/ankiweb_sync.py` (только скачивание) и число
+   записей в `%LOCALAPPDATA%\zhenya-progress\collection.anki2` = числу из сборки.
+Перед каждым шагом скрипт кладёт копию коллекции в `backups/` профиля. Если скрипт остановился
+(«несинхронизированные изменения», «требуется ПОЛНАЯ синхронизация») — не форсировать, не делать
+полную синхронизацию: объяснить пользователю и спросить. Нужен пакет `anki` той же версии, что
+Anki на компьютере (сейчас 26.9.4, установлен в системный Python), и вход в AnkiWeb (`auth.json`).
+
+Ручной импорт (если агент недоступен): Файл → Импорт → `IGCSE_Maths_Physics.apkg`, «Обновлять типы
+записей»: «Если новее» (или «Всегда» при смене шаблона) → синхронизация → синхронизация на телефоне.
+Если `anki_settings.py` запускался, проверить завтрашние новые симуляцией (ниже): после чередования
+по трём частям 2026-11-13 вышло 10 CS + 5 Maths + 5 Physics — CS начинается с нуля, а начало
+Maths/Physics уже выучено, поэтому первые позиции у CS; её держит лимит пресета (10).
+
+## Порядок новых карточек ставит сборка; `anki_settings.py` — только иногда
+`build_deck.py` сам даёт каждой записи позицию (`interleave`: Maths / Physics / Computer Science по очереди, порядок
+подколод — `STREAMS`). Импорт Anki 26.9 позицию из файла **сохраняет** для новых слов и не трогает
+позиции и пресеты уже существующих карточек (проверено 2026-11-04 на копии коллекции, с импортом
+пресетов и без). Поэтому после обычного импорта новых слов скрипт не нужен. Новое слово в середине
+файла получит позицию соседа — встанет рядом с ним, это нормально.
+
+`anki_settings.py` запускать, если: импорт создал **новую подколоду** (она, вероятно, получит пресет
+«По умолчанию» — 20 новых вместо 10), сбились пресеты (видно по `progress.py`: новые только из
+одной части), нужно поменять лимиты, или чтобы выровнять позиции всех новых карточек по сборке.
+Скрипт идемпотентен, сам делает копию в `backups/` профиля.
+
+Условия запуска: venv с `anki==26.9.4` и `genanki` (скрипт берёт позиции из `build_deck.py`),
+Anki закрыт, после — обычная синхронизация (scm не меняется → полная синхронизация не нужна).
+Venv в проекте не хранится — создать во временной папке (команда в docstring скрипта).
+
+Лимит пресета (10 новых) действует на **каждую подколоду отдельно** (0, 1, 2, 3, 4, 5 — у каждой свои
+10), а не на всю Maths / Physics / Computer Science вместе; общий потолок — 20 у главной. Равенство частей держится на
+чередовании позиций. Пример (симуляция на копии 2026-11-04 → 05.11): 10 из «4 Answer phrases»,
+3 из «3 Physics 0625», 7 из «0 Maths question language» — Physics больше, т.к. первые позиции
+Maths заняты словами, выученными 04.11. Симуляция: копия коллекции, обнулить `newToday` у колод,
+`col.sched.get_queued_cards()`.
+
+**Заниматься — только с главной колоды «IGCSE English».** Если нажать подколоду (например,
+«0 Maths question language»), Anki покажет только её, и Physics не будет.
+
+## Статистика: процент правильных
+Отчёт агентом — скил `zhenya-progress` (`progress.py`, читает копию коллекции).
+В самой Anki названия блоков в Anki 26.x по-русски: «Сегодня» (правильные = карточки − «Снова»),
+«Кнопки ответа» (красный/зелёный), «По часам», «Усвоение» (true retention, только интервал > 1 дня).
+
+## Окружение
+Windows 11, Python 3.12 (genanki, pypdf), Node 22 (для тестов card_check.js).
+Проверить `card_check.js` на настоящей разметке Anki: во временном venv с `anki==26.9.4` получить
+HTML сравнения `col.compare_answer(ожидаемое, напечатанное)` (новая пустая коллекция во временной
+папке), вставить в страницу с `#verdict`, `#accept` и скриптом и открыть
+`chrome --headless=new --dump-dom file:///…`. Сравнение Anki: напечатанное до `<br>` со стрелкой,
+лишнее — `typeBad`, «-» на месте недостающих букв — `typeMissed`.
+Пакет `anki` (pip, та же версия, что Anki на компьютере) — для `ankiweb_sync.py`.
+
+### Ежедневный отчёт (GitHub Actions, каждую ночь)
+- Страницы: график https://ekolvah.github.io/igcse-english-anki/ , слова для репетитора https://ekolvah.github.io/igcse-english-anki/words.html (GitHub Pages, открыты
+  всем, у кого есть ссылка; поисковикам закрыты `noindex`).
+- Строит `.github/workflows/report.yml` на серверах GitHub — компьютер может быть выключен.
+  Время — `cron: "30 1 * * *"` (UTC): на Кипре 03:30 зимой, 04:30 летом, GitHub опаздывает до
+  часа — к 6:00 готово. В workflow `TZ=Asia/Nicosia`: «день Anki» (с 4:00) и время на странице — кипрские.
+- Шаги: `ankiweb_sync.py` → `daily_chart.py` → `words_page.py` → `out/*.html` копируются в `site/`
+  (`index.html`, `words.html`) → deploy на Pages. В конце — повторное включение workflow через API:
+  иначе GitHub отключает расписание открытого репозитория после 60 дней без коммитов.
+- Запуски и ошибки — https://github.com/ekolvah/igcse-english-anki/actions (вкладка Actions). Упал — GitHub пишет письмо владельцу.
+  Запустить сейчас: `gh workflow run report.yml`, проверить: `gh run list --workflow report.yml`.
+- Секрет репозитория `ANKIWEB_HKEY` — ключ входа AnkiWeb из `auth.json` (не пароль). Сменили
+  пароль AnkiWeb → ключ перестанет работать: сделать `--login` (ниже), затем обновить секрет, не
+  печатая значение: `python -c "import json,os;print(json.load(open(os.path.expandvars(r'%LOCALAPPDATA%\zhenya-progress\auth.json')))['hkey'],end='')" | gh secret set ANKIWEB_HKEY`.
+  `ANKIWEB_ENDPOINT` нужен, только если в `auth.json` endpoint не пустой (сейчас пустой).
+- `ankiweb_sync.py` **только скачивает**: каждый раз новая пустая коллекция → полное скачивание
+  (`upload=False`). На компьютере копия — `%LOCALAPPDATA%\zhenya-progress\collection.anki2`, ключ входа —
+  `auth.json` там же (вне git, пароль не хранится). Вход: `python .claude\skills\zhenya-progress\ankiweb_sync.py --login`
+  в окне терминала (пароль вводит пользователь). Без `--login` из `cmd /c start` не запускать — проверено, не открывается.
+- Посмотреть страницы до выкладки: `python .claude/skills/zhenya-progress/ankiweb_sync.py`, потом
+  `daily_chart.py` и `words_page.py` → `out/zhenya-progress.html`, `out/zhenya-words.html`.
+- В шаблонах (`chart_template.html`, `words_template.html`) не писать имена меток подстановки нигде, кроме мест подстановки —
+  `daily_chart.py` заменит и их. Шаблоны — полные HTML-страницы (`<!doctype>`, `noindex`).
+
+Коллекцию Anki читать только копией: `%APPDATA%/Anki2/<профиль>/collection.anki2` (профиль скрипты находят сами, `PROFILE` в `progress.py`) (+ `-wal`)
+скопировать во временную папку и открыть sqlite.

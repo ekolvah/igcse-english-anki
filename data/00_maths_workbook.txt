@@ -1,0 +1,71 @@
+# Язык условий задач по математике — по рабочей тетради учителя
+# «Understanding maths questions» (Maths English 1, по Core mock 0580/11/M/J/26).
+# Здесь только то, чего нет в других подколодах. Связанные слова (range, mode, median,
+# root, y-intercept, estimate, simplify, solve, write down…) уже есть в темах 1 и 2.
+# Формат: term | русский | definition (simple English) | example | spell
+
+## 0 Maths question language::Answer form
+as a fraction | в виде дроби | write the answer as a/b | Write 0.15 as a fraction in its simplest form. → 3/20 |
+as a decimal | в виде десятичной дроби | write the answer with a decimal point | Write 3/4 as a decimal. → 0.75 |
+as a percentage | в процентах | write the answer with the % sign | Write 3/5 as a percentage. → 60% |
+correct to 1 significant figure | с точностью до 1 значащей цифры | round so that only the first non-zero digit is left | 9.57 → 10; 0.0386 → 0.04 |
+correct to 2 decimal places | с точностью до 2 знаков после запятой | round so that two digits are left after the decimal point | 3.14159 → 3.14 |
+in terms of n | через n (ответ — выражение с буквой n, а не число) | the answer must contain the letter n | Omar is 5 years older than Nina (n years). Omar's age = n + 5 |
+an expression for | выражение для (ответ с буквами, без знака =) | write it with letters and numbers, not as one number | Write an expression for the total cost. → 65x |
+ordered pair | упорядоченная пара — координаты (x, y) | two numbers in brackets: x first, then y | The y-intercept of y = 2x + 4 is (0, 4). |
+unfinished (answer) | незаконченный ответ (не все требования выполнены) | the answer does not yet follow every instruction | 15/100 is unfinished: it is not in its simplest form. |
+
+## 0 Maths question language::Small words that change the meaning
+less than | меньше (строго: само число НЕ входит) | smaller than; the number itself is not included | Numbers less than 8 from 4, 5, 8, 10: 4 and 5 | +
+greater than (more than) | больше (строго: само число НЕ входит) | bigger than; the number itself is not included | a prime number greater than 10: 11 |
+at most | не больше (само число входит) | this number or smaller | Numbers at most 8 from 4, 5, 8, 10: 4, 5 and 8 | +
+at least | не меньше, как минимум (само число входит) | this number or bigger | At least 5 on a dice: 5 or 6 | +
+no more than | не более (= at most) | this number or smaller | no more than 3 mistakes |
+fewer than | меньше (о том, что можно сосчитать) | less than, for things you can count | fewer than 20 pupils |
+between | между (проверь, входят ли концы!) | from one value to another; check if the end values count | a number between 3 and 7 |
+inclusive | включительно | the end values are counted too | from 1 to 6 inclusive: 1, 2, 3, 4, 5, 6 | +
+include | включать | count something as part of the group | “at most 8” includes 8. | +
+exclude | исключать, не включать | leave out | “less than 12” excludes 12. | +
+not | не (всё, кроме) | every outcome except this one | P(not 6) = 5/6 |
+but not | но не (в первом множестве, но вне второго) | in the first group but outside the second | A but not B: the part of A outside the overlap |
+difference between | разность (насколько одно больше другого) | the bigger value minus the smaller value | 25.7 − (−12.6) = 38.3 °C | +
+rise | подъём, увеличение (на сколько выросло) | how much a value goes up | The rise from −4 °C to 9 °C is 13 °C. |
+fall (drop) | понижение, падение | how much a value goes down | The temperature falls by 6 °C. |
+lowest | самый низкий, наименьший | the smallest value | The lowest temperature is −12.6 °C. | +
+highest | самый высокий, наибольший | the biggest value | The highest temperature is 25.7 °C. | +
+
+## 0 Maths question language::Words in word problems
+years older than | на … лет старше (прибавить) | add the number of years | Alan is 5 years older than Bella: b + 5 |
+years younger than | на … лет младше (вычесть) | subtract the number of years | Max is 3 years younger than Lena: a − 3 |
+twice as many as | вдвое больше, чем | multiply by 2 | Tom has twice as many as Ann (a): 2a |
+total | итого, всего; общий | everything added together | the total cost of x bags at 65 cents each = 65x cents | +
+each | каждый; за одну штуку | for one item | sweets costing 65 cents each | +
+every | каждые (о повторении через промежуток) | again and again after the same time | Buses leave every 16 minutes. | +
+per | на (каждый), за (одну единицу) | for each one | $3 per kilogram |
+cost | стоимость; стоить | the price you pay | Four pens cost p cents each: 4p cents | +
+together | одновременно; вместе | at the same moment | At 08:25 both buses leave together. | +
+the next time | следующий момент (первый раз после указанного) | the first time after the given time | Next time together: LCM(16, 28) = 112 min, 08:25 + 1 h 52 min = 10:17 |
+time interval | промежуток времени | the time between two events | 16 minutes and 28 minutes are time intervals. |
+duration | продолжительность (сколько длится) | how long something lasts | waiting time 24 minutes (a duration) | +
+clock time | время на часах (момент) | a time shown on a clock | 10:24 is a clock time. |
+contains | содержит | has inside | A bag contains 45 red and green balls. | +
+adds | добавляет | puts more in | Carlos adds 4 red balls. |
+more (4 more) | ещё (4 штуки) | extra, in addition | 4 more red balls |
+now | теперь (после изменения) | after the change | The ratio is now 1 : 2. |
+before / after | до / после (изменения) | the situation at the start / at the end | Before: red : green = 2 : 3. After: 1 : 2 |
+the rest (remaining) | остальные, оставшиеся | what is left | The rest of the balls are green. |
+counter | фишка | a small plastic disc used in probability and ratio questions | A bag has 30 counters. | +
+score (on a dice) | выбросить (очки на кубике) | get a number when you throw a dice | the probability of scoring 6 |
+represent | обозначать, означать | stand for | b represents Bella's age. | +
+
+## 0 Maths question language::Graphs and constructions
+x-coordinate | координата x (абсцисса) | the first number in (x, y) | In (−2, 0) the x-coordinate is −2. |
+y-coordinate | координата y (ордината) | the second number in (x, y) | In (0, 4) the y-coordinate is 4. |
+x-intercept | точка пересечения с осью x (там y = 0) | where a graph crosses the x-axis | y = 2x + 4 crosses the x-axis at (−2, 0). |
+crosses the x-axis | пересекает ось x (подставь y = 0) | the graph meets the x-axis; there y = 0 | 0 = 2x + 4, so x = −2 |
+passes through | проходит через (точку) | the point is on the line | The line passes through (1, 6). |
+using a ruler and compasses only | только линейкой и циркулем (транспортир нельзя) | you may not use a protractor or measure angles | Using a ruler and compasses only, construct triangle ABC. |
+leave your construction arcs | оставьте дуги построения (не стирайте!) | do not rub out the arcs; they show your method | Leave your construction arcs. |
+join | соединить (провести отрезок) | draw a straight line between two points | Join A to C. | +
+sloping side | наклонная (боковая) сторона — это НЕ высота | a side that is not at 90° to the base | base 8 cm, height 3 cm, sloping side 5 cm: area = ½ × 8 × 3 = 12 cm² |
+erase (rub out) | стереть | remove pencil marks | Do not erase your arcs. |

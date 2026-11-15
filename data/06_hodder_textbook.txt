@@ -1,0 +1,126 @@
+# Слова из учебника Hodder «Cambridge IGCSE Mathematics Core and Extended» (Pimentel, Wall,
+# 4-е изд., 2018): предметный указатель (Index, с. 544–549) + частые слова условий задач.
+# Только то, чего не было в колоде. Подколоды — существующие (новых не создаём).
+# Формат: term | русский | definition (simple English) | example | flag
+
+## 1 Command words::Maths only
+evaluate | вычисли (найди значение), дать оценку | work out the value of an expression; in computer science — judge how good or important something is | Evaluate 3 + 4 × 2. → 11 |
+prove | докажи | show with reasons that something is always true | Prove that triangles ABC and PQR are congruent. |
+
+## 0 Maths question language::Small words that change the meaning
+respectively | соответственно (в том же порядке) | in the same order as the things already named | A and B are 3 cm and 5 cm long respectively. → A = 3 cm, B = 5 cm |
+consecutive | идущие подряд, последовательные | coming one after another without a gap | 4, 5 and 6 are consecutive integers. |
+greatest | наибольший, самый большой | the biggest | Find the greatest number of boxes she can buy. |
+identical | одинаковые (совершенно одинаковые) | exactly the same | Two identical cubes are joined together. |
+implies | означает, следовательно | means that; shows that | An interest rate of 6% implies a multiplier of 1.06. |
+satisfy | удовлетворять (подходить под условие) | make an equation or inequality true | x = 3 satisfies x + 2 > 4. |
+
+## 0 Maths question language::Words in word problems
+convert | перевести, преобразовать (в другие единицы) | change into a different unit or form | Convert 2.5 km into metres. → 2500 m |
+interpret | истолковать, объяснить смысл | explain what something means | Interpret the gradient of the graph: it is the speed. |
+assume | предположить, считать (что) | take something as true for the calculation | Assume the speed is constant. |
+by inspection | на глаз, подбором (без длинных вычислений) | by looking carefully, without long working | By inspection, the nth term of 3, 6, 9, … is 3n. |
+interest rate | процентная ставка | the percentage of the money paid as interest each year | an interest rate of 4% per year |
+per annum | в год, ежегодно | each year | 5% interest per annum |
+deposit | вложить, положить (деньги в банк) | put money into a bank account | She deposits $500 in a bank. |
+loan | заём, кредит | money borrowed that must be paid back | He takes a loan of $2000 to buy a car. |
+hourly rate | почасовая ставка (оплата за час) | the money paid for one hour of work | Her hourly rate is $12. |
+currency | валюта | the type of money used in a country | Change dollars into another currency. |
+
+## 0 Maths question language::Graphs and constructions
+intersect | пересекаться | cross each other | The lines y = 2x and y = 6 − x intersect at (2, 4). |
+point of intersection | точка пересечения | the point where two lines or graphs cross | Solve the equations by finding the point of intersection. |
+unshaded | незаштрихованный | not shaded; left white | Leave unshaded the region that satisfies all the inequalities. |
+illustrate | изобразить, проиллюстрировать | show with a diagram or graph | Illustrate the information in a Venn diagram. |
+
+## 2 Maths 0580::01 Number
+accuracy | точность (близость к истинному значению) | how close a value or a measurement is to the exact (true) value | Give your answer to an appropriate degree of accuracy. |
+approximation | приближение, приближённое значение | a value close to the exact value, but not exact | 3.14 is an approximation of π. |
+directed numbers | числа со знаком (положительные и отрицательные) | numbers with a + or − sign | 3 °C − 8 °C = −5 °C |
+order of operations | порядок действий | which part of a calculation to do first: brackets, indices, × and ÷, then + and − | 2 + 3 × 4 = 14, not 20 |
+brackets | скобки | the symbols ( ) that show what to work out first | (2 + 3) × 4 = 20 |
+sum | сумма | the answer when you add numbers | The sum of 3 and 4 is 7. |
+product | произведение | the answer when you multiply numbers | The product of 3 and 4 is 12. |
+hundredths | сотые (доли) | the second place after the decimal point | 0.07 = 7 hundredths |
+triangle numbers | треугольные числа | numbers that make triangles of dots: 1, 3, 6, 10, … | 1, 3, 6, 10, 15, 21 |
+lowest terms | несократимый вид (дробь, которую нельзя сократить) | a fraction that cannot be simplified any more | 6/8 in its lowest terms is 3/4. |
+vulgar fraction | обыкновенная дробь (в этом учебнике = неправильная дробь) | a fraction written as a/b; the Hodder book uses it for an improper fraction | Change the vulgar fraction 27/4 into a mixed number. → 6¾ |
+zero index | нулевой показатель степени | the power 0; any number to the power 0 is 1 | 5⁰ = 1 |
+negative index | отрицательный показатель степени | a power with a minus sign; it means 1 divided by the number | 2⁻³ = 1/2³ = 1/8 |
+fractional index | дробный показатель степени | a power that is a fraction; it means a root | 8^⅓ = ∛8 = 2 |
+laws of indices | свойства степеней | the rules for multiplying, dividing and raising powers | aᵐ × aⁿ = aᵐ⁺ⁿ, aᵐ ÷ aⁿ = aᵐ⁻ⁿ |
+multiplier | процентный множитель (на что умножить) | the number you multiply by to increase or decrease by a percentage | An increase of 5% is a multiplier of 1.05. |
+exponential growth | экспоненциальный рост | increasing by the same percentage each time | $1000 grows by 5% each year: 1000 × 1.05ⁿ |
+exponential decay | экспоненциальное убывание | decreasing by the same percentage each time | A car loses 15% of its value each year: V × 0.85ⁿ |
+principal | исходная сумма, вклад (на которую начисляют проценты) | the money you put in or borrow at the start | In I = PRT/100, P is the principal. |
+cost price | цена покупки (себестоимость) | the price paid to buy or make something | Cost price $40, selling price $50 → profit $10 |
+selling price | цена продажи | the price something is sold for | Profit = selling price − cost price |
+discount | скидка | money taken off the price | A 10% discount on $50 is $5. |
+gross pay (gross earnings) | зарплата до вычетов (начисленная) | pay before tax and other deductions | Gross pay = basic pay + overtime + bonus |
+net pay | зарплата на руки (после вычетов) | pay after deductions such as tax and insurance | Net pay = gross pay − deductions |
+deductions | вычеты, удержания (налог, страховка) | money taken from pay, e.g. tax and insurance | Gross pay $188.25, deductions $33.43 → net pay $154.82 |
+basic pay | основная (базовая) оплата | normal pay for the normal working hours, without extras | basic pay of $12 per hour for 38 hours |
+overtime | сверхурочная работа (сверхурочные) | hours worked in addition to the normal working week | She works 6 hours of overtime. |
+time and a half | полуторная оплата (×1.5) | overtime pay of 1.5 times the basic hourly rate | $12 per hour → $18 per hour at time and a half |
+double time | двойная оплата (×2) | overtime pay of twice the basic hourly rate | $12 per hour → $24 per hour at double time |
+piece work | сдельная оплата (за каждую вещь) | being paid for each item made, not for the hours worked | $0.50 for each shirt made |
+bonus | премия, бонус | an extra payment added to basic pay | basic pay $300 + bonus $18 |
+compound measures | составные величины (скорость, плотность…) | a measure made from two other measures | speed in km/h, density in g/cm³ |
+average speed | средняя скорость | total distance ÷ total time | 150 km in 2 hours → 75 km/h |
+metric units | метрические единицы | units based on tens: mm, cm, m, km, g, kg, ml, l | 1 km = 1000 m, 1 kg = 1000 g |
+unitary method | метод приведения к единице (сначала цена одной штуки) | first find the value of one, then multiply | 5 pens cost $4 → 1 pen $0.80 → 8 pens $6.40 |
+common ratio | знаменатель геометрической прогрессии | the number you multiply by to get the next term of a geometric sequence | 2, 6, 18, 54, …: common ratio = 3 |
+proper subset | собственное подмножество | a subset that is not the whole set; symbol ⊂ | {1, 2} ⊂ {1, 2, 3} |
+
+## 2 Maths 0580::02 Algebra
+constant of proportionality | коэффициент пропорциональности | the number k in y = kx or y = k/x | y ∝ x, y = 10 when x = 2 → k = 5 |
+equation of a straight line | уравнение прямой | y = mx + c, where m is the gradient and c is the y-intercept | y = 2x + 3 |
+elimination method | метод сложения, метод исключения | solve simultaneous equations by adding or subtracting them to remove one letter | (x + y = 10) − (x − y = 2) → 2y = 8 |
+substitution method | метод подстановки | solve simultaneous equations by putting one equation into the other | y = 2x, x + y = 9 → x + 2x = 9 |
+polynomial | многочлен (полином) | an expression with several terms of whole-number powers of x | 3x³ − 2x + 5 |
+gradient function | производная функция (формула градиента) | a formula for the gradient of a curve at any point: dy/dx | y = x² → gradient function 2x |
+second derivative | вторая производная | the result of differentiating twice: d²y/dx² | y = x³ → dy/dx = 3x², d²y/dx² = 6x |
+point of inflexion | точка перегиба | a point where the curve changes the way it bends | y = x³ has a point of inflexion at (0, 0). |
+
+## 2 Maths 0580::03 Geometry
+acute-angled triangle | остроугольный треугольник | all three angles are less than 90° | angles 50°, 60°, 70° |
+obtuse-angled triangle | тупоугольный треугольник | one angle is more than 90° | angles 120°, 40°, 20° |
+side–side–side (SSS) | по трём сторонам (признак равенства треугольников) | two triangles are congruent if all three sides are equal | |
+side–angle–side (SAS) | по двум сторонам и углу между ними (признак равенства) | two sides and the angle between them are equal, so the triangles are congruent | |
+angle–side–angle (ASA) | по стороне и двум прилежащим углам (признак равенства) | two angles and the side between them are equal, so the triangles are congruent | |
+right angle–hypotenuse–side (RHS) | по гипотенузе и катету (признак равенства прямоугольных треугольников) | right angle, hypotenuse and one other side are equal, so the triangles are congruent | |
+area factor | коэффициент площадей (k²) | for similar shapes: the scale factor squared | scale factor 3 → area factor 9 |
+volume factor | коэффициент объёмов (k³) | for similar solids: the scale factor cubed | scale factor 2 → volume factor 8 |
+angle at the centre | центральный угол (угол в центре) | the angle at the centre is twice the angle at the circumference on the same arc | angle at circumference 40° → angle at centre 80° |
+angles in the same segment | вписанные углы на одну дугу (равны) | angles at the circumference standing on the same chord are equal | |
+tangents from an external point | касательные из внешней точки (равны по длине) | two tangents from one point outside a circle are the same length | |
+
+## 2 Maths 0580::04 Mensuration
+mensuration | измерения (длина, площадь, объём) | the topic about length, area and volume | Topic 5: Mensuration |
+arc length | длина дуги | the length of part of the circumference | arc length = θ/360 × 2πr |
+pi (π) | число пи (π) | circumference ÷ diameter ≈ 3.142 | C = πd |
+truncated | усечённый (с отрезанной верхушкой) | with the top cut off | A frustum is a truncated cone. |
+
+## 2 Maths 0580::05 Trigonometry
+back bearing | обратный азимут (для пути назад) | the bearing for the journey back: add or subtract 180° | bearing 070° → back bearing 250° |
+angle between a line and a plane | угол между прямой и плоскостью | the angle between the line and its shadow (projection) on the plane | angle between diagonal AG and the base of a cuboid |
+sine curve | синусоида (график синуса) | the wave-shaped graph of y = sin x | |
+cosine curve | косинусоида (график косинуса) | the wave-shaped graph of y = cos x | |
+tangent curve | тангенсоида (график тангенса) | the graph of y = tan x with asymptotes at 90°, 270°, … | |
+
+## 2 Maths 0580::06 Transformations and vectors
+negative enlargement | гомотетия с отрицательным коэффициентом | an enlargement with a negative scale factor; the image is upside down on the other side of the centre | scale factor −2 |
+
+## 2 Maths 0580::07 Probability
+favourable outcome | благоприятный исход | an outcome where the event you want happens | Getting an even number on a dice: 3 favourable outcomes (2, 4, 6) |
+combined events | сложные события (несколько испытаний сразу) | two or more events happening together | throwing two dice; spinning a coin twice |
+
+## 2 Maths 0580::08 Statistics
+box-and-whisker plot | ящик с усами; диаграмма размаха | shows the minimum, lower quartile, median, upper quartile and maximum | |
+lower quartile | нижний квартиль | the value a quarter of the way through the ordered data (25%) | |
+upper quartile | верхний квартиль | the value three quarters of the way through the ordered data (75%) | IQR = upper quartile − lower quartile |
+two-way table | двусторонняя таблица (таблица с двумя входами) | a table with two kinds of information: one in the rows, one in the columns | rows: boys / girls; columns: football / tennis |
+grouped frequency table | интервальная таблица частот | a frequency table where the data are put into class intervals | 0 < h ≤ 10 : 5 |
+grouped data | сгруппированные данные | data put into class intervals | heights in groups 150–159 cm, 160–169 cm |
+back-to-back stem-and-leaf diagram | двусторонняя диаграмма «ствол и листья» | two sets of data share one stem: leaves go to the left and to the right | |
+spread (of data) | разброс данных | how far apart the data values are; range and IQR measure it | Compare the averages and the spread. |

@@ -1,0 +1,373 @@
+# Термины Cambridge IGCSE Physics 0625 (syllabus 2026–2028), Core + Supplement.
+# Формат: term | русский | definition (simple English) | example | spell
+# Одно слово — одна карточка: variable, accuracy, protractor, line of best fit, vector, average speed,
+# frequency, reflection, prism есть в Maths (02, 06) со значением и для физики — здесь их не повторять.
+# Синонимы — тоже одна карточка: gamma rays → gamma radiation (γ); hyperbola → reciprocal graph (02).
+
+## 3 Physics 0625::00 Practical skills
+experiment | опыт, эксперимент | a test done to find something out | | +
+apparatus | оборудование, установка | the equipment used in an experiment | | +
+method | ход работы, методика | the steps of an experiment | | +
+independent variable | независимая переменная | the quantity you change on purpose | |
+dependent variable | зависимая переменная | the quantity you measure | |
+control variable | контролируемая переменная (не меняется) | a quantity you keep the same | |
+fair test | корректный опыт («честный тест») | only one variable is changed at a time | |
+reading | показание (прибора) | the value shown on an instrument | the ammeter reading | +
+measurement | измерение | a value found using an instrument | | +
+true value | истинное значение | the value that would be found in an ideal measurement | |
+measurement error | погрешность измерения | the difference between a measured value and the true value | |
+precision | сходимость, прецизионность (разброс повторных измерений) | how close repeated measurements are to each other | | +
+repeatability | повторяемость (тот же человек, те же приборы) | the same result when repeated by the same person with the same method and equipment | |
+reproducibility | воспроизводимость (другой человек или другие приборы) | the same result when repeated by a different person or with different equipment | |
+validity | достоверность (обоснованность) | the experiment measures what it is meant to measure | |
+anomaly (anomalous result) | аномальный результат (выброс) | a result that does not fit the pattern | | +
+range (of results) | диапазон | the lowest to the highest value | |
+zero error | ошибка нуля (прибор показывает не 0 без нагрузки) | an instrument shows a reading when it should show zero | |
+parallax error | ошибка параллакса | an error from reading a scale at an angle instead of straight on | |
+random error | случайная погрешность | errors that make readings scatter around the true value | |
+systematic error | систематическая погрешность | errors that make all readings too high or too low by the same amount | |
+uncertainty | неопределённость (погрешность) | the range in which the true value probably lies | |
+average (mean) | среднее значение | sum of the readings ÷ number of readings | |
+conclusion | вывод | what the results show | | +
+hypothesis | гипотеза | an idea that can be tested | | +
+safety precaution | мера безопасности | something done to avoid harm | Wear goggles. |
+stop-watch | секундомер | an instrument for measuring time | | +
+metre rule | метровая линейка | a 1 m ruler | |
+measuring tape | рулетка, мерная лента | a long flexible ruler | |
+micrometer screw gauge | микрометр | an instrument for measuring very small lengths | |
+measuring cylinder | мерный цилиндр | a tall container with a scale, used to find the volume of a liquid | | +
+beaker | химический стакан | a glass container with a lip | | +
+thermometer | термометр | an instrument for measuring temperature | | +
+top-pan balance | электронные весы | an instrument that measures mass | |
+force meter (newton meter) | динамометр | an instrument that measures force | |
+retort stand, boss and clamp | штатив с лапкой и муфтой | equipment to hold things in place | |
+eureka can (displacement can) | отливной сосуд | a can with a spout for measuring volume of an irregular object | |
+ray box | осветитель (для получения пучка света) | a lamp that makes a narrow beam of light | |
+power supply | источник питания | provides electrical energy for a circuit | |
+connecting leads | соединительные провода | wires used to connect a circuit | |
+crocodile clip | зажим «крокодил» | a spring clip on the end of a wire | |
+multimeter | мультиметр | an instrument that can measure current, voltage and resistance | |
+graph paper | миллиметровка | paper with a grid of small squares | |
+straight line through the origin | прямая через начало координат (прямая пропорциональность) | shows that two quantities are directly proportional | |
+
+## 3 Physics 0625::01 Motion, forces and energy
+physical quantity | физическая величина | something that can be measured, with a number and a unit | |
+unit | единица (измерения) | a fixed amount used for measuring | The unit of force is the newton. | +
+scalar | скаляр (скалярная величина) | a quantity with size only | mass, speed, energy | +
+distance | расстояние, путь | how far something travels | | +
+displacement | перемещение | distance in a given direction | | +
+speed | скорость (модуль, без направления) | distance travelled per unit time | v = s/t | +
+velocity | скорость (с направлением, векторная) | speed in a given direction | | +
+acceleration | ускорение | change in velocity per unit time | a = Δv/Δt | +
+deceleration | замедление | negative acceleration; slowing down | | +
+at rest | в покое | not moving | |
+constant speed | постоянная скорость | the speed does not change | |
+free fall | свободное падение | falling with only gravity acting | |
+acceleration of free fall (g) | ускорение свободного падения | 9.8 m/s² near the Earth's surface | |
+terminal velocity | установившаяся (предельная) скорость | the constant speed reached when air resistance equals weight | |
+mass | масса | the quantity of matter in an object; measured in kg | | +
+weight | вес (в IGCSE = сила тяжести, W = mg) | the gravitational force on an object; measured in N | W = mg | +
+gravitational field strength | напряжённость гравитационного поля (g) | force per unit mass, in N/kg | g = 9.8 N/kg |
+density | плотность | mass per unit volume | ρ = m/V | +
+float | плавать (на поверхности) | stay on the surface of a liquid | | +
+sink | тонуть | go down in a liquid | | +
+force | сила | a push or a pull; measured in newtons | | +
+newton (N) | ньютон (единица силы) | the unit of force | |
+resultant force | равнодействующая сила | the single force that has the same effect as all the forces together | |
+balanced forces | уравновешенные силы | forces that cancel out; resultant force is zero | |
+friction | трение | a force that opposes motion between surfaces | | +
+air resistance (drag) | сопротивление воздуха | a frictional force on an object moving through air | | +
+thrust | сила тяги | the force that pushes a vehicle forward | | +
+tension | сила натяжения | the pulling force in a rope or string | | +
+extension | удлинение | the increase in length of a spring | | +
+load | нагрузка | the force or weight applied | | +
+limit of proportionality | предел пропорциональности | the point after which extension is no longer proportional to load | |
+spring constant | жёсткость пружины (k) | force per unit extension | k = F/x |
+elastic | упругий | returns to its original shape | | +
+deform | деформировать(ся) | change shape | | +
+centre of gravity | центр тяжести (центр масс) | the point where the weight seems to act | |
+stability | устойчивость | how hard it is to tip an object over | | +
+moment (of a force) | момент силы | force × perpendicular distance from the pivot | M = Fd | +
+pivot | точка опоры, ось вращения | the point an object turns about | | +
+equilibrium | равновесие | no resultant force and no resultant moment | | +
+principle of moments | правило моментов | for equilibrium, clockwise moments = anticlockwise moments | |
+momentum | импульс (тела) — НЕ impulse! | mass × velocity | p = mv | +
+impulse | импульс силы (F × Δt) — НЕ momentum! | force × time; change in momentum | |
+conservation of momentum | закон сохранения импульса | total momentum before = total momentum after | |
+collision | столкновение | when objects hit each other | | +
+circular motion | движение по окружности | movement along a circle | |
+energy | энергия | the ability to do work; measured in joules | | +
+joule (J) | джоуль (единица энергии) | the unit of energy and work | |
+kinetic energy | кинетическая энергия | energy of a moving object | Eₖ = ½mv² |
+gravitational potential energy | потенциальная энергия (в поле тяжести) | energy stored because of height | ΔEₚ = mgΔh |
+chemical energy | химическая энергия | energy stored in fuels, food and batteries | |
+elastic (strain) energy | энергия упругой деформации | energy stored in a stretched or squashed object | |
+nuclear energy | ядерная энергия | energy stored in the nucleus | |
+internal energy (thermal energy) | внутренняя (тепловая) энергия | energy of the particles in a substance | |
+energy store | запас (форма хранения) энергии | where energy is kept | kinetic, chemical, gravitational potential |
+energy transfer | передача энергии | energy moving from one store to another | |
+conservation of energy | закон сохранения энергии | energy cannot be created or destroyed | |
+dissipated | рассеянная (энергия) | spread out to the surroundings, usually as heat | | +
+wasted energy | бесполезно потраченная энергия | energy that is not useful | |
+useful energy | полезная энергия | energy transferred to where it is wanted | |
+efficiency | КПД (коэффициент полезного действия) | useful energy output ÷ total energy input × 100% | | +
+Sankey diagram | диаграмма Санки (энергетический поток) | a diagram with arrows showing energy transfers | |
+work done | совершённая работа | force × distance moved in the direction of the force | W = Fd |
+power | мощность | work done or energy transferred per unit time | P = W/t | +
+watt (W) | ватт (единица мощности) | 1 joule per second | |
+fossil fuel | ископаемое топливо | coal, oil or natural gas | |
+renewable | возобновляемый | will not run out | wind, solar, hydroelectric | +
+non-renewable | невозобновляемый | will run out | coal, oil, gas |
+wind turbine | ветряная турбина (ветрогенератор) | a machine that turns wind energy into electricity | |
+hydroelectric | гидроэлектрический | electricity from falling water | |
+geothermal | геотермальный | using heat from inside the Earth | | +
+tidal | приливный | using the rise and fall of the sea | | +
+solar cell | солнечный элемент (свет → электричество) | a device that turns light directly into electricity | |
+solar panel | солнечный коллектор (нагрев воды) | a panel that uses the Sun to heat water | |
+nuclear fission | деление ядра | splitting of a large nucleus | |
+nuclear fusion | термоядерный синтез | joining of two small nuclei, as in the Sun | |
+pressure | давление | force per unit area | p = F/A | +
+pascal (Pa) | паскаль | the unit of pressure, 1 N/m² | |
+atmospheric pressure | атмосферное давление | the pressure of the air around us | |
+pressure in a liquid | давление в жидкости | Δp = ρgΔh; increases with depth | |
+
+## 3 Physics 0625::02 Thermal physics
+solid | твёрдое тело | particles are close together and vibrate in fixed positions | | +
+liquid | жидкость | particles are close together but can move past each other | | +
+gas | газ | particles are far apart and move quickly in all directions | | +
+state of matter | агрегатное состояние | solid, liquid or gas | |
+particle | частица | a very small piece of matter | | +
+kinetic particle model | молекулярно-кинетическая модель | all matter is made of moving particles | |
+Brownian motion | броуновское движение | the random movement of small particles hit by molecules | |
+random | беспорядочный, случайный | without a pattern | | +
+vibrate | колебаться | move quickly backwards and forwards | | +
+melting | плавление | solid → liquid | | +
+freezing (solidification) | отвердевание (замерзание) | liquid → solid | | +
+boiling | кипение | liquid → gas at a fixed temperature, with bubbles forming inside the liquid | | +
+evaporation | испарение | liquid → gas at the surface, at any temperature | | +
+condensation | конденсация | gas → liquid | | +
+melting point | температура плавления | the temperature at which a solid melts | |
+boiling point | температура кипения | the temperature at which a liquid boils | |
+temperature | температура | how hot or cold something is | | +
+absolute zero | абсолютный нуль | −273 °C; the lowest possible temperature | |
+kelvin (K) | кельвин | the unit of absolute temperature | T (K) = θ (°C) + 273 |
+thermal expansion | тепловое расширение | getting bigger when heated | |
+expand | расширяться | get bigger | | +
+contract | сжиматься | get smaller | | +
+specific heat capacity | удельная теплоёмкость | energy needed to raise the temperature of 1 kg by 1 °C | ΔE = mcΔθ |
+latent heat | скрытая теплота (фазового перехода) | energy needed to change state without changing temperature | |
+specific latent heat | удельная теплота (плавления/парообразования) | energy needed to change the state of 1 kg | |
+conduction | теплопроводность | thermal energy transfer through a solid by vibrating particles and free electrons | | +
+convection | конвекция | thermal energy transfer by the movement of a liquid or gas | | +
+radiation (thermal) | (тепловое) излучение | thermal energy transfer by infrared waves | | +
+convection current | конвекционный поток | the circular movement of a heated fluid | |
+infrared radiation | инфракрасное излучение | electromagnetic waves emitted by hot objects | |
+conductor (thermal) | проводник тепла | a material that transfers thermal energy well | Metals are good thermal conductors. |
+insulator (thermal) | теплоизолятор | a material that transfers thermal energy poorly | Air is a good insulator. |
+emitter | излучатель | a surface that gives out radiation | Matt black surfaces are good emitters. |
+absorber | поглотитель | a surface that takes in radiation | |
+reflector | отражатель | a surface that sends radiation back | Shiny surfaces are good reflectors. |
+matt | матовый | not shiny | | +
+fluid | текучая среда (жидкость или газ) | a liquid or a gas | | +
+
+## 3 Physics 0625::03 Waves
+wave | волна | a way of transferring energy without transferring matter | | +
+transverse wave | поперечная волна | vibrations are at 90° to the direction of travel | light, water waves |
+longitudinal wave | продольная волна | vibrations are along the direction of travel | sound |
+amplitude | амплитуда | the maximum distance from the rest position | | +
+wavelength | длина волны (λ) | the distance between two crests | | +
+hertz (Hz) | герц | the unit of frequency | |
+wave speed | скорость волны | v = fλ | |
+crest (peak) | гребень | the top of a wave | | +
+trough | впадина (подошва волны) | the bottom of a wave | | +
+wavefront | фронт волны | a line joining points on the same crest | | +
+compression | сжатие (участок продольной волны) | where particles are close together in a longitudinal wave; in computing — making a file smaller | | +
+rarefaction | разрежение | where particles are spread out in a longitudinal wave | | +
+refraction | преломление | a change of direction when a wave changes speed | | +
+diffraction | дифракция | spreading of a wave through a gap or around an edge | | +
+ripple tank | волновая ванна | a shallow tank of water for studying waves | |
+incident ray | падающий луч | the ray going towards a surface | |
+reflected ray | отражённый луч | the ray coming off a surface | |
+normal | нормаль (перпендикуляр к поверхности) | a line at 90° to a surface | | +
+angle of incidence | угол падения | the angle between the incident ray and the normal | |
+angle of reflection | угол отражения | the angle between the reflected ray and the normal | |
+angle of refraction | угол преломления | the angle between the refracted ray and the normal | |
+law of reflection | закон отражения | angle of incidence = angle of reflection | |
+plane mirror | плоское зеркало | a flat mirror | |
+virtual image | мнимое изображение | an image that cannot be formed on a screen | |
+real image | действительное изображение | an image that can be formed on a screen | |
+upright | прямое (изображение) | the right way up | | +
+inverted | перевёрнутое (изображение) | upside down | | +
+refractive index | показатель преломления | n = sin i / sin r | |
+critical angle | предельный угол (полного отражения) | the angle of incidence at which the angle of refraction is 90° | |
+total internal reflection | полное внутреннее отражение | all the light is reflected inside a denser material | |
+optical fibre | оптоволокно | a thin glass fibre that carries light by total internal reflection | |
+lens | линза | a curved piece of glass that refracts light | | +
+converging lens | собирающая линза | a lens that brings rays together | |
+diverging lens | рассеивающая линза | a lens that spreads rays out | |
+principal focus (focal point) | главный фокус | the point where parallel rays meet after a converging lens | |
+focal length | фокусное расстояние | the distance from the centre of the lens to the principal focus | |
+principal axis | главная оптическая ось | the line through the centre of a lens at 90° to it | |
+magnifying glass | лупа | a converging lens used to make things look bigger | |
+short sight | близорукость | cannot see far objects clearly; corrected with a diverging lens | |
+long sight | дальнозоркость | cannot see near objects clearly; corrected with a converging lens | |
+dispersion | дисперсия (разложение света) | splitting of white light into colours | | +
+spectrum | спектр | a range of colours or waves in order | | +
+monochromatic | монохроматический | light of a single frequency (one colour) | | +
+electromagnetic spectrum | электромагнитный спектр | radio, microwaves, infrared, visible, ultraviolet, X-rays, gamma rays | |
+radio waves | радиоволны | longest wavelength EM waves; used for broadcasting | |
+microwaves | микроволны | used for mobile phones, satellites and cooking | | +
+visible light | видимый свет | the EM waves we can see | |
+ultraviolet | ультрафиолет | EM waves that can damage skin and eyes | | +
+X-rays | рентгеновское излучение | EM waves used to see bones | |
+vacuum | вакуум | a space with no matter in it | | +
+analogue signal | аналоговый сигнал | a signal that varies continuously | |
+digital signal | цифровой сигнал | a signal with only two values, on and off | |
+sound | звук | a longitudinal wave produced by vibrating objects | | +
+echo | эхо | a reflected sound | | +
+pitch | высота (звука) | how high or low a sound is; depends on frequency | | +
+loudness | громкость | depends on the amplitude | | +
+ultrasound | ультразвук | sound above 20 000 Hz | | +
+audible range | диапазон слышимости | 20 Hz to 20 000 Hz for humans | |
+medium (pl. media) | среда (мн. среды) | the material a wave travels through | | +
+oscilloscope | осциллограф | an instrument that shows a wave on a screen | | +
+
+## 3 Physics 0625::04 Electricity and magnetism
+magnet | магнит | an object that attracts iron and has two poles | | +
+magnetic field | магнитное поле | the region where a magnetic force acts | |
+field lines | линии поля | lines showing the direction of a field | |
+north pole | северный полюс | | |
+attract | притягивать | pull together | | +
+repel | отталкивать | push apart | | +
+induced magnetism | намагничивание (наведённый магнетизм) | magnetism caused by being near a magnet | |
+permanent magnet | постоянный магнит | keeps its magnetism | |
+temporary magnet | временный магнит | loses its magnetism easily | |
+soft iron | мягкое железо | easily magnetised and demagnetised | |
+compass (plotting compass) | компас | a small magnet used to show field direction | | +
+electric charge | электрический заряд | positive or negative; measured in coulombs | |
+coulomb (C) | кулон | the unit of charge | |
+electron | электрон | a negative particle | | +
+static electricity | статическое электричество | charge that builds up on an insulator | |
+electric field | электрическое поле | a region where a charge feels a force | |
+conductor (electrical) | проводник | a material that lets charge flow easily | |
+insulator (electrical) | изолятор, диэлектрик | a material that does not let charge flow | |
+current | (электрический) ток (I) | the rate of flow of charge | I = Q/t | +
+ampere (A) | ампер | the unit of current | |
+ammeter | амперметр | measures current; connected in series | | +
+voltmeter | вольтметр | measures potential difference; connected in parallel | | +
+electromotive force (e.m.f.) | ЭДС (электродвижущая сила) | the electrical work done by a source per unit charge | |
+potential difference (p.d.) | напряжение, разность потенциалов | the work done per unit charge between two points | |
+volt (V) | вольт | the unit of e.m.f. and p.d. | |
+resistance | сопротивление | opposition to current; R = V/I | | +
+ohm (Ω) | ом | the unit of resistance | |
+resistor | резистор | a component that limits the current; it has a fixed value in ohms | | +
+variable resistor (rheostat) | переменный резистор (реостат) | a resistor whose resistance can be changed | |
+light-dependent resistor (LDR) | фоторезистор | resistance decreases as light gets brighter | |
+thermistor | терморезистор | resistance decreases as temperature increases | | +
+diode | диод | lets current flow in one direction only | | +
+light-emitting diode (LED) | светодиод | a diode that gives out light | |
+lamp (bulb) | лампа | | | +
+cell | гальванический элемент («батарейка») | a single source of e.m.f. | | +
+battery | батарея (из нескольких элементов) | two or more cells joined together | | +
+switch | выключатель, ключ | opens or closes a circuit | | +
+fuse | плавкий предохранитель | a thin wire that melts if the current is too high | | +
+circuit breaker | автоматический выключатель | a switch that opens automatically if the current is too high | |
+circuit | (электрическая) цепь | a closed path for current | | +
+series circuit | последовательная цепь | components in a single loop | |
+parallel circuit | параллельная цепь | components in separate branches | |
+branch | ветвь (цепи) | one path in a parallel circuit | | +
+junction | узел (разветвление) | a point where wires meet | | +
+direct current (d.c.) | постоянный ток | current flowing in one direction | |
+alternating current (a.c.) | переменный ток | current that changes direction | |
+potential divider | делитель напряжения | two resistors in series used to share the voltage | |
+kilowatt-hour (kWh) | киловатт-час | a unit of energy used for electricity bills | |
+live wire | фазный провод | the wire at high voltage | |
+neutral wire | нулевой (нейтральный) провод | the wire that completes the circuit | |
+earth wire | заземляющий провод (заземление) | a safety wire connected to the ground | |
+double insulation | двойная изоляция | the appliance case is plastic, so no earth wire is needed | |
+short circuit | короткое замыкание | a path with very low resistance | |
+electromagnetic induction | электромагнитная индукция | producing an e.m.f. by changing a magnetic field | |
+induced e.m.f. | индуцированная ЭДС | the e.m.f. produced by electromagnetic induction | |
+generator | генератор | a device that turns kinetic energy into electrical energy | | +
+dynamo | динамо-машина (генератор постоянного тока) | a simple d.c. generator | |
+slip rings | контактные кольца | used in an a.c. generator | |
+split-ring commutator | коллектор (разрезное кольцо) | reverses the current every half turn in a d.c. motor | |
+brushes | щётки | carbon contacts that touch the rings | |
+coil | катушка | a wire wound in loops | | +
+solenoid | соленоид | a long coil of wire | | +
+electromagnet | электромагнит | a coil with a soft iron core that is magnetic when current flows | | +
+relay | реле | a switch operated by an electromagnet | | +
+motor | электродвигатель | turns electrical energy into kinetic energy | | +
+motor effect | действие магнитного поля на проводник с током | a force on a wire carrying current in a magnetic field | |
+left-hand rule | правило левой руки | gives the direction of force on a current in a magnetic field | |
+right-hand rule | правило правой руки | gives the direction of induced current | |
+transformer | трансформатор | changes the voltage of an a.c. supply | | +
+step-up transformer | повышающий трансформатор | increases voltage | |
+step-down transformer | понижающий трансформатор | decreases voltage | |
+primary coil | первичная обмотка | the input coil of a transformer | |
+secondary coil | вторичная обмотка | the output coil of a transformer | |
+core | сердечник, ядро (процессора) | the iron centre of a transformer or electromagnet; in computing — one processing unit inside a CPU | | +
+turns | витки | loops of wire in a coil | | +
+transmission of electricity | передача электроэнергии | sending electricity over long distances at high voltage | |
+
+## 3 Physics 0625::05 Nuclear physics
+atom | атом | the smallest particle of an element | | +
+nucleus (pl. nuclei) | ядро (мн. ядра) | the very small positive centre of an atom | | +
+proton | протон | a positive particle in the nucleus | | +
+neutron | нейтрон | a particle with no charge in the nucleus | | +
+nucleon | нуклон | a proton or a neutron | | +
+proton number (Z) | зарядовое число (атомный номер Z) | the number of protons in the nucleus | |
+nucleon number (A) | массовое число (A) | the number of protons + neutrons | |
+nuclide | нуклид | an atom with a certain number of protons and neutrons | |
+isotope | изотоп | atoms with the same number of protons but different numbers of neutrons | | +
+ion | ион | an atom that has gained or lost electrons | | +
+alpha-particle scattering | рассеяние альфа-частиц (опыт Резерфорда) | the experiment that showed atoms have a small dense nucleus | |
+radioactive | радиоактивный | having an unstable nucleus that emits radiation | | +
+radioactive decay | радиоактивный распад | an unstable nucleus emitting radiation | |
+alpha particle (α) | альфа-частица | 2 protons + 2 neutrons; stopped by paper | |
+beta particle (β) | бета-частица | a fast electron from the nucleus; stopped by aluminium | |
+gamma radiation (γ) | гамма-излучение, гамма-лучи | electromagnetic radiation from the nucleus; the shortest-wavelength EM waves (also called gamma rays); reduced by lead | |
+ionising radiation | ионизирующее излучение | radiation that can knock electrons off atoms | |
+ionising | ионизирующий | able to make ions | |
+penetrate | проникать | go through | | +
+background radiation | радиационный фон | radiation that is always around us | |
+count rate | скорость счёта | number of counts per second or per minute | |
+Geiger-Müller tube (detector) | счётчик Гейгера | a detector of ionising radiation | |
+half-life | период полураспада | the time for half of the nuclei in a sample to decay | | +
+random (decay) | случайный (распад) | you cannot predict when a nucleus will decay | |
+contamination | радиоактивное загрязнение | radioactive material getting on or into something | | +
+irradiation | облучение | being exposed to radiation | | +
+shielding | экранирование, защита | material that absorbs radiation | | +
+chain reaction | цепная реакция | each fission causes more fissions | |
+
+## 3 Physics 0625::06 Space physics
+Solar System | Солнечная система | the Sun and everything that orbits it | |
+planet | планета | a large body orbiting a star | | +
+moon | спутник (планеты); Луна | a natural body orbiting a planet | |
+orbit | орбита; вращаться по орбите | the path of an object around another | | +
+axis (of the Earth) | ось (Земли) | the line the Earth spins around | |
+tilt | наклон (оси) | the Earth's axis is tilted by 23.5° | |
+season | время года | spring, summer, autumn, winter | | +
+star | звезда | a huge ball of gas that gives out light by nuclear fusion | | +
+the Sun | Солнце | the star at the centre of the Solar System | |
+galaxy | галактика | a huge group of billions of stars | | +
+Milky Way | Млечный Путь | our galaxy | |
+light-year | световой год | the distance light travels in one year | |
+comet | комета | a body of ice and dust with a very elliptical orbit | | +
+asteroid | астероид | a small rocky body orbiting the Sun | | +
+dwarf planet | карликовая планета | e.g. Pluto | |
+elliptical | эллиптический | shaped like an oval | | +
+accretion | аккреция (слипание частиц) | the growth of a body by gathering matter | |
+protostar | протозвезда | an early stage of a star | |
+main sequence star | звезда главной последовательности | a stable star fusing hydrogen into helium | |
+red giant | красный гигант | a large cool star | |
+white dwarf | белый карлик | a small hot dense star left after a red giant | |
+supernova | сверхновая | the explosion of a very large star | | +
+neutron star | нейтронная звезда | a very dense remnant of a supernova | |
+black hole | чёрная дыра | where gravity is so strong that light cannot escape | |
+nebula | туманность | a cloud of gas and dust | | +
+redshift | красное смещение | an increase in wavelength of light from galaxies moving away | | +
+Big Bang theory | теория Большого взрыва | the Universe began from a very small, hot point | |
+expanding Universe | расширяющаяся Вселенная | galaxies are moving apart | |
+cosmic microwave background radiation (CMBR) | реликтовое излучение | microwave radiation left over from the Big Bang | |
+Hubble constant | постоянная Хаббла | the ratio of the speed of a galaxy to its distance | |

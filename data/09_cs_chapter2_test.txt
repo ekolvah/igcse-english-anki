@@ -1,0 +1,75 @@
+# Контрольная Жени по Computer Science 0478 (2026-11-14): «Topic Test: Chapter 2 – Communication and
+# Internet Technologies», Paper 1 Theory (PDF прислал пользователь).
+# Термины главы (serial/parallel, simplex, half-/full-duplex, parity, checksum, check digit, ARQ,
+# firewall, spyware, encryption, plaintext, bandwidth, MSB, integrated circuit, bus) уже были в
+# 08_computer_science_0478.txt — не дублировались. Взяты слова формулировок вопросов, вариантов ответа
+# и mark scheme, которых в колоде не было.
+# Пропущено: аббревиатуры и слова, одинаковые в обоих языках (HTTP, HTTPS, HTML, CSS, ISBN, virus,
+# hacker, multimedia); WAN — нет в syllabus 2026–2028; слова-ловушки неверных вариантов ответа
+# (signal amplification, parallel-to-serial conversion, reboot).
+# automatic repeat query (ARQ) в задании назван «Automatic Repeat reQuest» — в 08 дописано в пример.
+# Формат: term | русский | definition (simple English) | example | flag
+
+## 5 Computer Science 0478::00 Question language
+distinguish between | различить (объяснить разницу) | say clearly how two things are not the same | Distinguish between half-duplex and full-duplex data transmission. |
+preferred over | предпочтительнее (чем) | chosen because it is better than another | Why is serial data transmission preferred over parallel data transmission? |
+simultaneously | одновременно | at the same time | In parallel transmission all the bits in a byte are sent simultaneously. |
+typically | обычно, как правило | usually; in most cases | Which device typically communicates using serial simplex transmission? |
+occur | происходить, случаться | to happen | What will occur at the receiver? |
+ensure | обеспечивать, гарантировать | to make sure that something happens | Explain how ARQ ensures error-free data transmission. |
+primary | главный, основной | most important; main | What is the primary purpose of a check digit? |
+responsibility | обязанность (ответственность) | a job or duty that a person or a company must do | Which statement describes a responsibility of an Internet Service Provider? |
+accurately | точно (верно) | correctly, with no mistakes | Which statement accurately describes an ISP? |
+context | ситуация, контекст | the situation in which something happens or is used | Give one reason why it is appropriate in that context. |
+real-world example | пример из жизни | an example from everyday life | Give one real-world example of each. |
+comparison table | таблица сравнения | a table that shows how two things are the same or different | Complete the comparison table below. |
+option | вариант (ответа) | one of the answers you can choose from | Circle the single best option (A, B, C or D). |
+multiple choice question | вопрос с выбором ответа | a question where you choose the right answer from A, B, C or D | Section A: Multiple Choice Questions |
+exceed | превышать | to be more than | Serial transmission is used for cables exceeding 100 metres. |
+eliminate | устранить, исключить | to remove completely, so that it is not needed any more | It eliminates the need for conversion at either end. |
+append | добавить в конец (дописать) | to add something at the end | A check digit is appended to the identification number. |
+
+## 5 Computer Science 0478::02 Data transmission
+wire | провод | a long thin piece of metal that carries electricity or signals | Serial transmission uses a single wire; parallel uses multiple wires. |
+long-distance | на большое расстояние (дальний) | over a long way | Serial transmission is preferred for long-distance communication. |
+sequentially | последовательно (по очереди) | one after another, in order | In serial transmission the bits are sent sequentially, one bit at a time. |
+data skew | перекос данных (биты приходят не одновременно) | bits sent together on different wires arrive at slightly different times | Over long distances parallel transmission suffers from data skew. |
+walkie-talkie | рация | a small radio for talking to another person; only one person can speak at a time | A walkie-talkie uses half-duplex transmission. |
+sender | отправитель | the device or person that sends the data | The receiver sends a request back to the sender. |
+receiver | получатель (приёмник) | the device that gets the data | The parity check is done at the receiver. |
+noisy | с помехами (зашумлённый) | full of unwanted signals that can change the data | Errors may occur across noisy communication channels. |
+communication channel | канал связи | the path that data travels along between two devices | Errors may occur across noisy communication channels. |
+flip (a bit) | поменять бит (0 на 1 или 1 на 0); инвертировать бит | to change a 0 into a 1, or a 1 into a 0 | If two bits are flipped, the parity check will not find the error. |
+corrupted | повреждённый (искажённый) | damaged, so that the data is wrong | The packet arrives corrupted at the receiving device. |
+error-free | без ошибок | with no mistakes | The packet is sent again until it is received error-free. |
+resend | отправить повторно (переслать) | to send again | The receiver asks the sender to resend the packet. |
+request | запрос | a message that asks for something | The receiver sends a request back to the sender. |
+data entry | ввод данных | typing data into a computer | A check digit finds mistakes made during data entry. |
+transposed digits | переставленные цифры | two digits that have changed places, e.g. 21 instead of 12 | A check digit can find transposed or mistyped digits. |
+identification number | идентификационный номер | a number that shows exactly which item or person it is | Check digits are added to identification numbers such as product barcodes. |
+
+## 5 Computer Science 0478::03 Hardware
+USB flash drive | флешка (USB-накопитель) | a small storage device that you plug into a USB port | An external USB flash drive uses serial transmission. |
+internal | внутренний | inside something | Parallel transmission is still used in internal computer buses. |
+external | внешний | outside something; connected from the outside | An external hard disk drive is plugged into the laptop. |
+
+## 5 Computer Science 0478::05 The internet and its uses
+Internet Service Provider (ISP) | интернет-провайдер (провайдер) | a company that gives people access to the internet for a fee | An ISP provides access to the internet and enforces its terms of service. |
+fee | плата (за услугу) | money you pay for a service | The ISP provides internet access for a fee. |
+terms of service | условия использования | rules you must agree to before you use a service | The ISP enforces its terms of service. |
+enforce | следить за соблюдением (правил) | to make sure that people obey the rules | The ISP enforces its terms of service. |
+host | размещать (сайт на сервере) | to keep a website on a server so that people can visit it | The web server hosts the company website. |
+broadband | широкополосный интернет | a fast internet connection that is always on | A broadband router uses full-duplex transmission. |
+download | скачать (загрузить) | to copy a file from the internet onto your computer | Users face security threats when downloading files. |
+browse | просматривать (сайты) | to look at web pages on the internet | Users face security threats when browsing the internet. |
+quarantine | поместить в карантин (изолировать файл) | to put a harmful file in a safe place where it cannot do damage | Anti-malware software can quarantine a virus. |
+replicate | размножаться (копировать сам себя) | to make copies of itself | A virus replicates itself and damages files. |
+halt | остановить (работу) | to make something stop | A virus can corrupt files or halt the system. |
+unauthorised access | несанкционированный доступ | use of a computer or its data by someone who is not allowed to | A firewall protects the computer from unauthorised access. |
+data theft | кража данных | stealing data | A firewall helps to stop outgoing data theft. |
+login credentials | данные для входа (логин и пароль) | the username and password you type to get into an account | Online banking websites use HTTPS to send login credentials. |
+online banking | интернет-банк (онлайн-банкинг) | using your bank account through a website or an app | Online banking websites use HTTPS. |
+intercept | перехватить | to catch data while it is being sent | HTTP sends data in plain text that can be intercepted. |
+network traffic | сетевой трафик | all the data moving into and out of a network | A firewall monitors inbound and outbound network traffic. |
+inbound | входящий | coming into a computer or a network | A firewall checks inbound traffic. |
+outbound | исходящий | going out of a computer or a network | A firewall checks outbound traffic. |

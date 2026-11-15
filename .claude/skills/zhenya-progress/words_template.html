@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Слова Жени</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@700&display=swap">
+<style>
+/* Шаблон для words_page.py: подзаголовок, правило «трудных» и список слов подставляет скрипт.
+   Layout: одна колонка — итог-переключатели сверху, поиск и тема, ниже список слов (раскрывается) */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --fg: #1d2330; --muted: #5d6676; --grid: #e2e5ea;
+  --ok: #2f7d5b; --pct: #3a5fb0; --hard: #b5482f; --hard-bg: #fbe9e4; --sel: #e8eefb;
+  --display: "PT Serif", Georgia, serif; --body: "PT Sans", "Segoe UI", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #14171d; --surface: #1c2028; --fg: #e8ebf0; --muted: #9aa3b2; --grid: #2c323d;
+  --ok: #5cc092; --pct: #8fa9ec; --hard: #f08c72; --hard-bg: #3a231d; --sel: #222c42; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #14171d; --surface: #1c2028; --fg: #e8ebf0; --muted: #9aa3b2; --grid: #2c323d;
+  --ok: #5cc092; --pct: #8fa9ec; --hard: #f08c72; --hard-bg: #3a231d; --sel: #222c42; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 40px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 20px; }
+h1 { font-family: var(--display); font-size: 1.75rem; margin: 0; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; max-width: 65ch; }
+.tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+.tab { font: inherit; color: inherit; text-align: left; background: var(--surface); border: 2px solid transparent;
+  border-radius: 10px; padding: 10px 14px; cursor: pointer; }
+.tab b { display: block; font-size: 1.6rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.tab span { color: var(--muted); font-size: .9rem; }
+.tab[aria-pressed="true"] { border-color: var(--pct); background: var(--sel); }
+.tab:focus-visible, .tools input:focus-visible, .tools select:focus-visible, summary:focus-visible { outline: 2px solid var(--pct); outline-offset: 2px; }
+.tab.hard b { color: var(--hard); }
+.tools { display: flex; flex-wrap: wrap; gap: 10px; }
+.tools input, .tools select { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 8px 10px; min-width: 0; }
+.tools input { flex: 1 1 220px; }
+.tools select { flex: 0 1 260px; }
+.hint { color: var(--muted); font-size: .9rem; margin: 0; }
+.list { background: var(--surface); border-radius: 10px; min-width: 0; }
+details { border-bottom: 1px solid var(--grid); }
+details:last-child { border-bottom: 0; }
+summary { list-style: none; cursor: pointer; padding: 10px 14px; display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: baseline; }
+summary::-webkit-details-marker { display: none; }
+.en { font-weight: 700; overflow-wrap: anywhere; }
+.n { color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; margin-right: 6px; }
+.ru { color: var(--muted); grid-column: 1; overflow-wrap: anywhere; }
+.meta { grid-row: 1 / span 2; grid-column: 2; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; text-align: right; }
+.chip { font-size: .8rem; border-radius: 999px; padding: 1px 9px; border: 1px solid currentColor; white-space: nowrap; }
+.chip.learn { color: var(--pct); } .chip.done { color: var(--ok); } .chip.new { color: var(--muted); }
+.chip.hard { color: var(--hard); background: var(--hard-bg); border-color: transparent; font-weight: 700; }
+.err { color: var(--muted); font-size: .8rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.more { padding: 0 14px 12px; display: grid; gap: 4px; font-size: .95rem; }
+.more p { margin: 0; overflow-wrap: anywhere; }
+.more p.iv { padding-left: 12px; font-variant-numeric: tabular-nums; }
+.more .k { color: var(--muted); }
+.empty { padding: 20px 14px; color: var(--muted); margin: 0; }
+footer { color: var(--muted); font-size: .85rem; max-width: 65ch; }
+@media (max-width: 480px) { .meta { grid-row: auto; grid-column: 1; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; } summary { grid-template-columns: 1fr; } }
+</style>
+
+<main>
+  <header>
+    <h1>Слова Жени</h1>
+    <p class="sub">__SUB__</p>
+  </header>
+
+  <div class="tabs" role="group" aria-label="Какие слова показать">
+    <button class="tab hard" id="t-hard" data-f="hard"><b></b><span>трудные сейчас</span></button>
+    <button class="tab" id="t-learn" data-f="learn"><b></b><span>учит сейчас</span></button>
+    <button class="tab" id="t-done" data-f="done"><b></b><span>выучено</span></button>
+    <button class="tab" id="t-new" data-f="new"><b></b><span>ещё впереди</span></button>
+    <button class="tab" id="t-all" data-f="all"><b></b><span>все слова</span></button>
+  </div>
+
+  <div class="tools">
+    <input id="q" type="search" placeholder="Поиск: английское или русское слово" aria-label="Поиск слова">
+    <select id="topic" aria-label="Тема"><option value="">Все темы</option></select>
+  </div>
+  <p class="hint" id="hint"></p>
+
+  <div class="list" id="list"></div>
+
+  <footer>Каждое слово Женя учит в обе стороны: видит английское — печатает русское, видит русское с английским определением — печатает английское. Засчитывается только точный ответ. «Выучено» — обе стороны Anki спрашивает не чаще раза в неделю (и будет спрашивать дальше, всё реже). «Трудные» — __HARD_RULE__. Нажмите на слово — определение, пример из задания и через сколько дней Anki спрашивал его снова: если эти числа растут (1 → 3 → 8), слово запоминается.</footer>
+</main>
+
+<script>
+const words = __WORDS_JSON__;
+const MONF = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+const STATUS = { learn: "учит", done: "выучено", new: "впереди" };
+// История «через сколько дней спросит снова» по направлениям: растёт — запоминает
+const dn = n => n % 10 === 1 && n % 100 !== 11 ? "день" : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? "дня" : "дней";
+function trend(a) {
+  if (a.length < 2) return "";
+  const last = a[a.length - 1], prev = a[a.length - 2];
+  if (last > prev) return a.slice(0, -1).some((v, i) => i && v < a[i - 1]) ? " — после ошибки снова растёт" : " — растёт, запоминает";
+  if (last < prev) return " — после ошибки начал заново";
+  return last <= 2 ? " — не растёт, пока не держится" : " — держится";
+}
+function ivHtml(w) {
+  const dirs = Object.keys(w.iv || {});
+  if (!dirs.length) return "";
+  return `<p><span class="k">Через сколько дней Anki спрашивал снова:</span></p>` + dirs.map(d =>
+    `<p class="iv">${d}: ${w.iv[d].join(" → ")} ${dn(w.iv[d][w.iv[d].length - 1])}${trend(w.iv[d])}</p>`).join("");
+}
+const HINT = {
+  hard: "Слова, на которых Женя чаще всего ошибается последние две недели. С них стоит начать занятие.",
+  learn: "Начатые, но Anki ещё спрашивает их чаще раза в неделю. Сверху — где больше всего ошибок.",
+  done: "Обе стороны Anki спрашивает не чаще раза в неделю. Сверху — те, что давались труднее.",
+  new: "Ещё не показывались. Порядок — как Anki их покажет: по очереди из Maths, Physics и Computer Science, всего до 20 в день.",
+  all: "Вся колода: сначала начатые, потом ещё не показанные в порядке очереди."
+};
+const match = { hard: w => w.hard, learn: w => w.s === "learn", done: w => w.s === "done", new: w => w.s === "new", all: () => true };
+words.forEach((w, i) => { w.q = (w.en + " " + w.ru).toLowerCase().replace(/ё/g, "е"); });
+let qi = 0; words.forEach(w => { if (w.s === "new") w.qn = ++qi; });
+
+const topicSel = document.getElementById("topic");
+[...new Set(words.map(w => w.topic))].sort().forEach(t => topicSel.add(new Option(t, t)));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const day = iso => { const [, m, d] = iso.split("-").map(Number); return `${d} ${MONF[m - 1]}`; };
+
+let filter = "hard";
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase().replace(/ё/g, "е");
+  const t = topicSel.value;
+  const inScope = w => (!t || w.topic === t) && (!q || w.q.includes(q));
+  for (const f in match) document.querySelector(`#t-${f} b`).textContent = words.filter(w => match[f](w) && inScope(w)).length;
+  document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === filter));
+  document.getElementById("hint").textContent = HINT[filter];
+  const shown = words.filter(w => match[filter](w) && inScope(w));
+  if (filter === "hard") shown.sort((a, b) => b.err - a.err);
+  const list = document.getElementById("list");
+  if (!shown.length) { list.innerHTML = `<p class="empty">${q || t ? "Таких слов нет — измените поиск или тему." : "Пока таких слов нет."}</p>`; return; }
+  list.innerHTML = shown.map(w => `<details><summary>
+      <span class="en">${w.qn && filter !== "all" ? `<span class="n">${w.qn}.</span>` : ""}${esc(w.en)}</span>
+      <span class="ru">${esc(w.ru)}</span>
+      <span class="meta">${w.hard ? `<span class="chip hard">трудное</span>` : ""}<span class="chip ${w.s}">${STATUS[w.s]}</span>
+        ${w.ans ? `<span class="err">ошибок ${w.err} из ${w.ans}</span>` : ""}</span>
+    </summary><div class="more">
+      ${w.def ? `<p><span class="k">Определение:</span> ${esc(w.def)}</p>` : ""}
+      ${w.ex ? `<p><span class="k">Пример:</span> ${esc(w.ex)}</p>` : ""}
+      ${ivHtml(w)}
+      <p><span class="k">Тема:</span> ${esc(w.topic)}${w.last ? ` · <span class="k">последний раз:</span> ${day(w.last)}` : ""}</p>
+    </div></details>`).join("");
+}
+function setFilter(f, push) { filter = match[f] ? f : "hard"; if (push) history.replaceState(null, "", "#" + filter); render(); }
+document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => setFilter(b.dataset.f, true)));
+document.getElementById("q").addEventListener("input", render);
+topicSel.addEventListener("change", render);
+window.addEventListener("hashchange", () => setFilter(location.hash.slice(1)));
+const start = location.hash.slice(1);
+setFilter(match[start] ? start : (words.some(w => w.hard) ? "hard" : "learn"));
+</script>

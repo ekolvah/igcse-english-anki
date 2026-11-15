@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Женя: успехи по дням</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@700&display=swap">
+<style>
+/* Шаблон для daily_chart.py: подзаголовок, плитки итогов и данные по дням подставляет скрипт.
+   Layout: одна колонка — итог сверху, один рисунок из двух панелей с общей осью дат, под ним таблица */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --fg: #1d2330; --muted: #5d6676; --grid: #e2e5ea;
+  --ok: #2f7d5b; --ok-soft: #a9d3bf; --pct: #3a5fb0; --on-ok: #ffffff; --hover: rgba(58, 95, 176, .08);
+  --iv0: #cfe9e5; --iv1: #84c7be; --iv2: #2f978c; --iv3: #0f5c55;
+  --s0: #2a78d6; --s1: #eb6834; --s2: #1baf7a;  /* предметы: математика, физика, информатика */  /* «спросит снова через…»: от «скоро» к «нескоро»; в тёмной теме яркость обратная — в тексте цвет не называть */
+  --display: "PT Serif", Georgia, serif; --body: "PT Sans", "Segoe UI", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #14171d; --surface: #1c2028; --fg: #e8ebf0; --muted: #9aa3b2; --grid: #2c323d;
+  --ok: #5cc092; --ok-soft: #2f5a47; --pct: #8fa9ec; --on-ok: #0f241a; --hover: rgba(143, 169, 236, .10); --iv0: #2d5550; --iv1: #2f7068; --iv2: #4fb3a6; --iv3: #a3e6dc; --s0: #3987e5; --s1: #d95926; --s2: #199e70; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #14171d; --surface: #1c2028; --fg: #e8ebf0; --muted: #9aa3b2; --grid: #2c323d;
+  --ok: #5cc092; --ok-soft: #2f5a47; --pct: #8fa9ec; --on-ok: #0f241a; --hover: rgba(143, 169, 236, .10); --iv0: #2d5550; --iv1: #2f7068; --iv2: #4fb3a6; --iv3: #a3e6dc; --s0: #3987e5; --s1: #d95926; --s2: #199e70; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 40px; }
+main { max-width: 720px; margin: 0 auto; display: grid; gap: 28px; }
+h1 { font-family: var(--display); font-size: 1.75rem; margin: 0; text-wrap: balance; }
+h2 { font-size: 1.1rem; margin: 0 0 4px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+.kpi { background: var(--surface); border-radius: 10px; padding: 14px 16px; }
+.kpi b { display: block; font-size: 1.8rem; line-height: 1.2; }
+.kpi span { color: var(--muted); font-size: .9rem; }
+section { background: var(--surface); border-radius: 10px; padding: 16px; min-width: 0; }
+.note { color: var(--muted); font-size: .9rem; margin: 0 0 8px; }
+.fig { position: relative; }
+svg { width: 100%; height: auto; display: block; }
+svg text { fill: var(--muted); font-family: var(--body); font-size: 13px; }
+svg .val { fill: var(--fg); font-weight: 700; }
+svg .panel { fill: var(--fg); font-weight: 700; font-size: 14px; }
+svg .grid { stroke: var(--grid); stroke-width: 1; }
+svg .col { fill: transparent; cursor: default; outline: none; }
+svg .col.on { fill: var(--hover); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .9rem; color: var(--muted); margin-top: 8px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.legend i.line { height: 3px; border-radius: 2px; vertical-align: 3px; width: 18px; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--fg); border: 1px solid var(--grid);
+  border-radius: 8px; padding: 8px 10px; font-size: .85rem; line-height: 1.45; box-shadow: 0 4px 14px rgba(0,0,0,.15); min-width: 180px; }
+.tip b { display: block; margin-bottom: 2px; }
+.tip span { color: var(--muted); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-weight: 400; }
+footer { color: var(--muted); font-size: .85rem; }
+h3 { font-size: .95rem; margin: 18px 0 2px; }
+.share { margin: 12px 0 0; }
+.share-h { font-size: .95rem; margin-bottom: 4px; }
+.bar { display: flex; gap: 2px; height: 14px; }
+.bar span { min-width: 3px; }
+.bar span:first-child { border-radius: 4px 0 0 4px; } .bar span:last-child { border-radius: 0 4px 4px 0; }
+.bar span:only-child { border-radius: 4px; }
+.bar.empty { background: var(--grid); border-radius: 4px; }
+.share-l { display: flex; flex-wrap: wrap; gap: 2px 16px; font-size: .9rem; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.share-l i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: 0; }
+.share-l span { color: var(--muted); }
+</style>
+
+<main>
+  <header>
+    <h1>Как занимается Женя</h1>
+    <p class="sub">__SUB__</p>
+  </header>
+
+  <div class="kpis">
+__KPIS__
+  </div>
+
+  <section>
+    <h2>Занятия по дням</h2>
+    <p class="note">Сверху — какая доля ответов за день верная. Снизу — сколько карточек за день он в итоге ответил верно и сколько из них сразу. Наведите или нажмите на день — все числа этого дня.</p>
+    <div class="fig" id="fig">
+      <svg id="chart" viewBox="0 0 640 470" role="img" aria-label="Процент верных ответов и число верно отвеченных карточек по дням"></svg>
+      <div class="tip" id="tip" hidden></div>
+    </div>
+    <div class="legend">
+      <span><i class="line" style="background:var(--pct)"></i>% верных ответов</span>
+      <span><i style="background:var(--ok)"></i>верно с первой попытки</span>
+      <span><i style="background:var(--ok-soft)"></i>верно после ошибки</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Сколько времени в день</h2>
+    <p class="note">Минуты, которые Женя провёл над карточками. Anki считает время от показа карточки до ответа; если карточка была на экране дольше минуты (отвлёкся), засчитывается только минута. Перерывы между карточками не входят, поэтому за телефоном он сидит немного дольше.</p>
+    <div class="fig" id="tfig">
+      <svg id="time" viewBox="0 0 640 240" role="img" aria-label="Минут занятий по дням"></svg>
+      <div class="tip" id="ttip" hidden></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Запоминает ли он слова</h2>
+    <p class="note">Anki сам решает, когда спросить карточку снова: ответил верно — следующий раз позже (1 → 3 → 8 дней…), ошибся — снова завтра. Столбик — все начатые карточки на конец дня. Если слова запоминаются, растут нижние части столбика — «через 7–20 дней» и дальше. Если нет — растёт только верхняя часть «завтра»: те же карточки спрашиваются каждый день.</p>
+    <div class="fig" id="mfig">
+      <svg id="mem" viewBox="0 0 640 300" role="img" aria-label="Начатые карточки по дням: через сколько дней Anki спросит их снова"></svg>
+      <div class="tip" id="mtip" hidden></div>
+    </div>
+    <div class="legend" id="mlegend"></div>
+  </section>
+
+  <section>
+    <h2>Поровну ли по предметам</h2>
+    <p class="note">Новые слова Anki даёт по очереди из трёх предметов. Равномерно — когда доли ниже примерно одинаковые и почти в каждом дне есть все три предмета. Информатику добавили 13 ноября: первые дни её новых слов больше, пока она догоняет.</p>
+    <div id="shares"></div>
+    <h3>Новых слов за день</h3>
+    <div class="fig" id="sfig">
+      <svg id="subj" viewBox="0 0 640 240" role="img" aria-label="Новые слова по дням и предметам"></svg>
+      <div class="tip" id="stip" hidden></div>
+    </div>
+    <div class="legend" id="slegend"></div>
+    <div class="tbl"><table id="stbl">
+      <thead><tr><th>Предмет</th><th>Всего слов</th><th>Учит</th><th>Выучено</th><th>Ещё впереди</th><th>Ответов за неделю</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Те же числа таблицей</h2>
+    <div class="tbl"><table id="tbl">
+      <thead><tr><th>День</th><th>Ответов</th><th>Верных</th><th>Карточек верно</th><th>С 1-й попытки</th><th>Минут</th><th>Спросит через 7+ дней</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <footer>Карточка = одно направление слова (EN→RU или RU→EN). «Ответов» — все нажатия: после ошибки карточка возвращается, пока он не ответит верно. День в Anki начинается в 4:00.</footer>
+</main>
+
+<script>
+const days = __DAYS_JSON__;
+const MON = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
+const MONF = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+days.forEach(o => {
+  const [y, m, d] = o.iso.split("-").map(Number);
+  o.p = o.ans ? Math.round(100 * o.ok / o.ans) : null;
+  o.d = days.length > 8 ? `${d}.${String(m).padStart(2, "0")}` : `${d} ${MON[m - 1]}`;
+  o.full = `${d} ${MONF[m - 1]}`;
+});
+
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.getElementById("chart");
+function el(tag, attrs, text, parent = svg) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  parent.appendChild(e); return e;
+}
+
+const L = 48, R = 624, step = (R - L) / Math.max(days.length, 1), cx = i => L + step * (i + .5);
+const dense = days.length > 8;
+// Панель 1: процент (0–100%)
+const P = { T: 44, B: 150 }, py = v => P.B - v / 100 * (P.B - P.T);
+// Панель 2: карточки (0–max, шаг 20)
+const yMax = Math.max(20, Math.ceil(Math.max(...days.map(o => o.cards), 1) / 20) * 20);
+const C = { T: 230, B: 420 }, cy = v => C.B - v / yMax * (C.B - C.T);
+
+const cols = days.map((o, i) => el("rect", { x: L + step * i + 1, y: 8, width: step - 2, height: 446, rx: 6, class: "col" }));
+
+el("text", { x: L, y: 18, class: "panel" }, "% верных ответов за день");
+[0, 50, 100].forEach(t => {
+  el("line", { x1: L, x2: R, y1: py(t), y2: py(t), class: "grid" });
+  el("text", { x: L - 8, y: py(t) + 4, "text-anchor": "end" }, t + "%");
+});
+// линия рвётся в дни без занятий
+let seg = [];
+const flush = () => { if (seg.length > 1) el("polyline", { points: seg.join(" "), fill: "none", stroke: "var(--pct)", "stroke-width": 2, "stroke-linejoin": "round" }); seg = []; };
+days.forEach((o, i) => { if (o.p == null) flush(); else seg.push(cx(i) + "," + py(o.p)); });
+flush();
+days.forEach((o, i) => {
+  if (o.p == null) return;
+  el("circle", { cx: cx(i), cy: py(o.p), r: dense ? 3.5 : 4.5, fill: "var(--pct)", stroke: "var(--surface)", "stroke-width": 2 });
+  el("text", { x: cx(i), y: py(o.p) - 10, "text-anchor": "middle", class: "val", style: dense ? "font-size:11px" : "" }, o.p + "%");
+});
+
+el("text", { x: L, y: 198, class: "panel" }, "Карточек ответил верно за день");
+for (let t = 0; t <= yMax; t += 20) {
+  el("line", { x1: L, x2: R, y1: cy(t), y2: cy(t), class: "grid" });
+  el("text", { x: L - 8, y: cy(t) + 4, "text-anchor": "end" }, t);
+}
+const w = Math.min(64, step * .55);
+days.forEach((o, i) => {
+  if (!o.ans) { el("text", { x: cx(i), y: C.B - 6, "text-anchor": "middle", style: "font-size:11px" }, "—"); return; }
+  const x = cx(i) - w / 2, gap = 2;
+  el("rect", { x, y: cy(o.first), width: w, height: C.B - cy(o.first), fill: "var(--ok)" });
+  const topH = cy(o.first) - cy(o.cards) - gap;
+  if (topH > 0) el("rect", { x, y: cy(o.cards), width: w, height: topH, rx: 4, fill: "var(--ok-soft)" });
+  el("text", { x: cx(i), y: cy(o.cards) - 8, "text-anchor": "middle", class: "val", style: dense ? "font-size:11px" : "" }, o.cards);
+  if (C.B - cy(o.first) >= 20 && w >= 18) el("text", { x: cx(i), y: cy(o.first) + 15, "text-anchor": "middle", style: "fill:var(--on-ok);font-weight:700;font-size:" + (dense ? 11 : 12) + "px" }, o.first);
+});
+days.forEach((o, i) => el("text", { x: cx(i), y: 444, "text-anchor": "middle", style: dense ? "font-size:11px" : "" }, o.d));
+
+const tip = document.getElementById("tip");
+function show(i) {
+  const o = days[i];
+  cols.forEach((c, j) => c.classList.toggle("on", j === i));
+  tip.innerHTML = `<b>${o.full}</b>` + (o.ans ?
+    `<span>Верных ответов:</span> ${o.p}% (${o.ok} из ${o.ans})<br>` +
+    `<span>Карточек ответил верно:</span> ${o.cards}<br>` +
+    `<span>— с первой попытки:</span> ${o.first}<br>` +
+    `<span>— после ошибки:</span> ${o.cards - o.first}` : `<span>Занятий не было</span>`);
+  tip.hidden = false;
+  const box = svg.getBoundingClientRect(), k = box.width / 640;
+  let left = (cx(i) + step / 2) * k + 8;
+  if (left + tip.offsetWidth > box.width) left = (cx(i) - step / 2) * k - tip.offsetWidth - 8;
+  tip.style.left = Math.max(0, left) + "px";
+  tip.style.top = (C.T - 20) * k + "px";
+}
+function hide() { tip.hidden = true; cols.forEach(c => c.classList.remove("on")); }
+cols.forEach((c, i) => {
+  c.setAttribute("tabindex", "0");
+  c.addEventListener("pointerenter", () => show(i));
+  c.addEventListener("click", () => show(i));
+  c.addEventListener("focus", () => show(i));
+  c.addEventListener("blur", hide);
+  svg.appendChild(c);
+});
+svg.addEventListener("pointerleave", hide);
+
+const tb = document.querySelector("#tbl tbody");
+days.slice().reverse().forEach(o => {
+  const tr = document.createElement("tr");
+  const strong = o.iv[2] + o.iv[3];
+  tr.innerHTML = o.ans ? `<td>${o.full}</td><td>${o.ans}</td><td>${o.p}%</td><td>${o.cards}</td><td>${o.first}</td><td>${o.min}</td><td>${strong}</td>`
+                       : `<td>${o.full}</td><td colspan="5">не занимался</td><td>${strong}</td>`;
+  tb.appendChild(tr);
+});
+
+// Панель «Запоминает ли он слова»: сложенные столбики по корзинам интервала, прочное — снизу
+const IV = [
+  { k: 3, name: "через 3 недели и больше", c: "var(--iv3)" },
+  { k: 2, name: "через 7–20 дней", c: "var(--iv2)" },
+  { k: 1, name: "через 2–6 дней", c: "var(--iv1)" },
+  { k: 0, name: "завтра (ещё учит)", c: "var(--iv0)" },
+];
+const mem = document.getElementById("mem");
+const tot = o => o.iv.reduce((a, b) => a + b, 0);
+const mStep = Math.max(...days.map(tot), 1) > 100 ? 50 : 20;
+const mMax = Math.max(mStep, Math.ceil(Math.max(...days.map(tot), 1) / mStep) * mStep);
+const M = { T: 24, B: 250 }, my = v => M.B - v / mMax * (M.B - M.T);
+const mcols = days.map((o, i) => el("rect", { x: L + step * i + 1, y: 4, width: step - 2, height: 280, rx: 6, class: "col" }, null, mem));
+for (let t = 0; t <= mMax; t += mStep) {
+  el("line", { x1: L, x2: R, y1: my(t), y2: my(t), class: "grid" }, null, mem);
+  el("text", { x: L - 8, y: my(t) + 4, "text-anchor": "end" }, t, mem);
+}
+days.forEach((o, i) => {
+  let acc = 0; const x = cx(i) - w / 2;
+  const parts = IV.filter(b => o.iv[b.k] > 0);
+  parts.forEach((b, j) => {
+    const y0 = my(acc), y1 = my(acc + o.iv[b.k]); acc += o.iv[b.k];
+    const h = y0 - y1 - (j < parts.length - 1 ? 2 : 0);
+    if (h > 0) el("rect", { x, y: y1, width: w, height: h, rx: j === parts.length - 1 ? 4 : 0, fill: b.c }, null, mem);
+  });
+  if (acc) el("text", { x: cx(i), y: my(acc) - 8, "text-anchor": "middle", class: "val", style: dense ? "font-size:11px" : "" }, acc, mem);
+  el("text", { x: cx(i), y: 274, "text-anchor": "middle", style: dense ? "font-size:11px" : "" }, o.d, mem);
+});
+document.getElementById("mlegend").innerHTML = "<span>Спросит снова:</span>" +
+  IV.slice().reverse().map(b => `<span><i style="background:${b.c}"></i>${b.name}</span>`).join("");
+const mtip = document.getElementById("mtip");
+function mshow(i) {
+  const o = days[i];
+  mcols.forEach((c, j) => c.classList.toggle("on", j === i));
+  mtip.innerHTML = `<b>${o.full}, конец дня</b><span>Начато карточек:</span> ${tot(o)}<br>` +
+    IV.map(b => `<span>— ${b.name}:</span> ${o.iv[b.k]}`).join("<br>");
+  mtip.hidden = false;
+  const box = mem.getBoundingClientRect(), k = box.width / 640;
+  let left = (cx(i) + step / 2) * k + 8;
+  if (left + mtip.offsetWidth > box.width) left = (cx(i) - step / 2) * k - mtip.offsetWidth - 8;
+  mtip.style.left = Math.max(0, left) + "px";
+  mtip.style.top = 10 * k + "px";
+}
+function mhide() { mtip.hidden = true; mcols.forEach(c => c.classList.remove("on")); }
+mcols.forEach((c, i) => {
+  c.setAttribute("tabindex", "0");
+  c.addEventListener("pointerenter", () => mshow(i));
+  c.addEventListener("click", () => mshow(i));
+  c.addEventListener("focus", () => mshow(i));
+  c.addEventListener("blur", mhide);
+  mem.appendChild(c);
+});
+mem.addEventListener("pointerleave", mhide);
+// Раздел «Поровну ли по предметам» (данные — и для подсказки панели времени)
+const SD = __SUBJ_JSON__;
+
+// Панель «Сколько времени в день»: минуты по дням, одна серия
+const tsvg = document.getElementById("time");
+const tTop = Math.max(...days.map(o => o.min), 1);
+const tStep = tTop > 60 ? 20 : 10;
+const tMax = Math.max(tStep * 2, Math.ceil(tTop / tStep) * tStep);
+const T = { T: 22, B: 190 }, ty = v => T.B - v / tMax * (T.B - T.T);
+const tcols = days.map((o, i) => el("rect", { x: L + step * i + 1, y: 2, width: step - 2, height: 224, rx: 6, class: "col" }, null, tsvg));
+for (let t = 0; t <= tMax; t += tStep) {
+  el("line", { x1: L, x2: R, y1: ty(t), y2: ty(t), class: "grid" }, null, tsvg);
+  el("text", { x: L - 8, y: ty(t) + 4, "text-anchor": "end" }, t, tsvg);
+}
+el("text", { x: L - 8, y: 10, "text-anchor": "end", style: "font-size:11px" }, "мин", tsvg);
+days.forEach((o, i) => {
+  if (!o.ans) el("text", { x: cx(i), y: T.B - 6, "text-anchor": "middle", style: "font-size:11px" }, "—", tsvg);
+  else {
+    const h = Math.max(T.B - ty(o.min), 2);
+    el("rect", { x: cx(i) - w / 2, y: T.B - h, width: w, height: h, rx: 4, fill: "var(--pct)" }, null, tsvg);
+    el("text", { x: cx(i), y: T.B - h - 8, "text-anchor": "middle", class: "val", style: dense ? "font-size:11px" : "" }, o.min, tsvg);
+  }
+  el("text", { x: cx(i), y: 214, "text-anchor": "middle", style: dense ? "font-size:11px" : "" }, o.d, tsvg);
+});
+const ttip = document.getElementById("ttip");
+function tshow(i) {
+  const o = days[i];
+  tcols.forEach((c, j) => c.classList.toggle("on", j === i));
+  ttip.innerHTML = `<b>${o.full}</b>` + (o.ans ?
+    `<span>Время:</span> ${o.min} мин<br><span>Ответов:</span> ${o.ans}, в среднем ${Math.round(o.min * 60 / o.ans)} с на ответ<br>` +
+    SD.subj.map((s, j) => `<span>— ${s.name}:</span> ${o.sm[j]} мин`).join("<br>") : `<span>Занятий не было</span>`);
+  ttip.hidden = false;
+  const box = tsvg.getBoundingClientRect(), k = box.width / 640;
+  let left = (cx(i) + step / 2) * k + 8;
+  if (left + ttip.offsetWidth > box.width) left = (cx(i) - step / 2) * k - ttip.offsetWidth - 8;
+  ttip.style.left = Math.max(0, left) + "px";
+  ttip.style.top = 4 * k + "px";
+}
+function thide() { ttip.hidden = true; tcols.forEach(c => c.classList.remove("on")); }
+tcols.forEach((c, i) => {
+  c.setAttribute("tabindex", "0");
+  c.addEventListener("pointerenter", () => tshow(i));
+  c.addEventListener("click", () => tshow(i));
+  c.addEventListener("focus", () => tshow(i));
+  c.addEventListener("blur", thide);
+  tsvg.appendChild(c);
+});
+tsvg.addEventListener("pointerleave", thide);
+
+const SUBJ = SD.subj.map((s, j) => ({ ...s, c: `var(--s${j})` }));
+document.querySelector("#stbl th:last-child").textContent = `Ответов за ${SD.recent} дней`;
+const pct = (n, t) => t ? Math.round(100 * n / t) : 0;
+function shareBar(title, vals) {
+  const t = vals.reduce((a, b) => a + b, 0);
+  const bar = t ? SUBJ.map((s, j) => vals[j] ? `<span style="flex:${vals[j]};background:${s.c}" title="${s.name}: ${vals[j]}"></span>` : "").join("")
+                : "";
+  return `<div class="share"><div class="share-h">${title} — ${t}</div>
+    <div class="bar${t ? "" : " empty"}">${bar}</div>
+    <div class="share-l">${SUBJ.map((s, j) => `<b><i style="background:${s.c}"></i>${s.name} ${pct(vals[j], t)}% <span>(${vals[j]})</span></b>`).join("")}</div></div>`;
+}
+document.getElementById("shares").innerHTML =
+  shareBar("Слова, которые он сейчас учит", SUBJ.map(s => s.learn)) +
+  shareBar(`Ответы за последние ${SD.recent} дней`, SUBJ.map(s => s.recent));
+document.querySelectorAll(".share-l b").forEach(b => b.style.fontWeight = 400);
+
+const ssvg = document.getElementById("subj");
+const ntot = o => o.sn.reduce((a, b) => a + b, 0);
+const sTop = Math.max(...days.map(ntot), 1);
+const sStep = sTop > 40 ? 20 : sTop > 20 ? 10 : 5;
+const sMax = Math.max(sStep, Math.ceil(sTop / sStep) * sStep);
+const S = { T: 22, B: 190 }, sy = v => S.B - v / sMax * (S.B - S.T);
+const scols = days.map((o, i) => el("rect", { x: L + step * i + 1, y: 2, width: step - 2, height: 224, rx: 6, class: "col" }, null, ssvg));
+for (let t = 0; t <= sMax; t += sStep) {
+  el("line", { x1: L, x2: R, y1: sy(t), y2: sy(t), class: "grid" }, null, ssvg);
+  el("text", { x: L - 8, y: sy(t) + 4, "text-anchor": "end" }, t, ssvg);
+}
+days.forEach((o, i) => {
+  const x = cx(i) - w / 2, parts = SUBJ.map((s, j) => j).filter(j => o.sn[j] > 0);
+  let acc = 0;
+  parts.forEach((j, n) => {
+    const y0 = sy(acc), y1 = sy(acc + o.sn[j]); acc += o.sn[j];
+    const h = y0 - y1 - (n < parts.length - 1 ? 2 : 0);
+    if (h > 0) el("rect", { x, y: y1, width: w, height: h, rx: n === parts.length - 1 ? 4 : 0, fill: SUBJ[j].c }, null, ssvg);
+  });
+  el("text", { x: cx(i), y: acc ? sy(acc) - 8 : S.B - 6, "text-anchor": "middle", class: acc ? "val" : "", style: dense ? "font-size:11px" : "" }, acc || (o.ans ? "0" : "—"), ssvg);
+  el("text", { x: cx(i), y: 214, "text-anchor": "middle", style: dense ? "font-size:11px" : "" }, o.d, ssvg);
+});
+document.getElementById("slegend").innerHTML = SUBJ.map(s => `<span><i style="background:${s.c}"></i>${s.name}</span>`).join("");
+const stip = document.getElementById("stip");
+function sshow(i) {
+  const o = days[i];
+  scols.forEach((c, j) => c.classList.toggle("on", j === i));
+  stip.innerHTML = `<b>${o.full}</b>` + (o.ans ?
+    `<span>Новых слов:</span> ${ntot(o)}<br>` + SUBJ.map((s, j) => `<span>— ${s.name}:</span> ${o.sn[j]}`).join("<br>") +
+    `<br><span>Ответов:</span> ${o.ans}<br>` + SUBJ.map((s, j) => `<span>— ${s.name}:</span> ${o.sa[j]} (${pct(o.sa[j], o.ans)}%)`).join("<br>")
+    : `<span>Занятий не было</span>`);
+  stip.hidden = false;
+  const box = ssvg.getBoundingClientRect(), k = box.width / 640;
+  let left = (cx(i) + step / 2) * k + 8;
+  if (left + stip.offsetWidth > box.width) left = (cx(i) - step / 2) * k - stip.offsetWidth - 8;
+  stip.style.left = Math.max(0, left) + "px";
+  stip.style.top = 4 * k + "px";
+}
+function shide() { stip.hidden = true; scols.forEach(c => c.classList.remove("on")); }
+scols.forEach((c, i) => {
+  c.setAttribute("tabindex", "0");
+  c.addEventListener("pointerenter", () => sshow(i));
+  c.addEventListener("click", () => sshow(i));
+  c.addEventListener("focus", () => sshow(i));
+  c.addEventListener("blur", shide);
+  ssvg.appendChild(c);
+});
+ssvg.addEventListener("pointerleave", shide);
+const stb = document.querySelector("#stbl tbody");
+SUBJ.forEach(s => {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `<td>${s.name}</td><td>${s.total}</td><td>${s.learn}</td><td>${s.done}</td><td>${s.total - s.learn - s.done}</td><td>${s.recent}</td>`;
+  stb.appendChild(tr);
+});
+</script>

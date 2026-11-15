@@ -1,0 +1,47 @@
+# Слова из пробного экзамена Жени (October mock 2026: 0580/11, 0580/33, 0580/22, 0580/43).
+# Только то, чего нет в других подколодах: формулировки условий, которые вызвали трудности.
+# Формат: term | русский | definition (simple English) | example | flag
+
+## 0 Maths question language::From October mock
+even number | чётное число | a whole number that can be divided by 2 exactly | 2, 4, 6, 8 are even numbers. |
+odd number | нечётное число | a whole number that cannot be divided by 2 exactly | 1, 3, 5, 7 are odd numbers. |
+fill in the box | впиши в клеточку (ответ — одно число в рамке) | write the missing number in the empty box | 4/7 = □/56 → write 32 in the box |
+complete the statement | допиши утверждение (заполни пропуск) | write the missing word or number so that the sentence is true | Angle DCX = y° because … → alternate angles |
+in the form | в виде (ответ записать по этому образцу) | write the answer so that it looks like the given pattern | Give your answer in the form y = mx + c. → y = 2x − 3 |
+give your answer in hours | ответ в часах. 1 ч 30 мин = 1.5 часа | write the answer as a number of hours, not hours and minutes | 1 h 30 min → 1.5 hours |
+the latest time | самое позднее время (ещё успеваешь) | the last possible time that still works | He must be at the station by 09 45 → the latest bus he can take |
+by (a time) | к (сроку), не позже | not later than this time | Be at the station by 09 45. |
+higher than | выше, больше чем (само число не входит) | bigger than; the value itself is not counted | the number of students with a higher score than Sam |
+type of correlation | тип корреляции. Ответ одним словом: positive / negative / no correlation | name the kind of correlation; do not describe the graph | What type of correlation? → negative |
+smooth curve | плавная кривая (не ломаная!) | a line that bends gently, with no corners, drawn through all the points | Draw the graph of y = x² as a smooth curve, not with a ruler. |
+modal class | модальный интервал (группа с наибольшей частотой) | the class with the highest frequency | 60 < x ≤ 80 has the highest frequency (34). |
+estimate of the mean | оценка среднего (по серединам интервалов) | multiply each class midpoint by its frequency, add, then divide by the total frequency | (10×4 + 30×20 + …) ÷ 100 |
+set notation | запись через множества (символы ∩, ∪, ′) | write the answer with set symbols | The shaded region is P ∪ Q. |
+n(A) | число элементов (множества A). Ответ — одно число, а не список | the number of elements in set A | n(X ∩ Y) = 3, not R, U, S | -
+list the elements | перечислить элементы (множества) | write every member of the set | X′ = {A, E, Q} |
+shaded region | заштрихованная область | the part of the diagram that is coloured in | Use set notation to describe the shaded region. |
+at random | наугад, случайным образом | every item has the same chance of being chosen | She picks a tile at random. |
+replaces | возвращает обратно (кладёт назад) | puts it back before the next pick | She replaces the tile and picks a second tile. |
+lands on | выпадает (стрелка останавливается на) | the spinner stops on this number | the probability that the spinner lands on 5 both times |
+interest earned | начисленные проценты (только доход, без вклада) | only the extra money, not the money invested | $34500 at 4.4% for 5 years: interest earned = $7590, not $42090 |
+total value (of an investment) | вся сумма (вклад + проценты) | the money invested plus all the interest | $2000 + $280 interest = $2280 |
+complete years | полные годы (целое число лет) | whole years only; round up to the first whole year when the value is bigger | 14.9 years → 15 complete years |
+share in the ratio | разделить в отношении | divide an amount into parts in the given ratio | Share $1050 in the ratio 7 : 3. → $735 and $315 |
+changes … into | меняет … на (деньги) | exchanges one currency for another | Kit changes $350 into euros. |
+population density | плотность населения (люди на 1 км²) | population ÷ area | 4680 ÷ 104 = 45 people per km² |
+geometrical reason | геометрическое обоснование (название правила, а не вычисление) | the name of the angle fact, not a calculation | Angle ABC = 90° because of the angle in a semicircle. |
+give a reason for each step | обоснуйте каждый шаг (правило для каждого угла) | write the angle fact next to every angle you find | angle ADB = angle ACB (angles in the same segment) |
+describe fully | опишите полностью (вид преобразования и все его данные) | give the type and every detail: vector, mirror line, or centre and angle | rotation, 90° clockwise, centre (0, 0) |
+single transformation | одно преобразование (не два подряд) | only one transformation, not a combination | The single transformation is a rotation. |
+maps A onto B | переводит A в B | changes shape A into shape B | the transformation that maps shape A onto shape B |
+the line y = x | прямая y = x (диагональ через начало координат) | the diagonal line through (0, 0), (1, 1), (2, 2) | Reflect shape A in the line y = x. |
+mathematically similar | подобные фигуры | the same shape, different size; all lengths are in the same ratio | Two bottles are mathematically similar. |
+directly south | строго на юг (азимут 180°) | exactly in the direction of south | Town B is directly south of town A. |
+actual distance | реальное расстояние (на местности) | the real distance, not the length on the drawing | 5.3 cm on the map × 40 = 212 km |
+shortest distance | кратчайшее расстояние (по перпендикуляру) | the perpendicular distance from a point to a line | the shortest distance from B to AC |
+curved surface area | площадь боковой поверхности (без оснований) | the area of the curved part only, without the flat ends | cone: πrl |
+open box | открытая коробка (без крышки, 5 граней) | a box with no lid | The net of an open box has 5 faces. |
+travel graph | график движения (расстояние–время) | a distance–time graph of a journey | Tom's journey is shown on the travel graph. |
+number line | числовая прямая | a line with numbers marked on it in order | Represent n < 5 on the number line. |
+table of values | таблица значений | x values with the matching y values for a graph | Complete the table of values for y = x². |
+by drawing a suitable line | проведя подходящую прямую (и найдя точку пересечения) | draw a straight line on the same grid and read the x-value where it crosses the curve | Solve 3 × 2ˣ = 7: draw y = 2 on the graph of y = 3 × 2ˣ − 5. |

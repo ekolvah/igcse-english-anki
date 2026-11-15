@@ -1,0 +1,77 @@
+# Формат строки: term | русский | definition (simple English) | example | spell
+# spell: "+" — сделать карточку «напиши слово сам» (ответ = term без скобок)
+# Строка "## Название" — начало подколоды.
+# Определения command words — официальные, из syllabus Cambridge IGCSE Physics 0625 (2026–2028) и Mathematics 0580 (2025–2027).
+
+## 1 Command words::Physics and Maths
+calculate | вычислить: формула → подстановка → ответ с единицами | work out from given facts, figures or information | Calculate the speed of the car. | +
+describe | описать (ЧТО происходит, главные признаки). Не объяснять «почему»! | state the points of a topic / give characteristics and main features | Describe the motion of the car between 0 and 10 s. | +
+explain | объяснить ПОЧЕМУ и/или КАК, с обоснованием (because, so, therefore) | set out purposes or reasons / make the relationships between things clear / say why and/or how and support with relevant evidence | Explain why the metal spoon feels cold. | +
+give | дать короткий ответ (из текста задания или по памяти) | produce an answer from the question or from memory | Give one use of X-rays. |
+state | назвать/сформулировать коротко, без объяснений | express in clear terms | State the unit of force. → newton (N) | +
+sketch | нарисовать от руки схематично, показав главные особенности | make a simple freehand drawing showing the key features | Sketch the graph of y = x². | +
+determine | определить (найти ответ по имеющимся данным). В математике — «установить точно» | Physics: establish an answer using the information available. Maths: establish with certainty | Determine the resistance of the lamp. | +
+
+## 1 Command words::Physics only
+comment | прокомментировать, высказать обоснованное мнение, комментарий | give an informed opinion; in programming — a note in the code for people, not run by the computer | Comment on the student's conclusion. |
+compare | сравнить: найти сходства и/или различия (обычно «A is … than B») | identify/comment on similarities and/or differences | Compare the speeds of the two balls. | +
+deduce | сделать вывод из данных | conclude from available information | Deduce which liquid is denser. |
+define | дать точное определение | give precise meaning | Define density. → mass per unit volume | +
+identify | назвать, выбрать, распознать | name/select/recognise | Identify the part of the graph where the car decelerates. |
+justify | обосновать (доказательствами или аргументами) | support a case with evidence/argument | Justify your answer. |
+predict | предсказать, что произойдёт, по имеющимся данным | suggest what may happen based on available information | Predict the new reading on the ammeter. | +
+suggest | предложить вариант (верных ответов может быть несколько); применить знания к новой ситуации | apply knowledge and understanding to situations where there are a range of valid responses in order to make proposals / put forward considerations | Suggest one way to improve the experiment. | +
+
+## 1 Command words::Maths only
+draw | нарисовать, начертить (рисунок или график) | make a diagram or a graph | Draw the graph of y = 2x + 4. | +
+construct | выполнить точное построение (линейка и циркуль, дуги не стирать) | make an accurate drawing | Construct triangle ABC with AB = 8 cm. |
+plot | нанести точки на график | mark point(s) on a graph | Plot the points from the table on the grid. |
+show (that) | доказать, что получается данный ответ: расписать ВСЕ шаги | provide structured evidence that leads to a given result | Show that x = 3.5. |
+work out | вычислить (с калькулятором или без) | calculate from given facts, figures or information with or without the use of a calculator | Work out 3/4 of 60. |
+write | записать (ответ в заданной форме) | give an answer in a specific form | Write 0.0034 in standard form. |
+write down | выписать, просто записать ответ (без подробного решения) | give an answer without significant working | Write down the gradient of y = 3x + 1. |
+
+## 1 Command words::Exam instructions
+find | найти | work out the value or answer | Find the value of x. |
+hence | следовательно; используй результат предыдущего пункта | use the answer you have just found to answer this part | Hence solve the equation. |
+hence or otherwise | используя предыдущий результат или любым другим способом | you may use the previous answer, or another method | Hence or otherwise find the area. |
+estimate | оценить, найти приблизительно | find an approximate value, often by rounding first | Estimate the value of 41.3 ÷ 9.79. | +
+show your working | покажите ход решения (иначе можно не получить баллы) | write down every step of your method, not only the answer | Show all your working. |
+give your answer correct to 3 significant figures | дайте ответ с точностью до 3 значащих цифр | round the final answer to three significant figures | 0.045672 → 0.0457 |
+in terms of π | ответ через π (не подставлять 3,14) | leave π in the answer as a symbol | Area = 25π cm² |
+exact value | точное значение (с корнем или π, без округления) | an answer with no rounding, e.g. a fraction, surd or π | √2/2, not 0.707 |
+in its simplest form | в несократимом (простейшем) виде | cannot be made simpler | 6/8 in its simplest form is 3/4. |
+not to scale | рисунок не в масштабе (не измерять линейкой!) | the diagram is not drawn accurately, so do not measure it | NOT TO SCALE |
+label | подписать (на рисунке или графике) | write names on parts of a diagram or graph | Label the axes. |
+shade | заштриховать (закрасить) | colour in a region | Shade the region where y > 2. |
+measure | измерить | find a size using a ruler, protractor or other instrument | Measure angle ABC. |
+complete the table | заполните таблицу | write the missing values in the table | Complete the table of values for y = x². |
+give a reason for your answer | объясните (обоснуйте) свой ответ | say why your answer is true | Angle x = 50°. Give a reason for your answer. |
+on the diagram | на рисунке (отметить прямо на рисунке в задании) | draw or write on the picture in the question paper | Mark the centre of rotation on the diagram. |
+use your graph | используйте свой график (ответ считывается с графика) | read the answer from the graph you drew | Use your graph to solve x² = 5. |
+
+## 4 Answer phrases (Physics)
+as X increases, Y increases | по мере увеличения X увеличивается Y | when one quantity goes up, the other also goes up | As the temperature increases, the particles move faster. |
+as X increases, Y decreases | при увеличении X уменьшается Y | when one quantity goes up, the other goes down | As the length increases, the current decreases. |
+the greater the …, the greater the … | чем больше …, тем больше … | shows that two quantities change together | The greater the mass, the greater the weight. |
+is directly proportional to | прямо пропорционален | if one doubles, the other doubles | Extension is directly proportional to load. |
+is inversely proportional to | обратно пропорционален | if one doubles, the other halves | Resistance is inversely proportional to cross-sectional area. |
+because | потому что | gives the reason | The ice melts because it absorbs thermal energy. |
+so / therefore | поэтому, следовательно | gives the result | The resultant force is zero, so the speed is constant. |
+as a result | в результате | introduces a consequence | As a result, the pressure of the gas increases. |
+this causes | это вызывает, приводит к | links a cause to an effect | This causes the particles to collide more often. |
+this means that | это означает, что | explains what a fact shows | This means that the wave carries less energy. |
+due to | из-за, вследствие | gives the cause | The car slows down due to friction. |
+whereas | тогда как, а | compares two different things | Solids have fixed shape, whereas liquids flow. |
+however | однако | introduces a contrast | However, the reading did not change. |
+remains constant | остаётся постоянным | does not change | The temperature remains constant while the ice melts. |
+per unit time | в единицу времени | for each second (or other unit of time) | Power is energy transferred per unit time. |
+per unit volume | на единицу объёма | for each cubic metre (or cm³) | Density is mass per unit volume. |
+the rate of | скорость (чего-либо), темп | how fast something happens | The rate of evaporation increases. |
+energy is transferred from … to … | энергия передаётся от … к … | describes an energy transfer | Energy is transferred from the hot water to the surroundings. |
+the particles gain kinetic energy | частицы получают кинетическую энергию | the particles start moving faster | When heated, the particles gain kinetic energy. |
+collide more often with the walls | чаще ударяются о стенки | more collisions with the container per second | The particles collide more often with the walls, so the pressure increases. |
+the resultant force is zero | равнодействующая сила равна нулю | all forces cancel out | The resultant force is zero, so the object stays at rest. |
+this is evidence that | это доказывает, что | shows what an observation proves | Redshift is evidence that the Universe is expanding. |
+to make it a fair test | чтобы опыт был корректным (честным) | change only one variable and keep the others the same | Use the same mass of water to make it a fair test. |
+repeat and calculate an average | повторить и вычислить среднее | do the measurement several times and find the mean | Repeat the reading three times and calculate an average. |

@@ -1,0 +1,425 @@
+# Computer Science 0478 (новый предмет, 2026-11-13). Источники:
+# - официальный syllabus Cambridge IGCSE Computer Science 0478 для экзаменов 2026–2028 (версия 6):
+#   разделы 1–10 «Subject content», command words, символы блок-схем — главный источник отбора;
+# - экзамены 0478 2024 года (June 12 и 22, November 11 и 21) — частые формулировки заданий
+#   (tick one box, complete the paragraph, use the terms from the list, annotate, trace table…);
+# - учебник Hodder «Cambridge IGCSE Computer Science» (Watson, Williams, 2014) и фрагменты Cambridge
+#   coursebook / revision guide с ebooks.papacambridge.com (поиск 0478 → e-books) — для сверки.
+# Учебник 2014 года написан по старой программе: темы, которых нет в syllabus 2026–2028 (MIDI,
+# файлы JPEG/MP3/MP4, SSL-сертификаты подробно, free software/shareware, компьютерная этика,
+# plagiarism, tomography, 3D-сканеры в медицине, Scratch, pre-release material), пропущены.
+# Слишком простые / одинаковые в обоих языках (keyboard, mouse, virus, robot, server, 3D printer,
+# laser printer, projector) и одни аббревиатуры (ASCII, HTTP, HTTPS, IPv4, IPv6) тоже пропущены.
+# Уже были в колоде — им дописано значение из информатики в существующей строке (не дублировать):
+# variable, constant, function, input, output, sequence, integer, real number, element, comment,
+# evaluate, circle (02_maths, 01_command_words, 06_hodder), core, compression (03_physics), sector;
+# convert уже был в 06_hodder.
+# Формат: term | русский | definition (simple English) | example | flag
+
+## 5 Computer Science 0478::00 Question language
+outline | изложить кратко (только главные пункты) | set out the main points | Outline the stages of the program development life cycle. |
+demonstrate | показать (как или на примере) | show how or give an example | Demonstrate how the denary number 5 is stored in binary. |
+tick | поставить галочку (✓), галочка | the mark ✓; put this mark in a box | Tick (✓) one box to show which of the terms is not a method for transmitting data. |
+complete the paragraph | дополни текст (вставь пропущенные слова) | fill in the missing words in the text | Complete the paragraph about fetching an instruction into the CPU. |
+use the terms from the list | используй термины из списка | take the words you need from the given words | Use the terms from the list. Some of the terms in the list will not be used. |
+some of the terms will not be used | некоторые термины не понадобятся | not every word in the list is needed | Some of the terms in the list will not be used. | -
+you should only use a term once | каждый термин — только один раз | each word from the list can be written in one gap only | You should only use a term once. | -
+some terms may be used more than once | можно повторять (термины) | a word from the list can go in two or more gaps | Some terms may be used more than once. | -
+draw one line to link | соедини одной линией | join each item on the left to its match on the right with a single line | Draw one line to link each logic function to its standard symbol. |
+annotate | подписать (пояснения на рисунке) | add short notes to a diagram to explain it | Draw and annotate a diagram to show the process of the DDoS attack. |
+working space | место для вычислений (черновик) | space on the paper to write your calculations | Working space |
+explain your choice | объясни свой выбор | say why you chose this answer | Identify the most suitable type of secondary storage. Explain your choice. |
+suitable | подходящий | right for this purpose or situation | Identify the most suitable sensor for this system. |
+appropriate | уместный, соответствующий | correct or good for the situation | Identify the most appropriate data type for each field. |
+scenario | ситуация (описанная в задании), сценарий | a situation described in the question | Describe the advantages of an automated system used for this scenario. |
+purpose | назначение, цель | what something is used for; why it exists | State the purpose of the primary key. |
+benefit | польза, выгода | something good that you get | Give three benefits of reducing the size of a file. |
+advantage | преимущество, плюс | a good point that makes something better than another | Give one advantage of using a compiler. |
+disadvantage | недостаток | a bad point; a problem with something | Give one disadvantage of storing data on the cloud. |
+drawback | минус, отрицательная сторона | a problem that makes something less good | Give two drawbacks of the company using this method. |
+characteristic | особенность, характеристика (свойство) | a typical feature or quality of something | Give two characteristics of the IPv6 format. |
+requirement | требование | something that a program or system must do | Write a program that meets these requirements. |
+statement | оператор (строка программы), утверждение | in programming — one instruction in a program; also a sentence that says something is true | Give a line number for an assignment statement. |
+correction | исправление | a change that makes something right | Identify the line numbers of the three errors and suggest a correction for each error. |
+amend | изменить (доработать) | change something to improve it | Amend the algorithm so that it also outputs the average. |
+stage | этап, стадия | one part of a process | Describe what happens at the decode stage of the cycle. |
+process | обрабатывать, процесс | to do operations on data; also a series of actions | Instructions are processed by the CPU. |
+store | хранить, сохранять | to keep data so that it can be used later | Data is stored in registers. |
+transmit | передавать (данные) | to send data from one device to another | Data is transmitted across the network in packets. |
+retrieve | получить (найти и достать) | to get stored data back | The web page is retrieved from the web server. |
+perform | выполнять | to do an action or a task | Perform a logical right shift of two places. |
+assign | назначать, присваивать | to give a value, a job or an address to something | A router can assign IP addresses. |
+device | устройство | a machine or a piece of equipment | Identify two input devices that can be built into a smartphone. |
+user | пользователь | a person who uses a computer or a program | The user enters a password. |
+ascending order | по возрастанию | from the smallest to the largest (A to Z, 1 to 9) | Sort the times in ascending order. |
+descending order | по убыванию | from the largest to the smallest (Z to A, 9 to 1) | ORDER BY Price DESCENDING |
+do not attempt to simplify | не упрощай | write it exactly as it is, without making it shorter | Do not attempt to simplify the logic expression. |
+you do not need to validate the input | проверять ввод не нужно | you can think that all data typed in is correct | You do not need to validate the input. | -
+all inputs and outputs must contain suitable messages | при вводе и выводе — понятные сообщения | show a text to the user every time the program asks for data or gives a result | All inputs and outputs must contain suitable messages. | -
+brand name | название фирмы (марка) | the name a company gives to its product | No marks will be awarded for using brand names of software packages or hardware. |
+
+## 5 Computer Science 0478::01 Data representation
+binary | двоичный (код, система счисления) | a number system with base 2 that uses only 0 and 1 | 01111001 is a binary number. |
+denary | десятичная (система), десятичный | a number system with base 10 that uses the digits 0 to 9 | Convert the binary number 01111001 to denary. |
+hexadecimal | шестнадцатеричная (система), шестнадцатеричный | a number system with base 16 that uses 0–9 and A–F | 6D is a hex number. |
+number system | система счисления | a way of writing numbers with a set of digits and a base (2, 10 or 16) | Binary is a base 2 number system. |
+bit | бит | one binary digit, 0 or 1 | Data can be measured in bits. |
+nibble | полубайт | 4 bits | 1011 is one nibble. |
+byte | байт | 8 bits | Give the name of the data storage measurement that is equal to 8 bits. |
+kibibyte (KiB) | кибибайт | 1024 bytes | State how many bits there are in a kibibyte. |
+mebibyte (MiB) | мебибайт | 1024 KiB | 1024 KiB = 1 MiB |
+gibibyte (GiB) | гибибайт | 1024 MiB | 1024 MiB = 1 GiB |
+tebibyte (TiB) | тебибайт | 1024 GiB | Give the name of the measurement that is equal to 1024 GiB. |
+pebibyte (PiB) | пебибайт | 1024 TiB | 1024 TiB = 1 PiB |
+exbibyte (EiB) | эксбибайт | 1024 PiB | 1024 PiB = 1 EiB |
+overflow error | ошибка переполнения, переполнение | the result is too large to be stored in the bits available | 11111111 + 00000001 gives an overflow error in an 8-bit register. |
+logical shift | логический сдвиг | moving all the bits left or right; empty places are filled with 0 | Perform a logical left shift of two places on 00101100. |
+most significant bit (MSB) | старший бит | the bit on the far left, with the largest place value | In 10010110 the MSB is 1. |
+least significant bit (LSB) | младший бит | the bit on the far right, with the smallest place value | In 10010110 the LSB is 0. |
+two's complement | дополнительный код | a way to store positive and negative integers in binary; the left bit is worth −128 | The denary integer −32 is stored as a two's complement integer. |
+character set | набор символов (кодировка) | the list of letters and symbols a computer can use, each with its own binary code | ASCII and Unicode are examples of character sets. |
+Unicode | Юникод | a list of codes for letters and symbols with more characters than ASCII, including other languages and emojis | Identify one other character set that could be used, apart from ASCII. |
+sample rate | частота дискретизации | how many times the sound is measured each second | A higher sample rate gives a more accurate recording. |
+sample resolution | разрядность звука (бит на один отсчёт) | the number of bits used for each sound measurement | The sound has a sample resolution of 16 bits. |
+pixel | пиксель | the smallest dot of colour in an image | An image is a series of pixels. |
+resolution | разрешение | the number of pixels in an image | The image has a resolution of 512 × 512. |
+colour depth | глубина цвета | the number of bits used for the colour of each pixel | A 16-bit colour image. |
+file size | размер файла | how much storage space a file takes | Calculate the file size of the image in KiB. |
+lossy compression | сжатие с потерями | makes a file smaller by removing some data forever | Reducing the resolution of an image is lossy. |
+lossless compression | сжатие без потерь | makes a file smaller with no data lost; the original can be rebuilt | RLE is a method of making a file smaller with no data lost. |
+run length encoding (RLE) | кодирование длин серий | stores each repeated value once, together with how many times it repeats | AAAAABBB → 5A 3B |
+bandwidth | пропускная способность | how much data can be sent in one second | Smaller files need less bandwidth. |
+
+## 5 Computer Science 0478::02 Data transmission
+data transmission | передача данных | sending data from one device to another | Data can be transmitted using serial or parallel methods. |
+packet | пакет (данных) | a small unit of data sent across a network | The email is broken down into packets. |
+packet header | заголовок пакета | the first part of a packet: destination address, packet number, originator's address | Describe the structure of a packet of data. |
+payload | полезная нагрузка (сами данные пакета) | the actual data carried in a packet | The payload is the part of the email in this packet. |
+trailer | концевик пакета (трейлер) | the end part of a packet: shows where it ends and holds error-check data | The trailer can contain a checksum. |
+destination address | адрес получателя | the address where the data must arrive | The packet header includes the destination address. |
+originator's address | адрес отправителя | the address of the device that sent the data | The packet header includes the originator's address. |
+packet switching | коммутация пакетов | data is sent in small parts that can take different routes and are put back in order at the end | Describe the process of packet switching. |
+route | маршрут | the way from one place to another | Each packet could take a different route. |
+router | маршрутизатор, роутер | a device that sends data to the right place on a network and connects it to the internet | A router controls the route a packet takes. |
+out of order | не по порядку | not in the right sequence | Packets may arrive out of order. |
+serial transmission | последовательная передача | data is sent one bit at a time down a single wire | USB uses serial transmission. |
+parallel transmission | параллельная передача | several bits are sent at the same time down several wires | Parallel transmission is used over short distances. |
+simplex | симплекс (передача в одну сторону) | data can be sent in one direction only | A computer sends data to a printer: simplex. |
+half-duplex | полудуплекс (в обе стороны, но по очереди) | data can go both ways, but only one way at a time | A walkie-talkie uses half-duplex transmission. |
+full-duplex | полный дуплекс (в обе стороны одновременно) | data can go both ways at the same time | A phone call uses full-duplex transmission. |
+universal serial bus (USB) | USB (универсальная последовательная шина) | a standard connection for plugging devices into a computer | Explain how USB is used to transmit data. |
+interference | помехи | unwanted signals that can change data while it is being sent | Errors can occur during data transmission due to interference. |
+error detection | обнаружение ошибок | finding out whether data was changed while being sent | Describe two methods for finding errors after data has been sent. |
+parity check | проверка чётности | counting the 1s in each byte to see if the count is odd or even as agreed | A parity check can use odd or even parity. |
+parity bit | бит чётности | an extra bit added to make the number of 1s odd or even | The parity bit is the first bit of the byte. |
+even parity | чётный паритет (чётное число единиц) | the number of 1s in each byte must be an even number | 10010110 has four 1s, so it is correct for even parity. |
+odd parity | нечётный паритет (нечётное число единиц) | the number of 1s in each byte must be an odd number | Using odd parity, 1101 0000 is correct. |
+parity byte | байт чётности | an extra byte that holds the column checks for a block of data | A parity byte is sent with the block of data. |
+checksum | контрольная сумма | a value worked out from the data before and after it is sent; if the two are different there is an error | The checksum is recalculated by the receiver. |
+echo check | эхо-проверка | the receiver sends the data back to the sender to compare | A copy of the data is sent back to the sender by the receiver. |
+check digit | контрольная цифра | an extra digit worked out from the other digits and added to the end of a number; checked on data entry | The last digit of an ISBN is a check digit. |
+automatic repeat query (ARQ) | автоматический запрос повтора | the receiver tells the sender if data arrived correctly; if no answer comes in time, the data is sent again | ARQ (also called Automatic Repeat reQuest) makes sure data is received without error. |
+acknowledgement | подтверждение (получения) | a message sent back to say that data has arrived | Positive and negative acknowledgements are used in ARQ. |
+timeout | тайм-аут (предельное время ожидания) | the time the sender waits before it sends the data again | If the timeout is reached, the packet is sent again. |
+encryption | шифрование | scrambling data so that it cannot be understood without the key | Give the purpose of encryption. |
+decrypt | расшифровать | turn scrambled data back into data that can be read, using a key | The receiver uses the key to turn the data back into readable data. |
+plaintext | исходный текст (до шифрования) | data before it is scrambled | The plaintext is encrypted using a key. |
+ciphertext | шифротекст (зашифрованный текст) | data after it has been scrambled | The ciphertext cannot be understood if it is intercepted. |
+symmetric encryption | симметричное шифрование | the same key is used to lock and to unlock the data | Explain how data is encrypted using symmetric encryption. |
+asymmetric encryption | асимметричное шифрование | uses two different keys: a public one to lock and a private one to unlock | Asymmetric encryption uses a public key and a private key. |
+public key | открытый ключ | a key that everyone can know; used to lock data | The data is encrypted with the receiver's public key. |
+private key | закрытый (секретный) ключ | a key only the owner knows; used to unlock data | Only the receiver's private key can decrypt the data. |
+
+## 5 Computer Science 0478::03 Hardware
+hardware | аппаратное обеспечение (железо) | the physical parts of a computer that you can touch | The CPU is an example of hardware. |
+central processing unit (CPU) | центральный процессор | the part of a computer that processes instructions and data | Instructions are processed by the CPU. |
+microprocessor | микропроцессор | a type of integrated circuit on a single chip | A microprocessor controls the washing machine. |
+integrated circuit | интегральная схема (микросхема) | a small chip with many electronic parts on it | A microprocessor is an integrated circuit on a single chip. |
+Von Neumann architecture | архитектура фон Неймана | a computer design where data and instructions are stored together in the same memory | The CPU has a Von Neumann architecture. |
+arithmetic logic unit (ALU) | арифметико-логическое устройство (АЛУ) | the part of the CPU that does calculations and logic operations | The ALU adds two numbers. |
+control unit (CU) | устройство управления | the part of the CPU that decodes instructions and sends signals to the other parts | The CU sends control signals using the control bus. |
+register | регистр | a very small, very fast memory location inside the CPU | Data is processed using logic gates and stored in registers. |
+program counter (PC) | счётчик команд | a CPU register that holds the address of the next instruction | The PC contains the address of the next instruction to be processed. |
+memory address register (MAR) | регистр адреса памяти | holds the address of the memory location to be read from or written to | The address is sent to the MAR. |
+memory data register (MDR) | регистр данных памяти | holds the data or instruction that has just been read from memory or will be written to it | The instruction is sent to the MDR using the data bus. |
+current instruction register (CIR) | регистр текущей команды | holds the instruction that is being decoded and executed | The instruction is copied from the MDR to the CIR. |
+accumulator (ACC) | аккумулятор (регистр результата) | a CPU register that holds the result of a calculation | The result is stored in the ACC. |
+bus | шина | a set of wires that carries data, addresses or signals between parts of a computer | Circle three buses that are used in the CPU. |
+address bus | шина адреса | carries memory addresses | The address is sent to the MAR using the address bus. |
+data bus | шина данных | carries data and instructions between the CPU and memory | The instruction is sent to the MDR using the data bus. |
+control bus | шина управления | carries signals such as read and write from the control unit | The CU sends a read signal on the control bus. |
+fetch-decode-execute (FDE) cycle | цикл «выборка-декодирование-выполнение» | the steps the CPU repeats for every instruction: get it, work out what it means, carry it out | Describe the process of the FDE cycle. |
+fetch | выборка, извлечь (команду из памяти) | to get the next instruction from memory | Give the name of two registers that are used in the fetch stage. |
+decode | декодировать | to work out what an instruction means | Describe what happens at the decode stage of the cycle. |
+execute | выполнить, исполнить | to carry out an instruction or run a program | The instruction is then executed. |
+instruction | команда, инструкция | an order that tells the CPU what to do | Instructions are fetched from RAM into the CPU. |
+cache | кэш | a small, very fast memory in the CPU that stores data and instructions used often | A larger cache can improve the performance of a CPU. |
+clock speed | тактовая частота | the number of cycles the CPU carries out each second, measured in GHz | A clock speed of 3.5 GHz is faster than 2.4 GHz. |
+performance | производительность | how fast and how well a computer works | Explain the effect this change will have on the performance of the CPU. |
+instruction set | набор команд | the list of all the commands a CPU can process; they are machine code | The CPU uses an instruction set to decode the instruction. |
+machine code | машинный код | instructions in binary that the CPU can run directly | An assembler translates assembly language into machine code. |
+embedded system | встроенная система | a small computer inside a device that does one dedicated job | A washing machine contains an embedded system. |
+general purpose computer | универсальный компьютер | a computer that can do many different jobs, like a PC or a laptop | A laptop is a general purpose computer. |
+dedicated | специализированный (для одной задачи) | made for only one particular job | An embedded system performs a dedicated function. |
+domestic appliance | бытовой прибор | a machine used at home, like a fridge or a washing machine | Embedded systems are used in domestic appliances. |
+input device | устройство ввода | a device that puts data into a computer | Identify two input devices that can be built into a smartphone. |
+output device | устройство вывода | a device that shows or uses the results from a computer | A speaker is an output device. |
+barcode scanner | сканер штрихкодов | reads the black and white lines on a product | A shop uses a barcode scanner at the checkout. |
+touch screen | сенсорный экран | a screen that you control with your finger | A smartphone has a touch screen. |
+resistive | резистивный | a type of touch screen: two layers touch when you press | A resistive touch screen works with a pen or a glove. |
+capacitive | ёмкостный | a type of touch screen that detects the electric charge of your finger | A capacitive touch screen does not work with a glove. |
+actuator | исполнительный механизм (привод) | a motor, pump or switch that makes something move or happen when it gets a signal | The microprocessor sends a signal to an actuator to open the window. |
+inkjet printer | струйный принтер | a printer that sprays tiny drops of ink onto paper | An inkjet printer is used to print photographs. |
+liquid crystal display (LCD) | жидкокристаллический дисплей (ЖК) | a flat screen made of crystals that change when electricity passes through them | An LCD screen needs a backlight. |
+sensor | датчик | a device that measures something in the environment and sends data to a computer | Describe the purpose of sensors. |
+acoustic sensor | датчик звука | measures sound | A burglar alarm uses one to detect the sound of breaking glass. |
+accelerometer | акселерометр (датчик ускорения) | measures how fast speed or direction changes | A smartphone uses one to turn the screen when you turn the phone. |
+flow sensor | датчик расхода (потока) | measures how fast a liquid or gas moves through a pipe | A water company uses one to measure water in a pipe. |
+gas sensor | газовый датчик | detects a gas in the air, for example carbon dioxide | A gas detector in the kitchen. |
+humidity sensor | датчик влажности воздуха | measures the amount of water vapour in the air | A greenhouse uses one to control the water in the air. |
+moisture sensor | датчик влажности почвы | measures how wet a material such as soil is | A farmer uses one to check if the plants need water. |
+infra-red sensor | инфракрасный датчик | detects heat given off by people or objects | A security light switches on when a person walks past. |
+level sensor | датчик уровня | measures how high a liquid is in a tank | A washing machine uses one to check the water in the drum. |
+light sensor | датчик освещённости | measures how bright it is | Street lights switch on when it gets dark. |
+magnetic field sensor | датчик магнитного поля | detects changes in the field around a magnet | A phone uses one as a compass. |
+pH sensor | датчик pH (кислотности) | measures how acidic or alkaline something is | A farmer checks the acidity of the soil. |
+pressure sensor | датчик давления | measures how hard something pushes on a surface | A burglar alarm detects a person standing on the floor mat. |
+proximity sensor | датчик приближения | detects how near an object is | A car uses one to help the driver park. |
+temperature sensor | датчик температуры | measures how hot or cold something is | A central heating system keeps the room warm. |
+primary storage | основная (первичная) память | memory that is directly accessed by the CPU: RAM and ROM | Explain why a computer needs both RAM and ROM. |
+secondary storage | внешняя (вторичная) память | storage that is not directly accessed by the CPU; keeps data permanently | Explain why a computer needs secondary storage. |
+random access memory (RAM) | оперативная память (ОЗУ) | memory that holds the data and programs in use now; its contents are lost when the power is off | Instructions and data are fetched from RAM into the CPU. |
+read only memory (ROM) | постоянная память (ПЗУ) | memory that cannot be changed and keeps its contents without power, e.g. the bootloader | The bootloader is stored in ROM. |
+volatile | энергозависимый (стирается без питания) | loses its data when the power is turned off | RAM is volatile. |
+magnetic storage | магнитный накопитель | stores data on spinning platters, using electromagnets | A hard disk drive is magnetic storage. |
+optical storage | оптический накопитель | uses a laser to read and write data on a disc | CD, DVD and Blu-ray are optical storage. |
+solid-state storage | твердотельный накопитель (флеш-память) | flash memory with no moving parts; uses NAND or NOR technology | Describe three differences between solid-state and optical storage. |
+hard disk drive (HDD) | жёсткий диск | a magnetic store with spinning platters | A hard disk drive has moving parts. |
+platter | пластина (диска) | a round, flat disk inside a hard drive that holds the data | Magnetic storage uses platters which are divided into tracks and sectors. |
+track | дорожка | a ring on a disk where data is stored | The platter is divided into tracks and sectors. |
+pits and lands | впадины и площадки (на оптическом диске) | the low and high places on the surface of a CD or DVD that store the 0s and 1s | A laser is used to read the pits and lands. |
+solid-state drive (SSD) | твердотельный диск | a storage device with flash memory and no moving parts | A laptop with an SSD starts up quickly. |
+transistor | транзистор | a tiny electronic switch | Transistors are used as control gates and floating gates. |
+virtual memory | виртуальная память | part of secondary storage used as extra RAM when RAM is full | Pages of data are transferred between RAM and virtual memory. |
+cloud storage | облачное хранилище | storing data on servers on the internet that you can reach from anywhere | Explain the advantages of storing data on the cloud. |
+remotely | удалённо | from a different place, using a network | Cloud storage can be accessed remotely. |
+locally | локально (на своём устройстве) | on your own computer, not on the internet | Compare storing data on the cloud and storing it locally. |
+network interface card (NIC) | сетевая карта (сетевой адаптер) | the part a computer needs to connect to a network | A computer needs a NIC to access a network. |
+MAC address | MAC-адрес | a unique code given to a network card by its manufacturer; written in hex | A MAC address is made of the manufacturer code and the serial code. |
+IP address | IP-адрес | a number given to a device by the network so that data can find it | A router can assign IP addresses. |
+static | статический (не меняется) | stays the same; does not change | A web server has a static IP address. |
+dynamic | динамический (меняется) | changes; can be different each time | Your phone gets a dynamic IP address each time it connects. |
+
+## 5 Computer Science 0478::04 Software
+software | программное обеспечение (ПО), программы | programs that run on a computer | A web browser is an example of software. |
+system software | системное ПО, системное программное обеспечение | programs that provide the services the computer needs, e.g. operating system | Give one example of system software. |
+application software | прикладное ПО, прикладное программное обеспечение | programs that provide the services the user needs, e.g. a word processor | Give two examples of application software. |
+operating system (OS) | операционная система (ОС) | the main system program that manages the computer and runs applications | Describe two functions of an operating system. |
+utility software | служебные программы (утилиты) | small system programs that look after the computer, e.g. anti-virus | A defragmenter is utility software. |
+interface | интерфейс | the way the user and the computer communicate | The operating system provides an interface. |
+peripheral | периферийное устройство | a device connected to a computer, like a printer or a keyboard | The operating system manages peripherals and drivers. |
+driver | драйвер | a program that lets the operating system control a device | A printer needs a driver. |
+multitasking | многозадачность | running more than one program at the same time | The operating system manages multitasking. |
+user account | учётная запись (аккаунт) | a person's login and settings on a computer | The operating system manages user accounts. |
+firmware | встроенное ПО (прошивка) | a program stored permanently in hardware, e.g. in ROM | The operating system is run on the firmware. |
+bootloader | загрузчик | the program in ROM that starts the computer and loads the operating system | The bootloader (firmware) is run on the hardware. |
+interrupt | прерывание | a signal that tells the CPU to stop and deal with something urgent | Pressing a key on the keyboard causes a hardware interrupt. |
+interrupt service routine (ISR) | обработчик прерывания | the small program that deals with a signal that stopped the CPU | The interrupt is handled using an ISR. |
+division by zero | деление на ноль | dividing a number by 0, which causes a software error | Division by zero causes a software interrupt. |
+high-level language | язык высокого уровня | a programming language close to English, easy to read, e.g. Python | Give one advantage of writing a program in a high-level language. |
+low-level language | язык низкого уровня | a programming language close to machine code, hard to read | Assembly language is a low-level language. |
+assembly language | язык ассемблера | a low-level language that uses short words (mnemonics) for instructions | A programmer uses assembly language to write a program for an embedded system. |
+mnemonic | мнемоника (короткое имя команды) | a short word for an instruction, e.g. LDA, ADD | Assembly language uses mnemonics. |
+assembler | ассемблер (переводчик в машинный код) | the translator for a low-level language with mnemonics | Give the name of the translator for assembly language. |
+translator | транслятор (переводчик программы) | a program that changes code into machine code | A compiler is a type of translator. |
+compiler | компилятор | translates the whole code at once before it runs and makes an executable file | A compiler gives an error report for the whole code. |
+interpreter | интерпретатор | translates and runs the code one line at a time; stops at the first error | An interpreter is mostly used when developing a program. |
+executable file | исполняемый файл | a file that can be run on its own, without the translator | A compiler produces an executable file. |
+error report | отчёт об ошибках | a list of all the mistakes found in the code | A compiler provides an error report for the whole code. |
+debug | отлаживать (искать и исправлять ошибки) | to find and fix mistakes in a program | An interpreter makes it easy to find and fix mistakes. |
+integrated development environment (IDE) | среда разработки | a program that gives a programmer all the tools to write, test and correct code | Describe three ways an IDE can help the programmer. |
+code editor | редактор кода | the part of an IDE where you type and change the program | The code editor highlights the keywords. |
+run-time environment | среда выполнения | lets you run the program inside the IDE and see what it does | The program is tested in the run-time environment. |
+error diagnostics | диагностика ошибок | shows where the mistakes are and what they are | Error diagnostics highlight the line with the mistake. |
+auto-completion | автодополнение | suggests the rest of a word while you type | Auto-completion finishes the name of the variable. |
+auto-correction | автоисправление | fixes small typing mistakes in the code | Auto-correction changes "PRNT" to "PRINT". |
+prettyprint | форматирование кода (цвет и отступы) | shows code in colours and with neat spacing so it is easy to read | Prettyprint shows keywords in a different colour. |
+
+## 5 Computer Science 0478::05 The internet and its uses
+the internet | интернет | the world network of connected computers; the infrastructure | Describe the difference between the internet and the world wide web. |
+world wide web (WWW) | всемирная паутина | all the websites and web pages that you reach using the internet | The world wide web is accessed using the internet. |
+infrastructure | инфраструктура | the basic structures and equipment that something needs to work | The internet is the infrastructure. |
+uniform resource locator (URL) | URL, адрес веб-страницы | the text address of a web page | The URL has three different parts. |
+protocol | протокол | a set of rules for sending data | HTTPS is a secure protocol. |
+domain name | доменное имя | the name of a website in the address, e.g. cambridgeinternational.org | A URL contains the protocol, the domain name and the file name. |
+web browser | браузер | a program that shows web pages | Give three functions of a web browser. |
+render | отображать (строить страницу из HTML) | to turn code into the page you see on the screen | The main purpose of a web browser is to render HTML. |
+bookmark | закладка | a saved link to a web page | The browser stores bookmarks and favourites. |
+tab | вкладка | one of several web pages open in the same window | A web browser allows the use of multiple tabs. |
+address bar | адресная строка | the box at the top of the browser where you type a URL | One function of a web browser is to provide an address bar. |
+domain name server (DNS) | DNS-сервер (сервер доменных имён) | a server that finds the IP address for a website name | The browser sends the URL to the DNS. |
+web server | веб-сервер | a computer that stores web pages and sends them to browsers | The web server sends the HTML to the browser. |
+cookie | куки (cookie-файл) | a small file a website saves on your computer to remember you | Explain what is meant by cookies and how they are used. |
+session cookie | сеансовый куки (удаляется при закрытии браузера) | a small file that is deleted when you close the browser | A session cookie holds items in an online shopping cart. |
+persistent cookie | постоянный куки (хранится долго) | a small file that stays on your computer after you close the browser | A persistent cookie stores login details. |
+shopping cart | корзина (интернет-магазина) | the list of items you want to buy online | Cookies hold items in an online shopping cart. |
+digital currency | цифровая валюта | money that only exists electronically | Bitcoin is an example of a digital currency. |
+blockchain | блокчейн | a digital ledger: a time-stamped series of records that cannot be changed | Blockchain is used to track digital currency transactions. |
+ledger | реестр (журнал записей) | a list of all money paid and received | Each computer keeps a copy of the ledger. |
+time-stamped | с отметкой времени | has the date and time written on it | Each block is time-stamped. |
+transaction | транзакция (платёж) | one payment or exchange of money | A payment transaction is made using digital currency. |
+cyber security | кибербезопасность | keeping computers and data safe from attacks | Describe three cyber security threats. |
+threat | угроза | something that can cause harm or damage | Phishing is a security threat. |
+brute-force attack | атака перебором | trying every possible password until the right one is found | A strong password helps stop a brute-force attack. |
+data interception | перехват данных | stealing data while it is being sent across a network | Encryption protects data against data interception. |
+distributed denial of service (DDoS) attack | DDoS-атака | many computers send so many requests to a server that it stops working | A company website is suffering a DDoS attack. |
+hacking | взлом | getting into a computer system without permission | A firewall can help to prevent hacking. |
+malware | вредоносное ПО (вредоносная программа) | software made to damage a computer or steal data | Anti-virus software removes malware. |
+worm | червь (сетевой) | a harmful program that copies itself across a network by itself | A worm spreads across the network without the user doing anything. |
+Trojan horse | троян (троянская программа) | a harmful program hidden inside software that looks useful | A Trojan horse looks like a free game. |
+spyware | шпионское ПО (шпионская программа) | a harmful program that secretly records what the user types | Spyware records your passwords as you type. |
+adware | рекламное ПО | a program that shows unwanted adverts | Adware fills the screen with pop-ups. |
+ransomware | программа-вымогатель | locks or encrypts your files and asks for money to unlock them | Ransomware encrypts all the files on the computer. |
+pharming | фарминг (подмена сайта) | malicious code sends the user to a fake website, even when the URL is typed correctly | Pharming redirects the user to a fake bank website. |
+phishing | фишинг (поддельное письмо) | a fake email that tries to get the user to give personal details | Check the URL attached to a link to avoid fake emails. |
+social engineering | социальная инженерия | tricking people into giving away information or access | A caller pretends to be from the bank. |
+access level | уровень доступа | what a user is allowed to see or change | Different users have different access levels. |
+anti-malware | защита от вредоносных программ (антивирус) | software that finds and removes harmful programs, e.g. anti-virus, anti-spyware | Install anti-malware and keep it up to date. |
+authentication | аутентификация (проверка личности) | checking that a user is who they say they are | Biometrics are a method of authentication. |
+username | имя пользователя (логин) | the name you type to log in | Enter your username and password. |
+biometrics | биометрия | using a part of the body, like a fingerprint or face, to identify a person | A smartphone uses a fingerprint to unlock. |
+two-step verification | двухэтапная проверка | a second code is sent to your phone after you enter your password | Two-step verification sends a code to your phone. |
+software update | обновление программ | a new version of a program that fixes problems | Automating software updates helps keep data safe. |
+firewall | межсетевой экран (брандмауэр, файрвол) | checks the data coming into and going out of a network and blocks anything harmful | A firewall can help prevent hacking. |
+privacy settings | настройки конфиденциальности | options that control who can see your information | Change the privacy settings on a social media account. |
+proxy server | прокси-сервер | a server between the user and the internet that hides the user's IP address and can filter traffic | A proxy server can help prevent a DDoS attack. |
+secure socket layer (SSL) | протокол SSL (защищённое соединение) | a protocol that encrypts data sent between a browser and a web server | SSL is used by HTTPS. |
+
+## 5 Computer Science 0478::06 Automated and emerging technologies
+automated system | автоматизированная система | sensors, a microprocessor and actuators work together to do a job without people | Describe how an automated system is used to water plants in a greenhouse. |
+agriculture | сельское хозяйство | farming: growing crops and keeping animals | Robots are used in agriculture. |
+robotics | робототехника | the design, construction and operation of robots | Robotics is a branch of computer science. |
+drone | дрон (беспилотник) | a flying machine without a pilot | A drone is used to deliver parcels. |
+domestic | бытовой, домашний | used in the home | A domestic robot cleans the floor. |
+programmable | программируемый | can be given instructions to do different jobs | A robot is programmable. |
+artificial intelligence (AI) | искусственный интеллект (ИИ) | computers simulating intelligent behaviour | Describe what is meant by AI. |
+expert system | экспертная система | a computer system that gives advice like a human specialist | A garage uses an expert system to find problems with cars. |
+knowledge base | база знаний | the stored facts in an expert system | The knowledge base contains facts about car problems. |
+rule base | база правил | the set of IF … THEN rules in an expert system | The rule base is used to reach a conclusion. |
+inference engine | механизм логического вывода | the part of an expert system that uses the rules on the facts to find an answer | The inference engine searches the knowledge base. |
+machine learning | машинное обучение | a program changes its own processes or data automatically from experience | A shopping website uses machine learning to suggest products. |
+simulate | моделировать, имитировать | to copy how something behaves | AI is used to simulate intelligent behaviour. |
+ability to reason | способность рассуждать | being able to think and reach a conclusion | AI has the ability to reason. |
+adapt | приспосабливаться (адаптироваться) | to change to fit a new situation | AI can learn and adapt. |
+diagnose | поставить диагноз (найти причину) | to find out what is wrong | The expert system helps diagnose problems with cars. |
+
+## 5 Computer Science 0478::07 Algorithm design and problem-solving
+algorithm | алгоритм | a set of steps to solve a problem | Explain the purpose of this algorithm. |
+program development life cycle | жизненный цикл разработки программы | the stages of making a program: analysis, design, coding, testing | Identify three stages of the program development life cycle. |
+analysis | анализ | the first stage: understand the problem and what is needed | Identify three tasks in the analysis stage. |
+design | проектирование | the stage where you plan the solution, e.g. with flowcharts | Structure diagrams are used in the design stage. |
+coding | написание кода (программирование) | writing the program | Iterative testing is done during coding. |
+testing | тестирование | running the program with test data to check it works | Testing uses normal, abnormal, extreme and boundary data. |
+abstraction | абстракция (убрать лишние детали) | keeping only the important details of a problem | A map is an example of abstraction. |
+decomposition | декомпозиция (разбиение задачи на части) | breaking a problem down into smaller parts | Decomposition makes a problem easier to solve. |
+sub-system | подсистема | a smaller part of a system | Every computer system is made up of sub-systems. |
+structure diagram | структурная схема | a diagram that shows how a system is broken down into smaller parts | Draw a structure diagram for the alarm system. |
+flowchart | блок-схема | a diagram that shows the steps of an algorithm with shapes and arrows | Complete the flowchart for the program. |
+pseudocode | псевдокод | a way to write an algorithm in simple code-like English | Write an algorithm in pseudocode to total the numbers input. |
+iterative testing | итеративное тестирование | testing each part again and again while it is being written | Coding includes iterative testing. |
+linear search | линейный поиск | looking at each item in a list one by one until the item is found | Use a linear search to find a name in the array. |
+bubble sort | сортировка пузырьком | comparing pairs of items next to each other and swapping them until the list is in order | The flowchart represents a bubble sort. |
+totalling | суммирование (подсчёт суммы) | adding up values, e.g. Total ← Total + Number | Totalling and counting are standard methods of solution. |
+counting | подсчёт (количества) | adding 1 each time something happens, e.g. Count ← Count + 1 | Count the number of values greater than 100. |
+validation | проверка допустимости (валидация) | an automatic check that input data is sensible and follows the rules | Explain the need for checks on input data. |
+verification | проверка правильности ввода (верификация) | checking that data has been copied or typed in correctly | Visual checks and double entry checks are types of this. |
+range check | проверка диапазона | checks that a value is between a lowest and a highest value | Range check: the mark must be between 0 and 100. |
+length check | проверка длины | checks the number of characters | The password must have at least 8 characters. |
+type check | проверка типа | checks that the data is the right kind, e.g. a number | The age must be an integer. |
+presence check | проверка наличия (поле не пустое) | checks that something has been entered | The email field must not be empty. |
+format check | проверка формата | checks that the data follows a pattern, e.g. two letters then four digits | The product code must be "PD" followed by four digits. |
+visual check | визуальная проверка | the user looks at the data on the screen to see that it is right | The user compares the screen with the paper form. |
+double entry check | двойной ввод | data is typed in twice and the two are compared | The password is entered twice and must match. |
+test data | тестовые данные | values used to check that a program works | Suggest suitable test data. |
+normal data | нормальные данные | data that is acceptable and should be accepted | 50 for a mark between 0 and 100 |
+abnormal data | ошибочные данные (недопустимые) | data that should be rejected | −5 or "ten" for a mark between 0 and 100 |
+extreme data | крайние данные (наибольшее и наименьшее допустимое) | the largest and smallest acceptable values | 0 and 100 for a mark between 0 and 100 |
+boundary data | граничные данные | the largest and smallest acceptable values and the values just outside them that are rejected | 0 and −1, 100 and 101 for a mark between 0 and 100 |
+trace table | таблица трассировки | a table that records the values of variables and outputs at each step of an algorithm | Complete the trace table using the data given in the array. |
+dry-run | ручная прогонка (выполнить алгоритм на бумаге) | working through an algorithm by hand, step by step | Complete a trace table to document a dry-run of the algorithm. |
+syntax error | синтаксическая ошибка | a mistake in the grammar of the code, e.g. a spelling mistake in a keyword | PRNT instead of PRINT |
+logic error | логическая ошибка | the program runs but gives the wrong result | Using < instead of > |
+flow line | линия потока (стрелка) | an arrow that shows the order of steps in a diagram of an algorithm | |
+terminator | терминатор (начало или конец блок-схемы) | the oval shape for Start and Stop in a flowchart | |
+decision | условие (ромб в блок-схеме), решение | a Yes/No question in a flowchart with two ways out | IS Number > 100? |
+
+## 5 Computer Science 0478::08 Programming
+declare | объявить (переменную) | to give a name and data type to a variable before using it | DECLARE Total : INTEGER |
+data type | тип данных | the kind of data a variable can hold, e.g. integer or string | Identify the most appropriate data type for each field. |
+char | символ (тип CHAR) | a data type that holds one letter, digit or symbol | 'A' |
+string | строка | a data type that holds text, a series of characters | "Hello" |
+Boolean | логический (тип), булев | a data type that can only be TRUE or FALSE | Found ← FALSE |
+selection | ветвление (выбор) | choosing which code to run, using IF or CASE | Give the line number of a selection statement. |
+iteration | итерация, повторение | repeating a set of instructions | Give the line number of an iteration statement. |
+loop | цикл | a part of a program that repeats | FOR Counter ← 1 TO 10 … NEXT Counter |
+count-controlled loop | цикл со счётчиком (FOR) | a loop that repeats a fixed number of times | FOR Counter ← 2 TO 1000 |
+pre-condition loop | цикл с предусловием (WHILE) | a loop that checks the condition before each repeat; may not run at all | WHILE Number <> 9999.9 DO |
+post-condition loop | цикл с постусловием (REPEAT … UNTIL) | a loop that checks the condition after each repeat; always runs at least once | REPEAT … UNTIL Password = "secret" |
+condition | условие | an expression that is TRUE or FALSE | IF Temperature > 38.0 |
+nested | вложенный | placed inside another statement of the same kind | Nested IF statements |
+string handling | обработка строк | working with text: finding its length, cutting out a part, changing case | LENGTH, SUBSTRING, UCASE, LCASE |
+substring | подстрока | a part of a string | SUBSTRING("Computer", 1, 3) gives "Com" |
+upper case | заглавные буквы (верхний регистр) | capital letters, like A B C | UCASE("cat") gives "CAT" |
+lower case | строчные буквы (нижний регистр) | small letters, like a b c | LCASE("CAT") gives "cat" |
+operator | оператор (знак операции) | a symbol for an action, e.g. +, <, AND | Four operators and three types are shown. |
+arithmetic operator | арифметический оператор | a symbol for a calculation: + − * / ^ MOD DIV | Total ← Price * Quantity |
+relational operator | оператор сравнения | compares two values: = < <= > >= <> | IF Mark >= 50 |
+logical operator | логический оператор | AND, OR, NOT | IF Age > 12 AND Age < 20 |
+MOD | остаток от деления (MOD) | gives the remainder after division | 17 MOD 5 = 2 |
+DIV | целочисленное деление (DIV) | gives the whole number result of a division | 17 DIV 5 = 3 |
+remainder | остаток | what is left over after dividing | 17 ÷ 5 = 3, 2 left over |
+procedure | процедура | a named block of code that does a task and can be called from the program | PROCEDURE Swap(X, Y) |
+parameter | параметр | a value passed into a procedure or function | Procedures and functions may have up to three parameters. |
+local variable | локальная переменная | a variable that can only be used inside the procedure where it is declared | |
+global variable | глобальная переменная | a variable that can be used anywhere in the program | |
+library routine | библиотечная подпрограмма | a ready-made procedure or function, e.g. ROUND or RANDOM | ROUND and RANDOM are library routines. |
+subroutine | подпрограмма | a procedure or function: a block of code with a name | A flowchart shape represents a call to one. |
+maintainable program | удобная в сопровождении программа | a program that is easy for another programmer to understand and change | Explain how to create a maintainable program. |
+identifier | идентификатор (имя) | the name of a variable, constant, array, procedure or function | NumberOfPlayers |
+meaningful identifier | понятное (осмысленное) имя | a name that shows what the variable stores | Suggest suitable meaningful identifiers for the array and the variables. |
+array | массив | a list of data items of the same type with one name | The array List[] starts at index 1. |
+index (array) | индекс (номер элемента массива) | the number that shows the position of an item in an array | The first index can be zero or one. |
+one-dimensional (1D) array | одномерный массив | an array with one row of data | Names are stored in a 1D array. |
+two-dimensional (2D) array | двумерный массив | an array with rows and columns | Grid[1,1] |
+file handling | работа с файлами | opening, reading, writing and closing files from a program | OPENFILE "Scores.txt" FOR READ |
+prompt | подсказка (сообщение перед вводом) | a message that tells the user what to type | OUTPUT "Please enter temperature " |
+assignment | присваивание | giving a value to a variable | Max ← List[1] |
+initialise | задать начальное значение (инициализировать) | to give a variable its first value | Total ← 0 |
+increment | увеличить на 1 | to add one to a value | Count ← Count + 1 |
+return (a value) | вернуть (значение) | to send a result back from a function | RETURN Total |
+call (a procedure) | вызвать (процедуру) | to run a procedure or function from another part of the program | CALL Swap(A, B) |
+valid | допустимый (правильный) | acceptable; follows the rules | The program checks that the input is valid. |
+
+## 5 Computer Science 0478::09 Databases
+database | база данных | an organised collection of data stored in tables | A shop sets up a new table to store details of its products. |
+field | поле (столбец таблицы) | one item of data about each record; a column in a table | The table contains these fields: ContractNumber, Months, EndDate. |
+record | запись (строка таблицы) | all the data about one item; a row in a table | State the number of records in this part of the database table. |
+primary key | первичный ключ | a field that has a different value in every record, so each record can be found | Identify the field that will be the most appropriate primary key. |
+structured query language (SQL) | язык запросов SQL | a language used to search and get data from a database | Complete this SQL statement. |
+query | запрос | a request to find data in a database | Write a query to find the cheeses that are out of stock. |
+alphanumeric | буквенно-цифровой (текст) | made of letters, digits and symbols | ContractNumber, e.g. CT567, is alphanumeric. |
+out of stock | нет в наличии | not available to buy now | Display the names of all the cheeses that are out of stock. |
+
+## 5 Computer Science 0478::10 Boolean logic
+logic gate | логический элемент (вентиль) | an electronic part that takes binary inputs and gives one binary output | Identify the standard symbols for these. |
+NOT gate | элемент НЕ | the output is the opposite of the input | 1 → 0, 0 → 1 |
+AND gate | элемент И | the output is 1 only if both inputs are 1 | 1 and 1 → 1 |
+OR gate | элемент ИЛИ | the output is 1 if one or both inputs are 1 | 0 and 1 → 1 |
+NAND gate | элемент И-НЕ | NOT AND: the output is 0 only if both inputs are 1 | 1 and 1 → 0 |
+NOR gate | элемент ИЛИ-НЕ | NOT OR: the output is 1 only if both inputs are 0 | 0 and 0 → 1 |
+XOR gate | элемент исключающее ИЛИ | exclusive OR: the output is 1 only if the inputs are different | 1 and 0 → 1, 1 and 1 → 0 |
+truth table | таблица истинности | a table that shows the output for every possible combination of inputs | Complete the truth table for this problem. |
+logic circuit | логическая схема | gates joined together to make an output from inputs | Draw a logic circuit for the expression. |
+logic expression | логическое выражение | a statement with inputs and AND, OR, NOT, e.g. X = (A AND B) OR NOT C | Write the logic expression for this problem. |
+problem statement | условие задачи | the words that describe what the system must do | Create a logic circuit from the problem statement. |
+standard symbol | стандартное обозначение | the shape that everyone uses for something in a diagram | Draw one line to link each logic function to its standard symbol. |
