@@ -1,21 +1,32 @@
-# Каждую ночь: скачать копию коллекции из AnkiWeb (только скачивание), построить две страницы
-# отчёта и выложить их на GitHub Pages:
-#   index.html — график «Как занимается Женя», words.html — «Слова Жени» для репетитора.
-# Заодно обновляет историю новых слов, которые Женя записал в AnkiDroid в колоду «Новые слова»
-# (data/zhenya_inbox.tsv, inbox.py), и коммитит её в main — по ней строится график на index.html.
+# Каждую ночь:
+#   1. скачать копию коллекции из AnkiWeb (ankiweb_sync.py);
+#   2. новые слова, которые Женя записал в AnkiDroid в колоду «Новые слова» → data/zhenya_inbox.tsv
+#      (inbox.py);
+#   3. если есть слова «ждёт» — Claude Code (подписка Pro, секрет CLAUDE_CODE_OAUTH_TOKEN) пишет строки
+#      колоды по .claude/skills/add-words/nightly_prompt.md; zhenya_apply.py проверяет, импортирует
+#      (слова Жени — первыми), убирает их из ящика и отправляет в AnkiWeb обычной синхронизацией;
+#      не прошло — правки Claude откатываются, слова остаются «ждёт», запуск — с ошибкой (письмо);
+#   4. построить страницы (index.html — график, words.html — для репетитора) → GitHub Pages;
+#   5. закоммитить data/ в main.
 # Время — 01:30 UTC: на Кипре 03:30 зимой и 04:30 летом; GitHub иногда опаздывает до часа,
-# поэтому к 6:00 страницы уже новые. Запустить вручную: вкладка Actions → «Отчёт» → Run workflow.
-# Секреты репозитория: ANKIWEB_HKEY (ключ входа из auth.json, не пароль), ANKIWEB_ENDPOINT.
+# поэтому к 6:00 страницы уже новые. Запустить вручную: вкладка Actions → «Отчёт» → Run workflow
+# (галочка «Сухой прогон» — Claude и проверки работают, но в AnkiWeb и git ничего не уходит,
+# что сделал бы Claude — в журнале шага «Сухой прогон: что изменилось бы»).
+# Секреты: ANKIWEB_HKEY (ключ входа из auth.json, не пароль), ANKIWEB_ENDPOINT, CLAUDE_CODE_OAUTH_TOKEN.
 name: Отчёт
 
 on:
   schedule:
     - cron: "30 1 * * *"
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Сухой прогон: слова Жени не отправлять в AnkiWeb и не коммитить"
+        type: boolean
+        default: false
 
 # Два этапа, как в шаблоне GitHub: build строит страницы и сохраняет историю слов, deploy выкладывает.
 # В одном этапе deploy-pages иногда «не находит» только что загруженные страницы (15.11.2026).
-
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -28,10 +39,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # коммит data/zhenya_inbox.tsv
+      contents: write  # коммит data/
       actions: write   # шаг «не дать GitHub отключить расписание»
     outputs:
       inbox: ${{ steps.inbox.outcome }}
+      claude: ${{ steps.claude.outcome }}
+      apply: ${{ steps.apply.outcome }}
+    env:
+      ANKIWEB_HKEY: ${{ secrets.ANKIWEB_HKEY }}
+      ANKIWEB_ENDPOINT: ${{ secrets.ANKIWEB_ENDPOINT }}
+      DRY_RUN: ${{ inputs.dry_run == true }}
     steps:
       - uses: actions/checkout@v5
 
@@ -41,19 +58,44 @@ jobs:
           cache: pip
           cache-dependency-path: .github/workflows/report.yml
 
-      - name: Пакет anki (как у Anki на компьютере)
-        run: pip install anki==26.9.4
+      - name: Пакеты anki (как у Anki на компьютере) и genanki (сборка колоды)
+        run: pip install anki==26.9.4 genanki==0.13.1
 
       - name: Скачать копию коллекции из AnkiWeb
-        env:
-          ANKIWEB_HKEY: ${{ secrets.ANKIWEB_HKEY }}
-          ANKIWEB_ENDPOINT: ${{ secrets.ANKIWEB_ENDPOINT }}
         run: python .claude/skills/zhenya-progress/ankiweb_sync.py
 
       - name: Новые слова Жени (ящик «Новые слова» → data/zhenya_inbox.tsv)
         id: inbox
-        continue-on-error: true   # отчёт строится и без этого шага; ошибка — в последнем шаге
-        run: python .claude/skills/zhenya-progress/inbox.py
+        continue-on-error: true   # отчёт строится и без этого шага; ошибка — в конце
+        run: |
+          python .claude/skills/zhenya-progress/inbox.py
+          cp data/zhenya_inbox.tsv "$RUNNER_TEMP/inbox.tsv"
+
+      - name: Слова Жени → строки колоды (Claude)
+        id: claude
+        if: steps.inbox.outcome == 'success' && steps.inbox.outputs.waiting != '0'
+        continue-on-error: true
+        timeout-minutes: 20
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          npm install -g --silent @anthropic-ai/claude-code
+          claude -p "$(cat .claude/skills/add-words/nightly_prompt.md)" --max-turns 80 \
+            --allowedTools "Read,Grep,Glob,Edit,Write,Bash(python .claude/skills/add-words/check_words.py:*)"
+
+      - name: Слова Жени → колода в AnkiWeb (проверка, импорт, отправка)
+        id: apply
+        if: steps.claude.outcome == 'success'
+        continue-on-error: true
+        run: python .claude/skills/add-words/zhenya_apply.py $([ "$DRY_RUN" = true ] || echo --push)
+
+      - name: Сухой прогон или ошибка — что изменилось бы, и откат правок Claude
+        if: steps.claude.outcome != 'skipped' && (env.DRY_RUN == 'true' || steps.apply.outcome != 'success')
+        run: |
+          git --no-pager diff --stat -- data/
+          git --no-pager diff -- data/
+          git checkout -- data/
+          cp "$RUNNER_TEMP/inbox.tsv" data/zhenya_inbox.tsv
 
       - name: Построить страницы
         run: |
@@ -68,15 +110,14 @@ jobs:
         with:
           path: site
 
-      - name: Сохранить историю новых слов в git
-        id: commit
-        if: steps.inbox.outcome == 'success'
+      - name: Сохранить слова Жени и историю в git
+        if: steps.inbox.outcome == 'success' && env.DRY_RUN != 'true'
         run: |
-          git add data/zhenya_inbox.tsv
+          git add data/
           if git diff --cached --quiet; then echo "Без изменений"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "Новые слова Жени: история на $(date +%F)"
+          git commit -q -m "Новые слова Жени: $(date +%F)"
           git pull -q --rebase origin main && git push -q origin HEAD:main
 
       # Расписание в открытом репозитории GitHub отключает после 60 дней без коммитов —
@@ -100,6 +141,10 @@ jobs:
       - id: deploy
         uses: actions/deploy-pages@v4
 
-      - name: Ошибка в шаге «Новые слова Жени» — письмо владельцу
-        if: needs.build.outputs.inbox == 'failure'
-        run: exit 1
+      - name: Ошибка в словах Жени — письмо владельцу (что именно — в журнале этапа build)
+        if: >-
+          needs.build.outputs.inbox == 'failure' || needs.build.outputs.claude == 'failure' ||
+          needs.build.outputs.apply == 'failure'
+        run: |
+          echo "inbox=${{ needs.build.outputs.inbox }} claude=${{ needs.build.outputs.claude }} apply=${{ needs.build.outputs.apply }}"
+          exit 1

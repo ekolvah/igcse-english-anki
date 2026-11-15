@@ -9,10 +9,16 @@ synced (по умолчанию) — копия, скачанная ankiweb_sync
 Запись ящика — любая запись в колоде «Новые слова» и любая запись не нашего типа (IGCSE_MODELS)
 в других колодах: вдруг Женя выбрал не ту колоду. Первое поле — слово, остальные — где встретил.
 Строка файла: id записи (время создания, мс) | день (день Anki, с 4:00) | слово | контекст |
-статус | что сделано. Статусы: «ждёт» — в ящике, не обработано; «добавлено», «уже было»,
-«не добавлено» — ставит тот, кто обработал слово (агент, скил add-words), в «что сделано» —
-перевод и подколода или причина; «удалено» — запись пропала из ящика до обработки.
+статус | что сделано | термин. Статусы:
+  «ждёт» — в ящике, не обработано;
+  «добавлено» / «уже было» — ставит тот, кто обработал слово (ночью Claude по
+      .claude/skills/add-words/nightly_prompt.md, или агент на компьютере); «термин» — точный
+      термин колоды: build_deck.py ставит такие слова первыми, zhenya_apply.py убирает их из ящика;
+  «непонятно» — Claude не понял слово (причина в «что сделано»), запись остаётся в ящике;
+      Женя исправил слово — снова «ждёт»;
+  «удалено» — запись пропала из ящика до обработки.
 Слово со статусом «ждёт» обновляется, если Женя его исправил. Файл можно править руками.
+В GitHub Actions пишет в $GITHUB_OUTPUT waiting=<сколько ждёт>.
 """
 import argparse
 import os
@@ -27,8 +33,9 @@ from ankiweb_sync import DATA_DIR  # noqa: E402
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 LOG = os.environ.get("ZHENYA_INBOX_LOG") or os.path.join(ROOT_DIR, "data", "zhenya_inbox.tsv")
-COLUMNS = ["id", "day", "word", "context", "status", "result"]
-WAITING, GONE = "ждёт", "удалено"
+COLUMNS = ["id", "day", "word", "context", "status", "result", "term"]
+WAITING, UNCLEAR, GONE = "ждёт", "непонятно", "удалено"
+DONE = ("добавлено", "уже было")  # обработано: термин в колоде, запись убирается из ящика
 
 
 def text(field):
@@ -101,18 +108,23 @@ def main():
         r = rows.get(str(nid))
         if r is None:
             rows[str(nid)] = {"id": str(nid), "day": p.anki_day(nid).isoformat(), "word": word,
-                              "context": context, "status": WAITING, "result": ""}
+                              "context": context, "status": WAITING, "result": "", "term": ""}
             added += 1
+        elif r["status"] == UNCLEAR and (r["word"], r["context"]) != (word, context):
+            r["word"], r["context"], r["status"], r["result"] = word, context, WAITING, ""
         elif r["status"] == WAITING:
             r["word"], r["context"] = word, context
     for r in rows.values():
-        if r["status"] == WAITING and r["id"] not in now:
+        if r["status"] in (WAITING, UNCLEAR) and r["id"] not in now:
             r["status"], r["result"] = GONE, "убрано из «Новых слов» до обработки"
     write_log(rows)
     waiting = [r for r in rows.values() if r["status"] == WAITING]
     print(f"{LOG}: в ящике {len(notes)}, новых {added}, ждут обработки {len(waiting)}, всего в истории {len(rows)}")
     for r in waiting:
         print(f"  {r['day']}  {r['word']}" + (f"  ({r['context']})" if r["context"] else ""))
+    if os.environ.get("GITHUB_OUTPUT"):
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+            f.write(f"waiting={len(waiting)}\n")
 
 
 if __name__ == "__main__":

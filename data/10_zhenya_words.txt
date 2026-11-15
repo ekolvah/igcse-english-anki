@@ -1,0 +1,5 @@
+# Слова, которые Женя сам записал в AnkiDroid (колода «Новые слова») — встретил в учебниках IGCSE.
+# Строки дописывает ночью Claude (.claude/skills/add-words/nightly_prompt.md) или агент на компьютере;
+# история и статус каждого слова — data/zhenya_inbox.tsv. Такие слова идут первыми (build_deck.py).
+# Подколоды — только существующие (заголовки как в других data/*.txt), новые — с согласия пользователя.
+# Формат: term | русский | definition (simple English) | example | flag

@@ -14,6 +14,7 @@
 
 Запуск:  python build_deck.py
 """
+import os
 import re
 import sys
 from pathlib import Path
@@ -23,6 +24,9 @@ import genanki
 ROOT = Path(__file__).parent
 DATA = ROOT / "data"
 OUT = ROOT / "IGCSE_Maths_Physics.apkg"
+# слова, которые Женя записал сам (колода «Новые слова» → .claude/skills/zhenya-progress/inbox.py)
+INBOX_LOG = Path(os.environ.get("ZHENYA_INBOX_LOG") or DATA / "zhenya_inbox.tsv")
+ZHENYA_DONE = ("добавлено", "уже было")
 ROOT_DECK = "IGCSE English"
 CHECK_JS = (ROOT / "card_check.js").read_text(encoding="utf-8")
 
@@ -297,6 +301,21 @@ def interleave(decks: dict) -> list:
     return [s[i] for i in range(max(map(len, streams))) for s in streams if i < len(s)]
 
 
+def zhenya_first() -> list[str]:
+    """Термины (lower) слов Жени со статусом «добавлено»/«уже было» — в порядке записи.
+    Раз спросил — слово нужно сейчас: такие записи получают первые позиции (решение 2026-11-15)."""
+    if not INBOX_LOG.exists():
+        return []
+    lines = INBOX_LOG.read_text(encoding="utf-8").splitlines()
+    head, out = lines[0].split("\t"), []
+    for line in lines[1:]:
+        r = dict(zip(head, line.split("\t")))
+        term = r.get("term", "").strip().lower()
+        if r.get("status") in ZHENYA_DONE and term and term not in out:
+            out.append(term)
+    return out
+
+
 def build():
     """Подколоды с записями; у записей уже стоит позиция (note.due)."""
     decks: dict[str, genanki.Deck] = {}
@@ -330,8 +349,19 @@ def build():
             notes += 1
             cards += 2 if spell else 1
 
-    # позиция новой карточки (Anki: «по возрастанию позиции»); обе карточки записи — одна позиция
-    for pos, note in enumerate(interleave({n: d.notes for n, d in decks.items()}), 1):
+    # позиция новой карточки (Anki: «по возрастанию позиции»); обе карточки записи — одна позиция.
+    # Сначала слова Жени (метка zhenya), потом все остальные по очереди частей STREAMS.
+    by_term = {n.fields[0].lower(): n for d in decks.values() for n in d.notes}
+    first = zhenya_first()
+    first = [esc(t) for t in first]  # поля записей уже экранированы
+    if missing := [t for t in first if t not in by_term]:
+        sys.exit(f"{INBOX_LOG.name}: термина нет в data/*.txt: {missing}")
+    front = [by_term[t] for t in first]
+    for note in front:
+        note.tags.append("zhenya")
+    front_ids = set(map(id, front))
+    rest = [n for n in interleave({n: d.notes for n, d in decks.items()}) if id(n) not in front_ids]
+    for pos, note in enumerate(front + rest, 1):
         note.due = pos
     return decks, notes, cards
 
