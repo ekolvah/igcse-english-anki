@@ -12,7 +12,8 @@ Claude (nightly_prompt.md) дописал строки в data/*.txt и пост
      нет новых подколод, новых записей не больше MAX_NEW, у слов «добавлено»/«уже было» термин в сборке;
   3. на КОПИИ коллекции: обычная синхронизация (подтянуть, что пришло после скачивания) → импорт
      (как anki_import.py: «если новее», без расписания и пресетов) → позиции всех не начатых
-     карточек по сборке (слова Жени впереди) → убрать обработанные записи из ящика «Новые слова»;
+     карточек по сборке (слова Жени впереди) → уже начатые слова этой ночи — к повторению
+     сегодня → убрать обработанные записи из ящика «Новые слова»;
   4. --push: обычная синхронизация с AnkiWeb (полную — никогда), копия встаёт на место скачанной,
      чтобы страницы отчёта показали уже новое.
 Ключ AnkiWeb — ANKIWEB_HKEY / ANKIWEB_ENDPOINT или auth.json (как в ankiweb_sync.py).
@@ -136,6 +137,19 @@ def main():
             f"select id from notes where mid not in ({','.join(map(str, ib.p.IGCSE_MODELS))}) or id in "
             f"(select nid from cards where did in ({','.join(map(str, inbox_dids)) or 'null'}))"))
         remove = [int(i) for i in done if int(i) in in_box]
+
+        # слово из ящика, которое Женя уже учит (повторение не сегодня), — к повторению сегодня:
+        # спросил, значит, слово нужно сейчас. Только слова этой ночи, не все прежние.
+        by_term = {n.fields[0].lower(): n.guid for d in decks.values() for n in d.notes}
+        asked = {by_term[build_deck.esc(done[str(i)]["term"]).lower()] for i in remove}
+        today = col.sched.today
+        due_now = [cid for cid, guid in col.db.all(
+            f"select c.id, n.guid from cards c join notes n on n.id = c.nid "
+            f"where n.mid = {mid} and c.type = 2 and c.queue = 2 and c.due > {today}") if guid in asked]
+        if due_now:
+            col.sched.set_due_date(due_now, "0")
+        print(f"Уже начатых карточек слов Жени — к повторению сегодня: {len(due_now)}")
+
         if remove:
             col.remove_notes(remove)
         print(f"Из ящика «{ib.p.INBOX}» убрано: {len(remove)}")
