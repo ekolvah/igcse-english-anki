@@ -1,2 +1,10 @@
 id	day	word	context	status	result	term
 1794746567925	2026-11-15	simultaneously	uses several wires to transfer the data bits simultaneously	уже было	уже в колоде: одновременно (Computer Science)	simultaneously
+1794757100841	2026-11-15	occurs	The transfer of data occurs either wirelessly	уже было	уже в колоде: происходить, случаться (Computer Science)	occur
+1794757171415	2026-11-15	either wirelessly	The transfer of data occurs either wirelessly by radio	добавлено	беспроводной → Data transmission	wireless
+1794757266493	2026-11-15	fibre optic	for example by fiber optic cable or copper	уже было	уже в колоде: оптоволокно (Physics)	optical fibre
+1794757362256	2026-11-15	copper twisted wire	for example by fiber optic cable or copper twisted wire	добавлено	витая пара (кабель) → Data transmission	twisted pair cable
+1794757406025	2026-11-15	Stream of bits	The data is transmitted as a stream of bits	добавлено	поток битов → Data transmission	stream of bits
+1794757585108	2026-11-15	There are	There are a number of differing methods	добавлено	несколько, ряд → Question language	a number of
+1794757716247	2026-11-15	Can be used	That can be used to transfer the data	добавлено	использоваться для → Question language	be used to
+1794757973871	2026-11-15	or now more commonly	Bit rate is measured in biys per second(bps) or now more commonly in megabits per second(Mbps)	добавлено	чаще, более распространённо → Question language	more commonly

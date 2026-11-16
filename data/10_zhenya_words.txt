@@ -3,3 +3,13 @@
 # история и статус каждого слова — data/zhenya_inbox.tsv. Такие слова идут первыми (build_deck.py).
 # Подколоды — только существующие (заголовки как в других data/*.txt), новые — с согласия пользователя.
 # Формат: term | русский | definition (simple English) | example | flag
+
+## 5 Computer Science 0478::02 Data transmission
+wireless | беспроводной | sending signals through the air, with no wires | The transfer of data occurs either wirelessly or through wires. |
+twisted pair cable | витая пара (кабель) | a cable with two copper wires wound around each other to carry signals | Data can be sent through a twisted pair cable. |
+stream of bits | поток битов | a long line of 0s and 1s sent one after another | The data is transmitted as a stream of bits. |
+
+## 5 Computer Science 0478::00 Question language
+a number of | несколько, ряд | more than one, but not an exact number | There are a number of different methods. |
+be used to | использоваться для | to be the tool or way to do something | Which method can be used to transfer the data? |
+more commonly | чаще, более распространённо | happening or used more often | Bit rate is measured in bits per second or, more commonly, in megabits per second. |
