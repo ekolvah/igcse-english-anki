@@ -151,7 +151,7 @@ control bus | шина управления | carries signals such as read and w
 fetch-decode-execute (FDE) cycle | цикл «выборка-декодирование-выполнение» | the steps the CPU repeats for every instruction: get it, work out what it means, carry it out | Describe the process of the FDE cycle. |
 fetch | выборка, извлечь (команду из памяти) | to get the next instruction from memory | Give the name of two registers that are used in the fetch stage. |
 decode | декодировать | to work out what an instruction means | Describe what happens at the decode stage of the cycle. |
-execute | выполнить, исполнить | to carry out an instruction or run a program; in a story — to kill someone as a punishment | The instruction is then executed. |
+execute | выполнить, исполнить; казнить (в рассказе) | to carry out an instruction or run a program; in a story — to kill someone as a punishment | The instruction is then executed. |
 instruction | команда, инструкция | an order that tells the CPU what to do | Instructions are fetched from RAM into the CPU. |
 cache | кэш | a small, very fast memory in the CPU that stores data and instructions used often | A larger cache can improve the performance of a CPU. |
 clock speed | тактовая частота | the number of cycles the CPU carries out each second, measured in GHz | A clock speed of 3.5 GHz is faster than 2.4 GHz. |
