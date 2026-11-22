@@ -13,3 +13,7 @@ stream of bits | поток битов | a long line of 0s and 1s sent one after
 a number of | несколько, ряд | more than one, but not an exact number | There are a number of different methods. |
 be used to | использоваться для | to be the tool or way to do something | Which method can be used to transfer the data? |
 more commonly | чаще, более распространённо | happening or used more often | Bit rate is measured in bits per second or, more commonly, in megabits per second. |
+overalls | комбинезон | clothes like a shirt and trousers joined in one piece, worn to keep other clothes clean | The workers wore blue overalls in the factory. |
+outer | внешний | on the outside; far from the centre or the inside | In this story, the outer group does not control the organization. |
+inner | внутренний | on the inside; close to the centre | In this story, the inner group controls the organization. |
+fiction | художественная литература, вымысел | stories that are made up and not real | Is the text fiction or a true story? |
