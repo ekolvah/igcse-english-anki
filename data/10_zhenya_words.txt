@@ -17,3 +17,6 @@ overalls | комбинезон | clothes like a shirt and trousers joined in on
 outer | внешний | on the outside; far from the centre or the inside | In this story, the outer group does not control the organization. |
 inner | внутренний | on the inside; close to the centre | In this story, the inner group controls the organization. |
 fiction | художественная литература, вымысел | stories that are made up and not real | Is the text fiction or a true story? |
+
+## 3 Physics 0625::00 Practical skills
+accurate | точный | very close to the true or exact value | Which method gives the most accurate value for the period? |
