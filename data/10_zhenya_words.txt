@@ -20,3 +20,6 @@ fiction | художественная литература, вымысел | st
 
 ## 3 Physics 0625::00 Practical skills
 accurate | точный | very close to the true or exact value | Which method gives the most accurate value for the period? |
+thickness | толщина | how thick something is; the distance between its two opposite sides | Measure the thickness of the wire. |
+metal strip | металлическая полоска | a long, thin, flat piece of metal | The metal strip bends when it is heated. |
+single | один, единственный | only one; not more than one | Use a single wire to join the two parts. |
