@@ -17,6 +17,16 @@ overalls | комбинезон | clothes like a shirt and trousers joined in on
 outer | внешний | on the outside; far from the centre or the inside | In this story, the outer group does not control the organization. |
 inner | внутренний | on the inside; close to the centre | In this story, the inner group controls the organization. |
 fiction | художественная литература, вымысел | stories that are made up and not real | Is the text fiction or a true story? |
+fluent | беглый (о речи) | able to speak or write a language easily and without stopping | Write a fluent answer in good English. |
+avoid | избегать | to stay away from something or not do it | Avoid using a calculator in this question. |
+entertainment | развлечение | things like films, music and games that people enjoy | Describe one use of a computer for entertainment. |
+repetition | повторение | doing or saying the same thing again and again | Use repetition to check each reading. |
+convenient | удобный | easy to use and suitable for what you need | Why is a USB drive convenient for storing data? |
+distracting | отвлекающий | making you stop thinking about what you are doing | Loud noise can be distracting when you study. |
+nevertheless | тем не менее | in spite of what has just been said | The test was hard; nevertheless, most students passed. |
+numerous | многочисленный | very many; a large number of | Numerous errors can happen when data is sent. |
+furthermore | кроме того | and also; used to add one more point | Furthermore, explain one disadvantage. |
+since | с тех пор как; так как | from a time in the past until now; or because | Since the data is large, it takes a long time to send. |
 
 ## 3 Physics 0625::00 Practical skills
 accurate | точный | very close to the true or exact value | Which method gives the most accurate value for the period? |
