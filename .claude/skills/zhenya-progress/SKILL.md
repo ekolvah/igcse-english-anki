@@ -27,7 +27,7 @@ description: Отчёт о том, как Женя занимается по к�
      через скил add-words.
 4. **Ответ пользователю** — по-русски, коротко: занимался ли каждый день, сколько, % верных,
    динамика, 3–5 трудных слов с переводом, один конкретный совет (если нужен).
-5. **Страница-график** https://ekolvah.github.io/igcse-english-anki/ обновляется сама каждую ночь на GitHub
+5. **Страница-график** https://ekolvah.github.io/igcse-english-anki/ обновляется сама 4 раза в сутки на GitHub
    (`.github/workflows/report.yml`: скачать из AnkiWeb `ankiweb_sync.py` → построить
    `daily_chart.py` по шаблону `chart_template.html` → GitHub Pages), компьютер не нужен.
    Просят «обнови график» — `gh workflow run report.yml`, через 2–3 мин проверить
